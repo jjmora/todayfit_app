@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Franchise index{% endblock %}
+
+{% block body %}
+    <h1>Franchise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for franchise in franchises %}
+            <tr>
+                <td>{{ franchise.id }}</td>
+                <td>{{ franchise.Name }}</td>
+                <td>{{ franchise.Email }}</td>
+                <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}">show</a>
+                    <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_franchise_new') }}">Create new</a>
+{% endblock %}
