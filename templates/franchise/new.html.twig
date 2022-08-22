@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Franchise{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle Franchise</h1>
+
+    {{ include('franchise/_form.html.twig') }}
+
+    <br />
+    <a href="{{ path('app_franchise_index') }}">Liste de Franchises</a>
+{% endblock %}
