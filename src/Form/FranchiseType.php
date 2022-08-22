@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Franchise;
+use App\Entity\Permission;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +17,12 @@ class FranchiseType extends AbstractType
             ->add('Name')
             ->add('Email')
             ->add('Active')
+            ->add('permissions', EntityType::class, [
+              'class' => Permission::class,
+              'choice_label' => 'name',
+              'multiple' => true,
+              'expanded' => true
+            ])
         ;
     }
 
