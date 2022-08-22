@@ -35,9 +35,12 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_franchise_index') }}">back to list</a>
-
-    <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">edit</a>
+    <br />
+    <a href="{{ path('app_franchise_index') }}">Liste des Franchises</a>
+    <br />
+    <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">Modifier</a>
+    <br />
+    
 
     {{ include('franchise/_delete_form.html.twig') }}
 {% endblock %}
