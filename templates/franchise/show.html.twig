@@ -20,14 +20,17 @@
                 <td>{{ franchise.Email }}</td>
             </tr>
             <tr>
-                <th>Active</th>
-                <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
+                <th>Permissions</th>
+                <td>
+                  {% for permission in franchise.permissions %}
+                    <span>| {{ permission.name }} </span>
+                  {% endfor %}
+                  |
+                </td>
             </tr>
             <tr>
-                <th>Permissions</th>
-                  {% for permission in franchise.permissions %}
-                    <td>| {{ permission.name }} |</td>
-                  {% endfor %}
+                <th>Active</th>
+                <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>

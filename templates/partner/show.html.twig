@@ -24,9 +24,19 @@
                 <td>{{ partner.Address }}</td>
             </tr>
             <tr>
+                <th>Permissions</th>
+                <td>
+                  {% for permission in partner.permissions %}
+                    <span>| {{ permission.name }} </span>
+                  {% endfor %}
+                  |
+                </td>
+            </tr>
+            <tr>
                 <th>Active</th>
                 <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
             </tr>
+
         </tbody>
     </table>
 

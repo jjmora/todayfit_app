@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
+                <th>Permissions</th>
                 <th>Active</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +24,14 @@
                 <td>{{ partner.Name }}</td>
                 <td>{{ partner.Email }}</td>
                 <td>{{ partner.Address }}</td>
+                <td>
+                  <span>
+                  {% for permission in partner.permissions %}
+                    | {{ permission.name }} </span>
+                  {% endfor %}
+                  |
+                  </span>
+                </td>
                 <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_partner_show', {'id': partner.id}) }}">show</a>
