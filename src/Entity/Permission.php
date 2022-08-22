@@ -23,9 +23,13 @@ class Permission
     #[ORM\ManyToMany(targetEntity: Franchise::class, mappedBy: 'permissions')]
     private Collection $franchises;
 
+    #[ORM\ManyToMany(targetEntity: Partner::class, mappedBy: 'permissions')]
+    private Collection $partners;
+
     public function __construct()
     {
         $this->franchises = new ArrayCollection();
+        $this->partners = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,33 @@ class Permission
     {
         if ($this->franchises->removeElement($franchise)) {
             $franchise->removePermission($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Partner>
+     */
+    public function getPartners(): Collection
+    {
+        return $this->partners;
+    }
+
+    public function addPartner(Partner $partner): self
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners->add($partner);
+            $partner->addPermission($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Partner $partner): self
+    {
+        if ($this->partners->removeElement($partner)) {
+            $partner->removePermission($this);
         }
 
         return $this;

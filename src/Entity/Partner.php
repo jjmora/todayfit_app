@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PartnerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
@@ -29,6 +31,14 @@ class Partner
 
     #[ORM\ManyToOne(inversedBy: 'partner')]
     private ?Franchise $franchise = null;
+
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'partners')]
+    private Collection $permissions;
+
+    public function __construct()
+    {
+        $this->permissions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +101,30 @@ class Partner
     public function setFranchise(?Franchise $franchise): self
     {
         $this->franchise = $franchise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permission>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        $this->permissions->removeElement($permission);
 
         return $this;
     }
