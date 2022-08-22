@@ -27,6 +27,9 @@ class Partner
     #[ORM\Column]
     private ?bool $Active = null;
 
+    #[ORM\ManyToOne(inversedBy: 'partner')]
+    private ?Franchise $franchise = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Partner
     public function setActive(bool $Active): self
     {
         $this->Active = $Active;
+
+        return $this;
+    }
+
+    public function getFranchise(): ?Franchise
+    {
+        return $this->franchise;
+    }
+
+    public function setFranchise(?Franchise $franchise): self
+    {
+        $this->franchise = $franchise;
 
         return $this;
     }

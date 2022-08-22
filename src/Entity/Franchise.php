@@ -29,9 +29,13 @@ class Franchise
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'franchises')]
     private Collection $permissions;
 
+    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Partner::class)]
+    private Collection $partner;
+
     public function __construct()
     {
         $this->permissions = new ArrayCollection();
+        $this->partner = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +99,36 @@ class Franchise
     public function removePermission(Permission $permission): self
     {
         $this->permissions->removeElement($permission);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Partner>
+     */
+    public function getPartner(): Collection
+    {
+        return $this->partner;
+    }
+
+    public function addPartner(Partner $partner): self
+    {
+        if (!$this->partner->contains($partner)) {
+            $this->partner->add($partner);
+            $partner->setFranchise($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Partner $partner): self
+    {
+        if ($this->partner->removeElement($partner)) {
+            // set the owning side to null (unless already changed)
+            if ($partner->getFranchise() === $this) {
+                $partner->setFranchise(null);
+            }
+        }
 
         return $this;
     }
