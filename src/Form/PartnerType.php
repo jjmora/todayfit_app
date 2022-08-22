@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Franchise;
 use App\Entity\Partner;
+use App\Entity\Permission;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,6 +24,12 @@ class PartnerType extends AbstractType
               'choice_label' => 'name',
               'multiple' => false,
               'placeholder' => ''
+            ])
+            ->add('Permissions', EntityType::class, [
+              'class' => Permission::class,
+              'choice_label' => 'name',
+              'multiple' => true,
+              'expanded' => true
             ])
         ;
     }
