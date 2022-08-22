@@ -23,6 +23,12 @@
                 <th>Active</th>
                 <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
             </tr>
+            <tr>
+                <th>Permissions</th>
+                  {% for permission in franchise.permissions %}
+                    <td>| {{ permission.name }} |</td>
+                  {% endfor %}
+            </tr>
         </tbody>
     </table>
 

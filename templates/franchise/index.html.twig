@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Active</th>
+                <th>Permissions</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,14 @@
                 <td>{{ franchise.Name }}</td>
                 <td>{{ franchise.Email }}</td>
                 <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
+                <td>
+                  <span>
+                  {% for permission in franchise.permissions %}
+                    | {{ permission.name }} </span>
+                  {% endfor %}
+                  |
+                  </span>
+                </td>
                 <td>
                     <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}">show</a>
                     <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">edit</a>
