@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "autoprefixer": "^10.4.8",
+        "bootstrap": "^5.2.0",
         "postcss-loader": "^7.0.1"
     }
 }
