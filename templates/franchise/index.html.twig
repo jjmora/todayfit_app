@@ -3,55 +3,69 @@
 {% block title %}Franchise index{% endblock %}
 
 {% block body %}
-    <h1>Franchise index</h1>
+    <section class="container mt-5">
+        <h1>Franchise index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Permissions</th>
-                <th>Active</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for franchise in franchises %}
-            <tr>
-                <td>{{ franchise.id }}</td>
-                <td>{{ franchise.Name }}</td>
-                <td>{{ franchise.Email }}</td>
-                <td>
-                  <span>
-                  {% for permission in franchise.permissions %}
-                    | {{ permission.name }} </span>
-                  {% endfor %}
-                  |
-                  </span>
-                </td>
-                <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}">Voir plus</a>
-                    <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table 
+          data-toggle="table"
+          data-search="true"
+          data-filter-control="true" 
+          class="table"
+        >
+            <thead>
+                <tr class="table-header">
+                    <th class="align-top">Id</th>
+                    <th class="align-top">Name</th>
+                    <th class="align-top">Email</th>
+                    <th class="align-top">Permissions</th>
+                    <th class="align-top">Active</th>
+                    <th class="align-top">Actions</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th data-field="active" data-filter-control="select" class="filter-active align-top"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for franchise in franchises %}
+                <tr>
+                    <td>{{ franchise.id }}</td>
+                    <td>{{ franchise.Name }}</td>
+                    <td>{{ franchise.Email }}</td>
+                    <td>
+                      <span>
+                      {% for permission in franchise.permissions %}
+                        | {{ permission.name }} </span>
+                      {% endfor %}
+                      |
+                      </span>
+                    </td>
+                    <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}" class="btn btn-primary">Voir plus</a>
+                        <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <br />
-    <a href="{{ path('app_franchise_new') }}">Ajouter une nouvelle Franchise</a>
-    <br />
-    <a href="{{ path('app_partner_index') }}">Liste des Structures</a>
-    <br />
-    <a href="{{ path('app_permission_index') }}">Liste de Permissions</a>
-    <br />
-    <a href="{{ path('app_dashboard') }}">Page d'accueil</a>
-    <br /> 
-
+        <br />
+        <a href="{{ path('app_franchise_new') }}">Ajouter une nouvelle Franchise</a>
+        <br />
+        <a href="{{ path('app_partner_index') }}">Liste des Structures</a>
+        <br />
+        <a href="{{ path('app_permission_index') }}">Liste de Permissions</a>
+        <br />
+        <a href="{{ path('app_dashboard') }}">Page d'accueil</a>
+        <br /> 
+    </section>
 {% endblock %}
