@@ -25,14 +25,19 @@
                   <td>{{ partner.Email }}</td>
                   <td>{{ partner.Address }}</td>
                   <td>
-                    <span>
                     {% for permission in partner.permissions %}
-                      | {{ permission.name }} </span>
+                      <span class="btn btn-sm btn-warning"> {{ permission.name }} </span>
                     {% endfor %}
-                    |
-                    </span>
                   </td>
-                  <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
+                  <td>{{ partner.Active ? '
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                    </div>
+                  ' : '
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                    </div>
+                  ' }}</td>
                   <td>
                       <a href="{{ path('app_partner_show', {'id': partner.id}) }}">Voir plus</a>
                       <a href="{{ path('app_partner_edit', {'id': partner.id}) }}">Modifier</a>
@@ -55,5 +60,16 @@
     <br />
     <a href="{{ path('app_dashboard') }}">Page d'accueil</a>
     <br />
+    <button type="button" class="btn btn-secondary"
+        data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="This top tooltip is themed via CSS variables.">
+  Custom tooltip
+</button>
+
+<script>
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 
 {% endblock %}
