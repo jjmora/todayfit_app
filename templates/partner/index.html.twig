@@ -4,47 +4,48 @@
 
 {% block body %}
     <h1>Partner index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Permissions</th>
-                <th>Active</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for partner in partners %}
-            <tr>
-                <td>{{ partner.id }}</td>
-                <td>{{ partner.Name }}</td>
-                <td>{{ partner.Email }}</td>
-                <td>{{ partner.Address }}</td>
-                <td>
-                  <span>
-                  {% for permission in partner.permissions %}
-                    | {{ permission.name }} </span>
-                  {% endfor %}
-                  |
-                  </span>
-                </td>
-                <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_partner_show', {'id': partner.id}) }}">Voir plus</a>
-                    <a href="{{ path('app_partner_edit', {'id': partner.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Permissions</th>
+                  <th>Active</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for partner in partners %}
+              <tr>
+                  <td>{{ partner.id }}</td>
+                  <td>{{ partner.Name }}</td>
+                  <td>{{ partner.Email }}</td>
+                  <td>{{ partner.Address }}</td>
+                  <td>
+                    <span>
+                    {% for permission in partner.permissions %}
+                      | {{ permission.name }} </span>
+                    {% endfor %}
+                    |
+                    </span>
+                  </td>
+                  <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
+                  <td>
+                      <a href="{{ path('app_partner_show', {'id': partner.id}) }}">Voir plus</a>
+                      <a href="{{ path('app_partner_edit', {'id': partner.id}) }}">Modifier</a>
+                  </td>
+              </tr>
+          {% else %}
+              <tr>
+                  <td colspan="6">no records found</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+    </div>
     <br />
     <a href="{{ path('app_partner_new') }}">Ajouter une nouvelle Structure</a>
     <br />
