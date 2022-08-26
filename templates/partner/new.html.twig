@@ -3,9 +3,42 @@
 {% block title %}New Partner{% endblock %}
 
 {% block body %}
-    <h1>Nouvelle Structure</h1>
+  <h1>Nouvelle Structure</h1>
 
-    {{ include('partner/_form.html.twig') }}
+  {{ include('partner/_form.html.twig') }}
 
-    <a href="{{ path('app_partner_index') }}">Liste des Structures</a>
+  <a href="{{ path('app_partner_index') }}">Liste des Structures</a>
+{% endblock %}
+
+{% block javascripts %}
+  <script>
+    window.onload = () => {
+      let franchise = document.querySelector("#partner_franchise");
+      franchise.addEventListener("change", function(){
+        let form = this.closest("form");
+        let indexData = this.value; // =>return the id
+        console.log(this.name)
+        let data = this.name + "=" + this.value;
+        
+        fetch(form.action, { 
+          method: form.getAttribute("method"),
+          body: data,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset:utf-8"
+          }
+        })
+        .then(response => response.text())
+        .then(html => {
+          let content = document.createElement("html");
+          content.innerHTML = html;
+          let nouveauSelect = content.querySelector("#partner_permissions");
+          console.log(nouveauSelect)
+          document.querySelector("#partner_permissions").replaceWith(nouveauSelect);
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      })
+    }
+  </script>
 {% endblock %}

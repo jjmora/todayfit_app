@@ -5,19 +5,33 @@ namespace App\Form;
 use App\Entity\Franchise;
 use App\Entity\Partner;
 use App\Entity\Permission;
+use App\Repository\FranchiseRepository;
+use App\Repository\PermissionRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PartnerType extends AbstractType
 {
+    private $permissionRepository;
+    private $franchiseRepository;
+
+    public function __construct(PermissionRepository $permissionRepository, FranchiseRepository $franchiseRepository)
+    {
+        $this->permissionRepository = $permissionRepository;
+        $this->franchiseRepository = $franchiseRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name')
-            ->add('Email')
-            ->add('Address')
+            ->add('name')
+            ->add('email')
+            ->add('address')
             ->add('Active')
             ->add('franchise', EntityType::class, [
               'class' => Franchise::class,
@@ -25,13 +39,45 @@ class PartnerType extends AbstractType
               'multiple' => false,
               'placeholder' => ''
             ])
-            ->add('Permissions', EntityType::class, [
+            ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',
               'multiple' => true,
-              'expanded' => true
+              'expanded' => true,
+              'disabled' => !$options['data']->getId()
             ])
         ;
+
+        $formModifier = function (FormInterface $form, Franchise $franchise = null){
+
+          //$allPermissions = $this->permissionRepository->findAll();
+          $franchiseId = $franchise->getId();
+
+          $selectedFranchise = $this->franchiseRepository->find($franchiseId);
+          $preFranchisePermissions = $selectedFranchise->getPermissions()->toArray();
+
+          $selectedPermissions = [];
+
+          foreach($preFranchisePermissions as $permission){
+            $selectedPermissions[$permission->getId()-1] = ['checked' => true];
+          }
+
+          $form->add('permissions', EntityType::class, [
+            'class' => Permission::class,
+            'choice_label' => 'name',
+            'multiple' => true,
+            'expanded' => true,
+            'choice_attr' => $selectedPermissions,
+          ]);
+        };
+
+        $builder->get('franchise')->addEventListener(
+          FormEvents::POST_SUBMIT,
+          function (FormEvent $event) use ($formModifier) {
+              $franchise = $event->getForm()->getData();
+              $formModifier($event->getForm()->getParent(), $franchise);
+          }
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
