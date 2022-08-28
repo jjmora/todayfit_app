@@ -39,6 +39,12 @@
                       <small>#{{ franchise.id }}</small>
                       <h5 class="card-title">{{ franchise.Name }}</h5>
                       <p class="card-text">{{ franchise.Email }}</p>
+                      <p>Permissions:</p>
+                      <div class="mb-3">
+                        {% for permission in franchise.permissions %}
+                          <span class="btn btn-sm btn-outline-warning my-1">{{ permission.name }}</span>
+                        {% endfor %}
+                      </div>
                       <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}" class="btn btn-primary">Modifier</a>
                     </div>
                     <div class="card-footer">
@@ -80,8 +86,8 @@
                     </td>
                     <td>{{ franchise.Active ? 'Yes' : 'No' }}</td>
                     <td>
-                        <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}">Voir plus</a>
-                        <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}">Modifier</a>
+                        <a href="{{ path('app_franchise_show', {'id': franchise.id}) }}" class="btn btn-sm btn-outline-success">Voir plus</a>
+                        <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>
                     </td>
                   </tr>
                 {% else %}
