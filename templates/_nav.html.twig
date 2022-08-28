@@ -22,7 +22,9 @@
               <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
-              <li><a class="dropdown-item" href="#">Login</a></li>
+              <li><a href="{{ path('app_login') }}" class="dropdown-item">Login</a></li>
+              <li><a href="{{ path('app_logout') }}" class="dropdown-item">Logout</a></li>
+              <li><a href="{{ path('app_register') }}" class="dropdown-item">Register</a></li>
               <li><a class="dropdown-item" href="#">User Dashboard</a></li>
             </ul>
           </li>
