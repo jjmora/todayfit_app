@@ -13,9 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
+  
+  #[Route('/', name: 'app_user_index', methods: ['GET'])]
+  public function index(UserRepository $userRepository): Response
+  {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+          $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
+          
+          return $this->redirectToRoute('app_dashboard');
+        }
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);

@@ -16,19 +16,26 @@
           <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
         </li>
       </ul>
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <button type="button" class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
-              <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
-              <li><a href="{{ path('app_login') }}" class="dropdown-item">Login</a></li>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          {{ app.user ? app.user.userIdentifier : 'Please Login' }}
+        </li>
+        <li class="nav-item dropdown">
+          <button type="button" class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+            <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
+            {% if app.user %}
               <li><a href="{{ path('app_logout') }}" class="dropdown-item">Logout</a></li>
               <li><a href="{{ path('app_register') }}" class="dropdown-item">Register</a></li>
-              <li><a class="dropdown-item" href="#">User Dashboard</a></li>
-            </ul>
-          </li>
-        </ul>
+              <li><a href="{{ path('app_user_index') }}" class="dropdown-item">User Dashboard</a></li>
+            {% else %}
+              <li><a href="{{ path('app_login') }}" class="dropdown-item">Login</a></li>
+            {% endif %}
+            
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

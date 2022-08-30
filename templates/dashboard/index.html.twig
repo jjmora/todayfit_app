@@ -9,6 +9,11 @@
 </style>
 
   <div class="container mt-5">
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Admin Dashboard - Unauthenticated user</h1>
     <a href="{{ path('app_admin') }}">Admin Area</a>
     <p>

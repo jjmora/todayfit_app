@@ -16,7 +16,13 @@ class PermissionController extends AbstractController
     #[Route('/', name: 'app_permission_index', methods: ['GET'])]
     public function index(PermissionRepository $permissionRepository): Response
     {
-        return $this->render('permission/index.html.twig', [
+      if (!$this->isGranted('ROLE_ADMIN')) {
+        $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
+        
+        return $this->redirectToRoute('app_dashboard');
+      }
+    
+      return $this->render('permission/index.html.twig', [
             'permissions' => $permissionRepository->findAll(),
         ]);
     }

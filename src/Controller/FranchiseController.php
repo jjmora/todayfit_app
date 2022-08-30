@@ -16,6 +16,12 @@ class FranchiseController extends AbstractController
     #[Route('/', name: 'app_franchise_index', methods: ['GET'])]
     public function index(FranchiseRepository $franchiseRepository): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+          $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
+          
+          return $this->redirectToRoute('app_dashboard');
+        }
+
         return $this->render('franchise/index.html.twig', [
             'franchises' => $franchiseRepository->findAll(),
         ]);
