@@ -11,11 +11,11 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
-      if (!$this->isGranted('ROLE_ADMIN')) {
-        $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
+      // if (!$this->isGranted('ROLE_ADMIN')) {
+      //   $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
         
-        return $this->redirectToRoute('app_dashboard');
-      }
+      //   return $this->redirectToRoute('app_dashboard');
+      // }
 
         $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
 
