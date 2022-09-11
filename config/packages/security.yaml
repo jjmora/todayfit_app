@@ -34,7 +34,7 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/franchise, roles: ROLE_USER }
-        - { path: ^/structure, roles: ROLE_USER }
+        - { path: ^/partner, roles: ROLE_USER }
         - { path: ^/permission, roles: ROLE_USER }
 
 when@test:
