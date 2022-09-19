@@ -28,9 +28,13 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        if ($this->getUser()) {
-          return $this->redirectToRoute('app_admin');
-        }
+        // if (!$this->isGranted("ROLE_ADMIN")) {
+        //   return $this->redirectToRoute('app_dashboard');
+        // }
+      
+        // if ($this->getUser()) {
+        //   return $this->redirectToRoute('app_admin');
+        // }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -55,10 +59,15 @@ class RegistrationController extends AbstractController
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context([
+                      'user' => $user,
+                    ])
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_dashboard');
+            //redirect to external url
+            return $this->redirect('http://www.juanjosemora.es');
         }
 
         return $this->render('registration/register.html.twig', [
