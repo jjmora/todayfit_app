@@ -7,7 +7,7 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1>Registrer un nouvel utilisateur</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
@@ -18,6 +18,4 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
-
-    <p>Vous avez déjà un email? <a href="{{ path('app_login')}}">Please Login</a></p>
 {% endblock %}

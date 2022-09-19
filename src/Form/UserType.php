@@ -23,7 +23,6 @@ class UserType extends AbstractType
                 'Super Admin' => 'ROLE_SUPER_ADMIN'
               ],
             ])
-            ->add('password')
             ->add('isVerified')
         ;
     }
