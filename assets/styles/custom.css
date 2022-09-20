@@ -1,0 +1,19 @@
+footer {
+  position: fixed;
+  bottom: 0px;
+}
+
+.custom-form {
+  border-radius: 15px;
+}
+
+.custom-form button {
+  margin: 20px 0px;
+}
+
+.custom-form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+/*# sourceMappingURL=custom.css.map */
