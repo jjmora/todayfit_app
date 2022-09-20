@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Roles</th>
                 <th>IsVerified</th>
+                <th>IsPasswordReset</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,9 +23,10 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.passwordReset ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">détails</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}

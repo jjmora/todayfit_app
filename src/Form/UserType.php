@@ -24,6 +24,7 @@ class UserType extends AbstractType
               ],
             ])
             ->add('isVerified')
+            ->add('passwordReset')
         ;
     }
 
