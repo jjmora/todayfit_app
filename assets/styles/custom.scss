@@ -4,3 +4,17 @@ footer{
   position: fixed;
   bottom: 0px;
 }
+
+// LOGIN FORM
+.custom-form{
+  border-radius: 15px;
+  
+  button{
+    margin: 20px 0px;
+  }
+
+  label{
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+}
