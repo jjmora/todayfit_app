@@ -6,6 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_franchise_index') }}">Franchises</a>
         </li>
@@ -15,6 +16,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
         </li>
+      {% endif %}
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
         <li class="nav-item dropdown">
