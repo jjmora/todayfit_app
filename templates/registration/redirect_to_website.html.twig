@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email Verification{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+
+    {% if app.user %}
+      <h1>Email Verification Successful</h1>
+      <p>Thank you. You have confirmed your email.Please visit the website here and Login with your email: {{ app.user.userIdentifier }}</p>
+    {% else %}
+      <p>Please Login</p>
+    {% endif %}
+    <a href="http://www.juanjosemora.es">Website</p>
+</div>
+{% endblock %}
