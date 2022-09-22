@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified = false;
 
     #[ORM\Column]
-    private ?bool $passwordReset = null;
+    private ?bool $passwordReset = false;
 
     public function getId(): ?int
     {
