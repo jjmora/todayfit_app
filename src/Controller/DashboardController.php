@@ -28,7 +28,9 @@ class DashboardController extends AbstractController
         // User is connected, verified and has reset the password
         if($user){
           // send to final page 
-          return $this->render("registration/redirect_to_website.html.twig");
+          return $this->render("registration/redirect_to_website.html.twig", [
+            'user' => $user
+          ]);
         }
         
         // user is not connected
