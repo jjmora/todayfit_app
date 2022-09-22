@@ -87,12 +87,12 @@ class RegistrationController extends AbstractController
             // $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
             $this->addFlash('verify_email_error', $exception->getReason());
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_login');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre e-mail a été confirmé.');
 
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('app_dashboard');
     }
 }

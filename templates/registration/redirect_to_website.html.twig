@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email Verification{% endblock %}
+
+{% block body %}
+<section class="container bg-light p-5 text-center">
+
+    {% if app.user %}
+    <div class="text-center mb-3">
+      <h1>Votre adresse e-mail a été vérifiée!</h1>
+      <h2>Merci et bienvenue dans la famille TODAYFIT</h2>
+    </div>
+    <p>Vous pouvez desormais accèder à votre panneau d'administration avec votre nouveau mot de passe et votre e-mail: {{ app.user.userIdentifier }}</p>
+    {% else %}
+      <p>Vous n'êtes pas connecté</p>
+      <a href="{{ path('app_login') }}" class="dropdown-item">Login</a>
+    {% endif %}
+    <a href="http://www.juanjosemora.es" class="btn btn-success">Acceder au site web</a>
+</section>
+{% endblock %}
