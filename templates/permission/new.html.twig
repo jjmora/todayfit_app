@@ -3,9 +3,12 @@
 {% block title %}New Permission{% endblock %}
 
 {% block body %}
-    <h1>Create new Permission</h1>
+<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
+
+    <h1>Nouvelle Permission</h1>
 
     {{ include('permission/_form.html.twig') }}
 
-    <a href="{{ path('app_permission_index') }}" class="my-3 btn btn-outline-primary">back to list</a>
+    <a href="{{ path('app_permission_index') }}" class="my-3 btn btn-outline-primary">Retourner à la liste</a>
+</section>
 {% endblock %}
