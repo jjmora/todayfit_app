@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Permission{% endblock %}
+{% block title %}Editer Permission{% endblock %}
 
 {% block body %}
-    <h1>Edit Permission</h1>
+<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
 
-    {{ include('permission/_form.html.twig', {'button_label': 'Update'}) }}
+    <h1>Editer Permission</h1>
 
-    <a href="{{ path('app_permission_index') }}">back to list</a>
-
+    {{ include('permission/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
     {{ include('permission/_delete_form.html.twig') }}
+
+    <a href="{{ path('app_permission_index') }}" class="btn btn-warning">Retourner à la liste</a>
+
+</section>
 {% endblock %}

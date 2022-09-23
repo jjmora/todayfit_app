@@ -14,6 +14,11 @@ class DashboardController extends AbstractController
         /** @var User $user */
         $user = $this ->getUser();
 
+        //User is connected AND is ROLE_ADMIN
+        if ($this->isGranted('ROLE_ADMIN')) {
+          return $this->redirectToRoute('app_admin');
+        };
+
         //User is connected BUT is NOT verified
         if($user && !$user->isVerified()){
           return $this->render("registration/please-verify-email.html.twig");
