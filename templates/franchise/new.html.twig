@@ -3,10 +3,13 @@
 {% block title %}New Franchise{% endblock %}
 
 {% block body %}
+<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
+
     <h1>Nouvelle Franchise</h1>
 
     {{ include('franchise/_form.html.twig') }}
 
     <br />
-    <a href="{{ path('app_franchise_index') }}"  class="my-3 btn btn-outline-primary">Liste de Franchises</a>
+    <a href="{{ path('app_franchise_index') }}"  class="my-3 btn btn-warning">Liste de Franchises</a>
+</section>
 {% endblock %}

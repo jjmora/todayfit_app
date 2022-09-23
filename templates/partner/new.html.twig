@@ -3,8 +3,10 @@
 {% block title %}New Partner{% endblock %}
 
 {% block body %}
+<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
+
   <div class="container d-flex flex-column justify-content-center">
-    <section class="col-6 custom-form">
+    <section class="custom-form">
       <h1>Nouvelle Structure</h1>
 
       {{ include('partner/_form.html.twig') }}
@@ -12,6 +14,7 @@
       <a href="{{ path('app_partner_index') }}" class="my-3 btn btn-outline-primary">Liste des Structures</a>
     </section>
   </div>
+</section>
 {% endblock %}
 
 {% block javascripts %}

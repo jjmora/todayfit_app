@@ -15,6 +15,11 @@
       <p>Vous n'êtes pas connecté</p>
       <a href="{{ path('app_login') }}" class="dropdown-item">Login</a>
     {% endif %}
-    <a href="http://www.juanjosemora.es" class="btn btn-success">Acceder au site web</a>
+    <div>
+      <a href="http://www.juanjosemora.es" class="btn btn-success my-3">Acceder au site web</a>
+    </div>
+    {% if user.passwordReset %}
+      <a href="/reset-password" class="btn btn-outline-primary">Modifier mon Mot de Passe</a>
+    {% endif %}
 </section>
 {% endblock %}
