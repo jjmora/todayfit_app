@@ -45,6 +45,7 @@ class PartnerType extends AbstractType
               'multiple' => false,
               'placeholder' => ''
             ])
+            // TO DO dynamic user selection by franchise
             ->add('user', EntityType::class, [
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
@@ -83,7 +84,8 @@ class PartnerType extends AbstractType
             $selectedPermissions[$permission->getId()-1] = ['checked' => true];
           }
 
-          $form->add('permissions', EntityType::class, [
+          $form
+            ->add('permissions', EntityType::class, [
             'class' => Permission::class,
             'choice_label' => 'name',
             'multiple' => true,
