@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Franchise;
 use App\Form\FranchiseType;
+use App\Form\FranchiseEditType;
 use App\Repository\FranchiseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +58,7 @@ class FranchiseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_franchise_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Franchise $franchise, FranchiseRepository $franchiseRepository): Response
     {
-        $form = $this->createForm(FranchiseType::class, $franchise);
+        $form = $this->createForm(FranchiseEditType::class, $franchise);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
