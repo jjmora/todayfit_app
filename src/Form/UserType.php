@@ -20,7 +20,9 @@ class UserType extends AbstractType
               'expanded' => true,
               'choices' => [
                 'Admin' => 'ROLE_ADMIN',
-                'Super Admin' => 'ROLE_SUPER_ADMIN'
+                'Super Admin' => 'ROLE_SUPER_ADMIN',
+                'Franchise' => 'ROLE_FRANCHISE',
+                'Structure' => 'ROLE_STRUCTURE'
               ],
             ])
             ->add('isVerified')
