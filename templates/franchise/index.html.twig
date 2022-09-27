@@ -39,7 +39,8 @@
                       <div class="card-body">
                         <small>#{{ franchise.id }}</small>
                         <h5 class="card-title">{{ franchise.Name }}</h5>
-                        <p class="card-text">{{ franchise.Email }}</p>
+                        <small class="card-text">(E-mail perso: {{ franchise.email }})</small>
+                        <p class="card-text">{{ franchise.user.email }}</p>
                         <p>Permissions:</p>
                         <div class="mb-3">
                           {% for permission in franchise.permissions %}
