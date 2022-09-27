@@ -38,6 +38,13 @@ class PartnerType extends AbstractType
             ->add('address', null, [
               'label' => 'Adresse'
             ])
+            ->add('Active')
+            ->add('franchise', EntityType::class, [
+              'class' => Franchise::class,
+              'choice_label' => 'name',
+              'multiple' => false,
+              'placeholder' => ''
+            ])
             ->add('user', EntityType::class, [
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
@@ -51,21 +58,14 @@ class PartnerType extends AbstractType
                 ;
               },
               'multiple' => false,
-              'expanded' => false
-            ])
-            ->add('Active')
-            ->add('franchise', EntityType::class, [
-              'class' => Franchise::class,
-              'choice_label' => 'name',
-              'multiple' => false,
-              'placeholder' => ''
+              'expanded' => false,
             ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',
               'multiple' => true,
               'expanded' => true,
-              'disabled' => !$options['data']->getId()
+              'disabled' => !$options['data']->getId() //true or false
             ])
         ;
 
