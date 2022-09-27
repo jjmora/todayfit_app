@@ -22,7 +22,7 @@ class UserType extends AbstractType
                 'Admin' => 'ROLE_ADMIN',
                 'Super Admin' => 'ROLE_SUPER_ADMIN',
                 'Franchise' => 'ROLE_FRANCHISE',
-                'Structure' => 'ROLE_STRUCTURE'
+                'Structure' => 'ROLE_PARTNER'
               ],
             ])
             ->add('isVerified')
