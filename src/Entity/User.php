@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $passwordReset = false;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Franchise $franchise = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,6 +128,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPasswordReset(bool $passwordReset): self
     {
         $this->passwordReset = $passwordReset;
+
+        return $this;
+    }
+
+    public function getFranchise(): ?Franchise
+    {
+        return $this->franchise;
+    }
+
+    public function setFranchise(Franchise $franchise): self
+    {
+        // set the owning side of the relation if necessary
+        if ($franchise->getUser() !== $this) {
+            $franchise->setUser($this);
+        }
+
+        $this->franchise = $franchise;
 
         return $this;
     }

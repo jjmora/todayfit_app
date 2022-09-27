@@ -32,6 +32,10 @@ class Franchise
     #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Partner::class)]
     private Collection $partner;
 
+    #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->permissions = new ArrayCollection();
@@ -129,6 +133,18 @@ class Franchise
                 $partner->setFranchise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
