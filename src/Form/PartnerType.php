@@ -5,8 +5,10 @@ namespace App\Form;
 use App\Entity\Franchise;
 use App\Entity\Partner;
 use App\Entity\Permission;
+use App\Entity\User;
 use App\Repository\FranchiseRepository;
 use App\Repository\PermissionRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,8 +32,27 @@ class PartnerType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('email')
-            ->add('address')
+            ->add('email', null, [
+              'label' => 'Adresse E-mail personnelle'
+            ])
+            ->add('address', null, [
+              'label' => 'Adresse'
+            ])
+            ->add('user', EntityType::class, [
+              'class' => User::class,
+              'placeholder' => 'Utilisateurs disponibles',
+              'choice_label' => 'email',
+              'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                  ->where('u.roles LIKE :role')
+                  ->setParameter('role', '%"'.'ROLE_PARTNER'.'"%')
+                  ->leftJoin(Partner::class, 'p', 'WITH', 'u = p.user' )
+                  ->andwhere('p.user is NULL');
+                ;
+              },
+              'multiple' => false,
+              'expanded' => false
+            ])
             ->add('Active')
             ->add('franchise', EntityType::class, [
               'class' => Franchise::class,

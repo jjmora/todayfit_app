@@ -65,7 +65,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_dashboard');
+            return $this->redirectToRoute('app_user_index');
             //redirect to external url
             return $this->redirect('http://www.juanjosemora.es');
         }
