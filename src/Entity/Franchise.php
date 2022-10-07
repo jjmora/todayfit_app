@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\CollectionOperationInterface;
 use App\Repository\FranchiseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+  collectionOperations: ['get'],
+  itemOperations: ['get'],
+)]
 class Franchise
 {
     #[ORM\Id]
