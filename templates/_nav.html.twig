@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary px-5">
+<nav class="navbar navbar-expand-lg bg-warning px-5">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ path('app_dashboard') }}">
       <img src="{{ asset('build/images/logo_white.png')}}" alt="Today Fit Logo" width="150px">
@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+      {# {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %} #}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_franchise_index') }}">Franchises</a>
         </li>
@@ -18,14 +18,14 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
         </li>
-      {% endif %}
+      {# {% endif %} #}
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
         <li class="nav-item dropdown">
           {{ app.user ? app.user.userIdentifier : 'Please Login' }}
         </li>
         <li class="nav-item dropdown">
-          <button type="button" class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+          <button type="button" class="btn btn-a nav-a py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
             <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
