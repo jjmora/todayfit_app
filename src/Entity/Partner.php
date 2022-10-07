@@ -9,7 +9,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
-#[ApiResource]
+#[ApiResource(
+  collectionOperations: ['get'],
+  itemOperations: ['get'],
+)]
 class Partner
 {
     #[ORM\Id]
@@ -34,6 +37,9 @@ class Partner
 
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'partners')]
     private Collection $permissions;
+
+    #[ORM\OneToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -125,6 +131,18 @@ class Partner
     public function removePermission(Permission $permission): self
     {
         $this->permissions->removeElement($permission);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

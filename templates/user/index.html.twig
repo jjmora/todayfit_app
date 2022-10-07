@@ -15,6 +15,10 @@
             <tr>
                 <th>Id</th>
                 <th>E-mail</th>
+                <th>
+                  <span class="franchise-title">Franchise</span> 
+                  ou 
+                  <span class="partner-title">Structure</span></th>
                 <th>Roles</th>
                 <th>Verifié?</th>
                 <th>Password modifié?</th>
@@ -26,6 +30,14 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+                <td>
+                  {% if user.franchise %}
+                    <span class="franchise-title">{{ user.franchise.name }} | {{ user.franchise.email }}</span>
+                  {% endif %}
+                  {% if user.partner %}
+                    <span class="partner-title">{{ user.partner.name }} | {{ user.partner.email }}</span>
+                  {% endif %}
+                </td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>{{ user.passwordReset ? 'Yes' : 'No' }}</td>

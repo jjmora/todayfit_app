@@ -11,7 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FranchiseType extends AbstractType
+class FranchiseEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -19,21 +19,6 @@ class FranchiseType extends AbstractType
             ->add('Name')
             ->add('Email', null, [
               'label' => 'Adresse E-mail personnelle'
-            ])
-            ->add('user', EntityType::class, [
-              'class' => User::class,
-              'placeholder' => 'Utilisateurs disponibles',
-              'choice_label' => 'email',
-              'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                  ->where('u.roles LIKE :role')
-                  ->setParameter('role', '%"'.'ROLE_FRANCHISE'.'"%')
-                  ->leftJoin(Franchise::class, 'f', 'WITH', 'u = f.user' )
-                  ->andwhere('f.user is NULL');
-                ;
-              },
-              'multiple' => false,
-              'expanded' => false
             ])
             ->add('Active')
             ->add('permissions', EntityType::class, [

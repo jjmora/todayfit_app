@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\CollectionOperationInterface;
 use App\Repository\FranchiseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+  collectionOperations: ['get'],
+  itemOperations: ['get'],
+)]
 class Franchise
 {
     #[ORM\Id]
@@ -31,6 +35,10 @@ class Franchise
 
     #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Partner::class)]
     private Collection $partner;
+
+    #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -129,6 +137,18 @@ class Franchise
                 $partner->setFranchise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

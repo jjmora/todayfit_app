@@ -16,6 +16,7 @@
                   <th>Id</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>User</th>
                   <th>Address</th>
                   <th>Permissions</th>
                   <th>Active</th>
@@ -28,6 +29,13 @@
                   <td>{{ partner.id }}</td>
                   <td>{{ partner.Name }}</td>
                   <td>{{ partner.Email }}</td>
+                  <td>
+                    {% if partner.user %}
+                      {{ partner.user.email }}
+                    {% else %}
+                      <i>Acun utilisateur asigné</i>
+                    {% endif %}
+                  </td>
                   <td>{{ partner.Address }}</td>
                   <td>
                     {% for permission in partner.permissions %}

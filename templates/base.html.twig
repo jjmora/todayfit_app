@@ -47,29 +47,30 @@
         </style>
     </head>
     <body>
-        {# Header #}
-        <div class="container-fluid bg-warning text-center py-1"><i>Ce site web est une site de démonstration</i></div>
-        {{ include('_nav.html.twig') }}
 
-        {# Messages #}
-        <div class="container mt-3">
-          {% for message in app.flashes('error') %}
-              <div class="alert alert-danger">
-                  {{ message }}
-              </div>
-          {% endfor %}
-          {% for message in app.flashes('success') %}
-              <div class="alert alert-success">
-                  {{ message }} 
-              </div>
-          {% endfor %}
-        </div>
+          {# Header #}
+          <div class="container-fluid bg-warning text-center py-1"><i>Ce site web est une site de démonstration</i></div>
+          {{ include('_nav.html.twig') }}
 
-        {# Main Content #}
-        <section class="container mt-3">
-            {% block body %}{% endblock %}
-        </section>
-        
+          {# Messages #}
+          <div class="container mt-3">
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }} 
+                </div>
+            {% endfor %}
+          </div>
+
+          {# Main Content #}
+          <section class="container mt-3">
+              {% block body %}{% endblock %}
+          </section>
+
         {# Footer #}
         {{ include('_footer.html.twig') }}
     </body>
