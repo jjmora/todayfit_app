@@ -79,6 +79,8 @@ form fieldset{
 }
 #partner_permissions {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 #partner_permissions input[type="checkbox"]{
     visibility: hidden;

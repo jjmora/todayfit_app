@@ -52,7 +52,9 @@
               {{ include('franchise/_card.html.twig', {
                 'button_label': 'Go!',
                 'name' : franchise.name,
-                'permissions' : franchise.permissions
+                'permissions' : franchise.permissions,
+                'image': franchise.image,
+                'description': franchise.description
                 }) }}
             {% endfor %}
 

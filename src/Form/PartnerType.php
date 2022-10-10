@@ -38,6 +38,8 @@ class PartnerType extends AbstractType
             ->add('address', null, [
               'label' => 'Adresse'
             ])
+            ->add('image')
+            ->add('description')
             ->add('Active')
             ->add('franchise', EntityType::class, [
               'class' => Franchise::class,

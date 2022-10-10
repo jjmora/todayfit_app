@@ -20,6 +20,8 @@ class FranchiseType extends AbstractType
             ->add('Email', null, [
               'label' => 'Adresse E-mail personnelle'
             ])
+            ->add('image')
+            ->add('description')
             ->add('user', EntityType::class, [
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
