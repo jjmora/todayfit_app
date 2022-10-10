@@ -29,6 +29,9 @@ class Permission
     #[ORM\ManyToMany(targetEntity: Partner::class, mappedBy: 'permissions')]
     private Collection $partners;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->franchises = new ArrayCollection();
@@ -102,6 +105,18 @@ class Permission
         if ($this->partners->removeElement($partner)) {
             $partner->removePermission($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

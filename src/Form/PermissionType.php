@@ -13,6 +13,7 @@ class PermissionType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('image')
         ;
     }
 

@@ -24,51 +24,11 @@
           {# < PERMISSION #}
             {% include 'franchise/_permission.html.twig' with {
               'permission_name' : permission.name,
-              'image': "https://www.svgrepo.com/show/256525/running-fitness.svg"
+              'image': permission.image
               }
             %}
           {# > PERMISSION #}
         {% endfor %}
-
-        {# < PERMISSION #}
-          {% include 'franchise/_permission.html.twig' with {
-            'permission_name' : 'Machine à café',
-            'image': "https://www.svgrepo.com/show/142204/hot-drink.svg"
-            }
-          %}
-        {# > PERMISSION #}
-
-        {# < PERMISSION #}
-          {% include 'franchise/_permission.html.twig' with {
-            'permission_name' : 'Virtual Boxing',
-            'image': "https://cdn-icons-png.flaticon.com/512/73/73029.png"
-            }
-          %}
-        {# > PERMISSION #}
-
-        {# < PERMISSION #}
-          {% include 'franchise/_permission.html.twig' with {
-            'permission_name' : 'Piscine',
-            'image': "https://www.svgrepo.com/show/393385/swimming.svg"
-            }
-          %}
-        {# > PERMISSION #}
-
-        {# < PERMISSION #}
-          {% include 'franchise/_permission.html.twig' with {
-            'permission_name' : 'Spa',
-            'image': "https://www.svgrepo.com/show/342830/spa.svg"
-            }
-          %}
-        {# > PERMISSION #}
-
-        {# < PERMISSION #}
-          {% include 'franchise/_permission.html.twig' with {
-            'permission_name' : 'Virtual Bike',
-            'image': "https://cdn-icons-png.flaticon.com/512/71/71422.png"
-            }
-          %}
-        {# > PERMISSION #}
 
       </div>
 
