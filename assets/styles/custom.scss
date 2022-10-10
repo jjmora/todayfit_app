@@ -77,15 +77,18 @@ form fieldset{
   border-radius: 15px;
   padding: 10px;
 }
-#partner_permissions {
+#partner_permissions,
+#franchise_edit_permissions {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-#partner_permissions input[type="checkbox"]{
+#partner_permissions input[type="checkbox"],
+#franchise_edit_permissions input[type="checkbox"] {
     visibility: hidden;
 }
-#partner_permissions input[type="checkbox"] + label {
+#partner_permissions input[type="checkbox"] + label,
+#franchise_edit_permissions input[type="checkbox"] + label {
     background-color: white; /* Green */
     border: 1px solid #ced4da;
     color: #ced4da;
@@ -96,12 +99,12 @@ form fieldset{
     font-size: 16px;
     border-radius:5px;
 }
-#partner_permissions input[type="checkbox"]:checked + label {
+#partner_permissions input[type="checkbox"]:checked + label,
+#franchise_edit_permissions input[type="checkbox"]:checked + label {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
 }
-
 
 // CARD SECTION
 .card-section{
