@@ -51,6 +51,8 @@
             {% for franchise in franchises %}
               {{ include('franchise/_card.html.twig', {
                 'button_label': 'Go!',
+                'id': franchise.id,
+                'email': franchise.email,
                 'name' : franchise.name,
                 'permissions' : franchise.permissions,
                 'image': franchise.image,
