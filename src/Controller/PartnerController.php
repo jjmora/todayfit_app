@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\SearchPartnerType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/partner')]
 class PartnerController extends AbstractController
 {
-    #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository): Response
+    #[Route('/', name: 'app_partner_index', methods: ['GET', 'POST'])]
+    public function index(PartnerRepository $partnerRepository, Request $request): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
@@ -22,8 +23,19 @@ class PartnerController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+        $partners = $partnerRepository->findAll();
+
+        $form = $this->createForm(SearchPartnerType::class);
+
+        $search = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+          $partners = $partnerRepository->search($search->get('input_data')->getData());
+        }
+      
         return $this->render('partner/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
+            'partners' => $partners,
+            'form' => $form->createView()
         ]);
     }
 

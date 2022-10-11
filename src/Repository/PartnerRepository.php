@@ -21,6 +21,18 @@ class PartnerRepository extends ServiceEntityRepository
         parent::__construct($registry, Partner::class);
     }
 
+    public function search($input_data)
+    {
+      $query = $this->createQueryBuilder('p');
+
+      if($input_data != null){
+        $query->where('MATCH_AGAINST(p.Name, p.Email, p.description, p.Address) AGAINST (:input_data boolean)>0')
+          ->setParameter('input_data', $input_data);
+      }
+
+      return $query->getQuery()->getResult();
+    }
+
     public function add(Partner $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
