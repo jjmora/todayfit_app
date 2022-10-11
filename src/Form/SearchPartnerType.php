@@ -21,6 +21,7 @@ class SearchPartnerType extends AbstractType
           ],
           'required' => false
         ])
+        //->add('Active')
         ->add('Chercher', SubmitType::class, [
           'label' => 'Chercher',
           'attr' => [

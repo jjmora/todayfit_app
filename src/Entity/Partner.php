@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 #[ORM\Index(name: 'partner', columns: ['name', 'email', 'description', 'address'], flags: ['fulltext'])]
 #[ApiResource(
-  // collectionOperations: ['get'],
-  // itemOperations: ['get'],
+    collectionOperations: ['get'],
+    itemOperations: ['get'],
 )]
 class Partner
 {

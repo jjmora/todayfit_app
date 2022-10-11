@@ -64,6 +64,10 @@
                   'image': partner.image,
                   'description': partner.description
                   }) }}
+              {% else %}
+                <div class="alert alert-danger" role="alert">
+                  Il n'y a pas de resultat pour votre recherche
+                </div>
               {% endfor %}
 
             </div>
