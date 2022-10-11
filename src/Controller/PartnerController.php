@@ -26,11 +26,12 @@ class PartnerController extends AbstractController
         $partners = $partnerRepository->findAll();
 
         $form = $this->createForm(SearchPartnerType::class);
-
         $search = $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()){
-          $partners = $partnerRepository->search($search->get('input_data')->getData());
+          //dd($form);
+
+          $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
         }
       
         return $this->render('partner/index.html.twig', [

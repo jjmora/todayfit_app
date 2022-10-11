@@ -107,16 +107,18 @@ form fieldset{
 }
 
 // PARTNER FORM SECTION
-#search_persona{
-  display:flex;
-  flex-direction:row;
-  justify-content: space-between;
-  max-height: 40px;
-  margin-bottom: 50px;
-}
-#search_persona input{
-  width: 400px;
-}
+
+// #search_partner {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   gap: 15px;
+
+//   input {
+//     width: 400px;
+//   }
+// }
 
 // .search-icon::after{
 //   font-family: "Font Awesome 5 Free"; 
