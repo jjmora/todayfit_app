@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use App\Entity\Partner;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,20 +25,22 @@ class SearchPartnerType extends AbstractType
             ],
             'required' => false
           ])
-          // ->add('active', EntityType::class, [
-          //   'class' => Partner::class,
-          //   'choice_label' => 'Active',
-          //   'label' => 'Active ?',
-          //   'required' => false
-          // ])
           ->add('active', CheckboxType::class, [
             'label'    => 'Voir uniquement les Actives',
             'required' => false,
+            'attr' => [
+              'class' => ''
+            ]
           ])
           ->add('Chercher', SubmitType::class, [
             'label' => 'Chercher',
             'attr' => [
-              'class' => 'btn btn-warning search-icon'
+              'class' => 'btn btn-warning search-icon ms-3'
+            ]
+          ])
+          ->add('Reset', ResetType::class, [
+            'attr' => [
+              'class' => 'btn btn-outline-danger ms-2'
             ]
           ])
   ;

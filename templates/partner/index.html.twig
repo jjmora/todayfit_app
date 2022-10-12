@@ -3,6 +3,10 @@
 {% block title %}Partner index{% endblock %}
 
 {% block body %}
+    <div>
+      {{ form(form) }}
+    </div>
+
     {# Header section #}
     <section class="d-flex flex-row justify-content-between align-items-center">
       <h1>Structures</h1>
@@ -37,26 +41,17 @@
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
           <section class='container card-section my-5'>
             <div class="row">
-              <div class='d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-4'>
-                <div class='d-flex flex-column flex-lg-row'>
-                  <h2 class="fw-bold lh-1 mb-0 mb-md-0 me-md-3 text-uppercase mb-2">MES CLUBS</h2>
+              <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
+                
+                <div class='d-flex flex-column flex-sm-row mb-sm-3'>
+                  <h2 class="fw-bold lh-1 mb-0 mb-md-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
                   <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
                 </div>
-                <div class="d-flex flex-column flex-lg-row align-items-center">
-                  {{ form(form) }}
-                </div>
-                {# <div class="d-flex flex-column flex-lg-row align-items-center">
 
-                  <form class="d-flex flex-row align-items-center gap-3">
-                    <div class="form-check form-switch ">
-                      <input class="form-check-input" type="checkbox" id="switchActive" />
-                      <label class="form-check-label" for="switchActive">Actives</label>
-                    </div>
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                  </form>
-                
-                </div> #}
+                <div class="d-flex flex-column flex-lg-row search-form-partner">
+                  {# {{ form(form) }} #}
+                </div>
+
               </div>
 
               {% for partner in partners %}
@@ -65,7 +60,8 @@
                   'name' : partner.name,
                   'permissions' : partner.permissions,
                   'image': partner.image,
-                  'description': partner.description
+                  'description': partner.description,
+                  'id': partner.id
                   }) }}
               {% else %}
                 <div class="alert alert-danger" role="alert">
