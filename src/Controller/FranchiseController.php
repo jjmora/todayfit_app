@@ -14,8 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    #[Route('/', name: 'app_franchise_index', methods: ['GET'])]
-    public function index(FranchiseRepository $franchiseRepository): Response
+    #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET'])]
+    public function index(FranchiseRepository $franchiseRepository, $page): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
@@ -23,8 +23,24 @@ class FranchiseController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+        // PAGINATION
+        // $page = 1;
+        $qty = 3;
+        $qtyFranchise = $franchiseRepository->count([]); 
+        $qtyPages = ceil($qtyFranchise / $qty);
+
+        $franchises = $franchiseRepository->findBy(
+          [],
+          null,
+          $qty,
+          ($page - 1)*$qty
+        );
+
         return $this->render('franchise/index.html.twig', [
-            'franchises' => $franchiseRepository->findAll(),
+            'franchises' => $franchises,
+            'qtyPages' => $qtyPages,
+            'page' => $page,
+            'qty' => $qty,
         ]);
     }
 
@@ -47,7 +63,7 @@ class FranchiseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_franchise_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_franchise_show', methods: ['GET'])]
     public function show(Franchise $franchise): Response
     {
         return $this->render('franchise/show.html.twig', [
