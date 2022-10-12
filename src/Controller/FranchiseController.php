@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Franchise;
+use App\Entity\Partner;
 use App\Form\FranchiseType;
 use App\Form\FranchiseEditType;
 use App\Repository\FranchiseRepository;
+use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +16,52 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
+    #[Route('/maFranchise', name: 'app_ma_franchise_show', methods: ['GET'])]
+    public function showMyFranchise(FranchiseRepository $franchiseRepository): Response
+    { 
+        if($this->getUser()){
+          
+          if($this->getUser()->getFranchise() != null){
+            $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
+          } else {
+            $franchise = null;
+          }  
+
+          return $this->render('franchise/show.html.twig', [
+              'franchise' => $franchise,
+          ]);
+        }
+
+        $this->addFlash('error', "Vous n'avez pas le droit d'acceder");
+        return $this->redirectToRoute('app_dashboard');
+
+    }
+
+    #[Route('/maFranchise/partner/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
+    public function showMyPartner(Partner $partner, $id, FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository): Response
+    {
+        $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
+        $partners = $franchise->getPartner();
+        //dd($this->getUser()->getFranchise());
+        //dd($partnerRepository->find($id)->getFranchise());
+        if( $partnerRepository->find($id)->getFranchise() != $this->getUser()->getFranchise()) {
+          $this->addFlash('error', "Vous n'avez pas le droit d'acceder");
+          return $this->redirectToRoute('app_dashboard');
+        }
+
+        return $this->render('partner/show.html.twig', [
+            'partner' => $partner,
+            'partners' => $partners
+        ]);
+    }
+
     #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET'])]
     public function index(FranchiseRepository $franchiseRepository, $page): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
-          return $this->redirectToRoute('app_dashboard');
+          //return $this->redirectToRoute('app_dashboard');
         }
 
         //All Franchises
