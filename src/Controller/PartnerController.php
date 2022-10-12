@@ -13,8 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/partner')]
 class PartnerController extends AbstractController
 {
-    #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository): Response
+    #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET'])]
+    public function index(PartnerRepository $partnerRepository, $page): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
@@ -22,12 +22,27 @@ class PartnerController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+        // PAGINATION
+        $page = (int)$page;
+        $qty = 3;
+        $qtyPartners = $partnerRepository->count([]); 
+        $qtyPages = ceil($qtyPartners / $qty);
+        $partners = $partnerRepository->findBy(
+          [],
+          null,
+          $qty,
+          ($page - 1)*$qty
+        );
+
         return $this->render('partner/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
+            'partners' => $partners,
+            'qtyPages' => $qtyPages,
+            'page' => $page,
+            'qty' => $qty,
         ]);
     }
 
-    #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
+    #[Route('/new/partner', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();
@@ -46,7 +61,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_partner_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
     public function show(Partner $partner): Response
     {
         return $this->render('partner/show.html.twig', [

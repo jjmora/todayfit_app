@@ -30,6 +30,8 @@
 
         {# < Card section #}
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+          
+          {# < Card Content section #}
           <section class='container card-section my-5'>
             <div class="row">
               <div class='d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-4'>
@@ -49,18 +51,55 @@
                 </div>
               </div>
 
+              {% set link = "/partner/show/" %}
               {% for partner in partners %}
                 {{ include('partner/_card.html.twig', {
                   'button_label': 'Go!',
+                  'id': partner.id,
                   'name' : partner.name,
                   'permissions' : partner.permissions,
                   'image': partner.image,
-                  'description': partner.description
+                  'description': partner.description,
+                  'link': link,
                   }) }}
               {% endfor %}
 
             </div>
           </section>
+          {# > Card Content section #}
+
+          {# < Pagination section #}
+          <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+              {% if page != 1 %}
+              <li class="page-item">
+                <a class="page-link" 
+                  href={{ path('app_partner_index', {page: page - 1,qty: qty}) }} 
+                >Previous</a>
+              </li>
+              {% endif %}
+              {% for i in range(1, qtyPages) %}
+                <li class="page-item">
+                  <a 
+                    class="{{ i == page ? "active page-link" : "page-link" }}"
+                    href={{ path('app_partner_index', {page: i,qty: qty}) }}
+                  >
+                    {{ i }}
+                  </a>
+                </li>
+              {% endfor %}
+              {% if page != qtyPages %}
+                <li class="page-item">
+                  <a 
+                    class="page-link" 
+                    href="{{ path('app_partner_index', {page: page + 1,qty: qty}) }}" 
+                  >Next</a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+          {# > Pagination section #}
+
         </div>
         {# > Card section #}
 

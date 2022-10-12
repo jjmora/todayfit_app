@@ -44,7 +44,7 @@ class FranchiseController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_franchise_new', methods: ['GET', 'POST'])]
+    #[Route('/new/fr', name: 'app_franchise_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FranchiseRepository $franchiseRepository): Response
     {
         $franchise = new Franchise();
