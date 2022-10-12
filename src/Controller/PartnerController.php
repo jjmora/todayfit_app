@@ -23,7 +23,6 @@ class PartnerController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
-<<<<<<< HEAD
         // PAGINATION
         $page = (int)$page;
         $qty = 3;
