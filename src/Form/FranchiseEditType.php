@@ -22,7 +22,12 @@ class FranchiseEditType extends AbstractType
             ])
             ->add('image')
             ->add('description')
-            ->add('Active')
+            ->add('Active', null, [
+              'label' => 'Active',
+              'label_attr' => [
+                'class' => 'custom-active-check'
+              ]
+            ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',

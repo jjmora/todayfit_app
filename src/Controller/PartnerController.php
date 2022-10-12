@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\PartnerEditType;
 use App\Form\SearchPartnerType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -87,7 +88,7 @@ class PartnerController extends AbstractController
     #[Route('/{id}/edit', name: 'app_partner_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository): Response
     {
-        $form = $this->createForm(PartnerType::class, $partner);
+        $form = $this->createForm(PartnerEditType::class, $partner);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

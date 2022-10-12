@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PartnerType extends AbstractType
+class PartnerEditType extends AbstractType
 {
     private $permissionRepository;
     private $franchiseRepository;
@@ -51,22 +51,6 @@ class PartnerType extends AbstractType
               'choice_label' => 'name',
               'multiple' => false,
               'placeholder' => ''
-            ])
-            // TO DO dynamic user selection by franchise
-            ->add('user', EntityType::class, [
-              'class' => User::class,
-              'placeholder' => 'Utilisateurs disponibles',
-              'choice_label' => 'email',
-              'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                  ->where('u.roles LIKE :role')
-                  ->setParameter('role', '%"'.'ROLE_PARTNER'.'"%')
-                  ->leftJoin(Partner::class, 'p', 'WITH', 'u = p.user' )
-                  ->andwhere('p.user is NULL');
-                ;
-              },
-              'multiple' => false,
-              'expanded' => false,
             ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,

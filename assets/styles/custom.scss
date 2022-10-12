@@ -78,19 +78,39 @@ form fieldset{
   padding: 10px;
 }
 #partner_permissions,
+#franchise_permissions,
 #franchise_edit_permissions,
-#search_partner {
+#partner_edit_permissions,
+#registration_form_roles,
+#search_partner,
+.custom-active-check {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 #partner_permissions input[type="checkbox"],
+#franchise_permissions input[type="checkbox"],
 #franchise_edit_permissions input[type="checkbox"],
-#search_partner input[type="checkbox"] {
+#partner_edit_permissions input[type="checkbox"],
+#registration_form_roles input[type="checkbox"],
+#search_partner input[type="checkbox"],
+#franchise_edit_Active,
+#partner_edit_Active,
+#partner_Active,
+#franchise_Active {
     visibility: hidden;
 }
+
 #partner_permissions input[type="checkbox"] + label,
-#franchise_edit_permissions input[type="checkbox"] + label{
+#franchise_permissions input[type="checkbox"] + label,
+#franchise_edit_permissions input[type="checkbox"] + label,
+#partner_edit_permissions input[type="checkbox"] + label,
+#registration_form_roles input[type="checkbox"] + label,
+#franchise_edit_Active,
+#franchise_Active,
+#partner_edit_Active,
+#partner_Active,
+.custom-active-check {
     background-color: white; /* Green */
     border: 1px solid #ced4da;
     color: #ced4da;
@@ -115,8 +135,15 @@ form fieldset{
 }
 
 #partner_permissions input[type="checkbox"]:checked + label,
+#franchise_permissions input[type="checkbox"]:checked + label,
 #franchise_edit_permissions input[type="checkbox"]:checked + label,
-#search_partner input[type="checkbox"]:checked + label {
+#partner_edit_permissions input[type="checkbox"]:checked + label,
+#registration_form_roles input[type="checkbox"]:checked + label,
+#search_partner input[type="checkbox"]:checked + label,
+#franchise_edit_Active[type="checkbox"]:checked + label,
+#franchise_Active[type="checkbox"]:checked + label,
+#partner_edit_Active[type="checkbox"]:checked + label,
+#partner_Active[type="checkbox"]:checked + label{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
