@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\SearchPartnerType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,7 @@ class PartnerController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+<<<<<<< HEAD
         // PAGINATION
         $page = (int)$page;
         $qty = 3;
@@ -34,11 +36,21 @@ class PartnerController extends AbstractController
           ($page - 1)*$qty
         );
 
+        $form = $this->createForm(SearchPartnerType::class);
+        $search = $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+          //dd($form);
+
+          $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
+        }
+      
         return $this->render('partner/index.html.twig', [
-            'partners' => $partners,
-            'qtyPages' => $qtyPages,
-            'page' => $page,
-            'qty' => $qty,
+          'partners' => $partners,
+          'qtyPages' => $qtyPages,
+          'page' => $page,
+          'qty' => $qty,
+          'form' => $form->createView()
         ]);
     }
 

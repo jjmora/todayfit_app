@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
+#[ORM\Index(name: 'franchise', columns: ['name', 'email', 'description'], flags: ['fulltext'])]
 #[ApiResource(
   collectionOperations: ['get'],
   itemOperations: ['get'],
