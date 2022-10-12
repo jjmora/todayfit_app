@@ -5,8 +5,10 @@
 {% block body %}
 <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
 
-    <h1>{{ partner.Name }}</h1>
-
+    <div class="d-flex flex-row align-items-center justify-content-between">
+      <h1>{{ partner.Name }}</h1>
+      {{ include('partner/_delete_form.html.twig') }}
+    </div>
     <table class="table">
         <tbody>
             <tr>
@@ -27,24 +29,29 @@
             </tr>
             <tr>
                 <th>Permissions</th>
-                <td>
+                <td class="d-flex gap-2 text-success">
                   {% for permission in partner.permissions %}
-                    <span>| {{ permission.name }} </span>
+                    <small class="border border-success px-2 py-1 rounded"> {{ permission.name }} </small>
                   {% endfor %}
-                  |
                 </td>
             </tr>
             <tr>
                 <th>Active</th>
-                <td>{{ partner.Active ? 'Yes' : 'No' }}</td>
+                <td>
+                  {% if partner.Active %}
+                    <span class="border border-success px-2 py-1 rounded text-success">Oui</span>
+                  {% else %}
+                    <span class="border border-danger px-2 py-1 rounded text-danger">Non</span>
+                  {% endif %}
+                </td>
             </tr>
 
         </tbody>
     </table>
-    
-    <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-primary">Modifier</a>
-    <a href="{{ path('app_partner_index') }}" class="btn btn-warning">Liste des Structures</a>
 
-    {{ include('partner/_delete_form.html.twig') }}
+    <section class="container d-grid gap-2 col-xl-6">
+      <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-primary">Modifier</a>
+      <a href="{{ path('app_partner_index') }}" class="btn btn-warning">Liste des Structures</a>
+    </section>
 </section>
 {% endblock %}

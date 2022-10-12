@@ -121,6 +121,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Franchise</th>
                         <th>Email</th>
                         <th>User</th>
                         <th>Address</th>
@@ -134,6 +135,9 @@
                     <tr>
                         <td>{{ partner.id }}</td>
                         <td>{{ partner.Name }}</td>
+                        <td>
+                          <span class="btn btn-sm btn-outline-danger">{{ partner.franchise.name }}</span>
+                        </td>
                         <td>{{ partner.Email }}</td>
                         <td>
                           {% if partner.user %}
@@ -143,20 +147,19 @@
                           {% endif %}
                         </td>
                         <td>{{ partner.Address }}</td>
-                        <td>
+                        <td class="d-grid gap-2 text-success">
                           {% for permission in partner.permissions %}
-                            <span class="btn btn-sm btn-warning">{{ permission.name }}</span>
+                            <small class="border border-success px-2 py-1 rounded mx-1 my-1"> {{ permission.name }} </small>
                           {% endfor %}
                         </td>
-                        <td>{{ partner.Active ? '
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                          </div>
-                        ' : '
-                          <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                          </div>
-                        ' }}</td>
+
+                        <td>
+                          {% if partner.Active %}
+                            <span class="border border-success px-2 py-1 rounded text-success">Oui</span>
+                          {% else %}
+                            <span class="border border-danger px-2 py-1 rounded text-danger">Non</span>
+                          {% endif %}
+                        </td>
                         <td>
                             <a href="{{ path('app_partner_show', {'id': partner.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
                             <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>

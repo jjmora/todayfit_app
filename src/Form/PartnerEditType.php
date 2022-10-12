@@ -46,52 +46,13 @@ class PartnerEditType extends AbstractType
                 'class' => 'custom-active-check'
               ]
             ])
-            ->add('franchise', EntityType::class, [
-              'class' => Franchise::class,
-              'choice_label' => 'name',
-              'multiple' => false,
-              'placeholder' => ''
-            ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',
               'multiple' => true,
               'expanded' => true,
-              'disabled' => !$options['data']->getId() //true or false
             ])
         ;
-
-        $formModifier = function (FormInterface $form, Franchise $franchise = null){
-
-          //$allPermissions = $this->permissionRepository->findAll();
-          $franchiseId = $franchise->getId();
-
-          $selectedFranchise = $this->franchiseRepository->find($franchiseId);
-          $preFranchisePermissions = $selectedFranchise->getPermissions()->toArray();
-
-          $selectedPermissions = [];
-
-          foreach($preFranchisePermissions as $permission){
-            $selectedPermissions[$permission->getId()-1] = ['checked' => true];
-          }
-
-          $form
-            ->add('permissions', EntityType::class, [
-            'class' => Permission::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-            'expanded' => true,
-            'choice_attr' => $selectedPermissions,
-          ]);
-        };
-
-        $builder->get('franchise')->addEventListener(
-          FormEvents::POST_SUBMIT,
-          function (FormEvent $event) use ($formModifier) {
-              $franchise = $event->getForm()->getData();
-              $formModifier($event->getForm()->getParent(), $franchise);
-          }
-        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
