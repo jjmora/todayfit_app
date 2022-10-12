@@ -23,6 +23,9 @@ class FranchiseController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+        //All Franchises
+        $allFranchises = $franchiseRepository->findAll();
+
         // PAGINATION
         // $page = 1;
         $qty = 3;
@@ -37,6 +40,7 @@ class FranchiseController extends AbstractController
         );
 
         return $this->render('franchise/index.html.twig', [
+            'allFranchises' => $allFranchises,
             'franchises' => $franchises,
             'qtyPages' => $qtyPages,
             'page' => $page,

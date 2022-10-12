@@ -14,14 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/partner')]
 class PartnerController extends AbstractController
 {
-    #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository, $page): Response
+    #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
+    public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
           return $this->redirectToRoute('app_dashboard');
         }
+
+        //All Partners
+        $allPartners = $partnerRepository->findAll();
 
         // PAGINATION
         $page = (int)$page;
@@ -45,6 +48,7 @@ class PartnerController extends AbstractController
         }
       
         return $this->render('partner/index.html.twig', [
+          'allPartners' => $allPartners,
           'partners' => $partners,
           'qtyPages' => $qtyPages,
           'page' => $page,
