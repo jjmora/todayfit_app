@@ -10,11 +10,12 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
+         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('darkMode') }}
         {% endblock %}
     </head>
-    <body>
+    <body data-theme="light">
 
           {# Header #}
           <div class="container-fluid bg-warning text-center py-1"><small><i>Ce site web est une site de démonstration</i></small></div>

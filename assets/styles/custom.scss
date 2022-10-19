@@ -230,3 +230,30 @@ form fieldset{
   /* text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000; */
   -webkit-text-stroke: 0.5px black;
 }
+
+// DARK MODE
+
+.dark-mode {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #21232f;
+}
+
+[data-theme="dark"] {
+  --bg-color: #21232f;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color)!important;
+  color: var(--text-color) !important;
+}
+
+.hidden-icon {
+  display: none;
+}
+// DARK MODE
