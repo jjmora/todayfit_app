@@ -10,7 +10,125 @@
 
 <div class="example-wrapper">
   <h1>Admin Dashboard</h1>
-  <h2>Hello {{ app.user.email }}</h2>
-  <a href="{{ path('app_logout') }}">Logout</a>
+  <p class="">Bonjour {{ app.user.email }}</p>
+  {# <a href="{{ path('app_logout') }}">Logout</a> #}
+
+  {# < Card Section #}
+  <div class="row">
+
+    <!-- Users Card -->
+    <div class="col-md-6 mb-4">
+        <a href="{{ path('app_user_index') }}" class="text-dark dashboard-card-link">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-start">
+                        <div class="col-auto">
+                            <i class="bi bi-people-fill fa-2x"></i>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Utilisateurs
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ allUsers }} utilisateurs inscrits
+                            </div>
+                            <div class="h6 mb-0 font-weight-bold text-gray-800 ms-5 d-flex flex-column">
+                                <span class="mt-1">{{ adminQty }} avec role Admin</span>
+                                <span class="mt-1">{{ franchiseQty }} avec role Franchises</span>
+                                <span class="mt-1">{{ partnerQty }} avec role Structures</span>
+                                <span class="mt-1">{{ noRoleQty }} sans role</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Franchises (Monthly) Card -->
+    <div class="col-md-6 mb-4">
+        <a href="{{ path('app_franchise_index') }}" class="text-dark dashboard-card-link">
+            <div class="card border-start-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-start">
+                        <div class="col-auto">
+                            <i class="bi bi-briefcase-fill fa-2x"></i>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {{ allFranchises }}  Franchises
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                              {{ franchiseActiveCount }}  Actives
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                              {{ franchiseInactiveCount }}  Inactives
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Structures (Monthly) Card -->
+    <div class="col-md-6 mb-4">
+        <a href="{{ path('app_partner_index') }}" class="text-dark dashboard-card-link">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-start">
+                        <div class="col-auto">
+                            <i class="bi bi-house-fill fa-2x"></i>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                              {{ allStructures }} Structures
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                      {{ partnerActiveCount }} Actives
+                                    </div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                      {{ partnerInactiveCount }} Inactives
+                                    </div>
+                                </div>
+                                {# <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div> #}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Permissions Card -->
+    <div class="col-md-6 mb-4">
+        <a href="{{ path('app_permission_index') }}" class="text-dark dashboard-card-link">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="bi bi-gear-fill fa-2x"></i>
+                        </div>
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                              {{ allPermissions }} Permissions    
+                            </div>
+                            {# <div class="h5 mb-0 font-weight-bold text-gray-800">18</div> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+  </div>
+  {# > Card Section #}
+
 </div>
 {% endblock %}
