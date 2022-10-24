@@ -39,6 +39,9 @@ security:
         - { path: ^/(franchise|partner|permission|admin), roles: ROLE_ADMIN }
         #- { path: ^/register, roles: ROLE_ADMIN }
         #- { path: ^(?!/(login|api)), roles: ROLE_ADMIN }
+        
+        #- { path: ^/(franchise|partner|permission|register|admin), roles: ROLE_ADMIN }
+
 
 when@test:
     security:

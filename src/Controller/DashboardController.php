@@ -39,7 +39,7 @@ class DashboardController extends AbstractController
         }
         
         // user is not connected
-        $this->addFlash('error', "Vous n'êtes pas connecté(e)");
+        //$this->addFlash('error', "Vous n'êtes pas connecté(e)");
         //$this->addFlash('success', 'Congrats');
         return $this->redirectToRoute('app_login');
         return $this->render('dashboard/index.html.twig');
