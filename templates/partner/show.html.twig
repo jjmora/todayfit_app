@@ -3,64 +3,76 @@
 {% block title %}Partner{% endblock %}
 
 {% block body %}
-<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form mb-5">
-    {% if partner %}
-      {% if is_granted("ROLE_ADMIN") %}
-        <div class="d-flex flex-row align-items-center justify-content-between">
-          <h1 class="text-center">{{ partner.Name }}</h1>
-          {{ include('partner/_delete_form.html.twig') }}
-        </div>
-      {% endif %}
-      <div class="text-center">
-        <h1>{{ partner.Name }}</h1>
-      </div>
-      <div class="overflow image-container text-center partner-card-container mb-2">
-        <img src="{{ partner.image }}" alt="Today Fit Franchise" width="350px" class="partner-card-show">
-      </div>
-      <article class="partner-show-article">
-        <div class="d-flex border-bottom p-1">
-          <p class="partner-show-fields"><b>Id:</b></p>
-          <p>{{ partner.id }}</p>
-        </div>
-        <div class="d-flex border-bottom p-1">
-          <p class="partner-show-fields"><b>Nom:</b></p>
-          <p>{{ partner.Name }}</p>
-        </div>
-        <div class="d-flex border-bottom p-1">
-          <p class="partner-show-fields"><b>Email:</b></p>
-          <p>{{ partner.Email }}</p>
-        </div>
-        <div class="d-flex border-bottom p-1">
-          <p class="partner-show-fields"><b>Adresse:</b></p>
-          <p>{{ partner.Address }}</p>
-        </div>
-        <div class="d-flex border-bottom p-1">
-          <p class="partner-show-fields"><b>Active:</b></p>
-          {% if partner.Active %}
-            <span class="border border-success bg-success text-white px-2 py-1 rounded text-success">Oui</span>
-          {% else %}
-            <span class="border border-danger bg-danger text-white px-2 py-1 rounded text-danger">Non</span>
-          {% endif %}
-        </div>
-        <div class="border-bottom p-1">
-          <p class="partner-show-fields col-12"><b>Permissions:</b></p>
-          <div class="row justify-content-center">
-            {% for permission in partner.permissions %}
-              <small class="col-5 text-center border border-success bg-success text-white px-2 py-1 m-1 rounded"> {{ permission.name }} </small>
-            {% endfor %}
-          </div>
-        </div>
-      </article>
-      
-      {% if is_granted("ROLE_ADMIN") %}
-        <section class="container d-grid gap-2 col-xl-6">
-          <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-primary">Modifier</a>
-          <a href="{{ path('app_partner_index') }}" class="btn btn-warning">Liste des Structures</a>
-        </section>
-      {% endif %}
-    {% else %}
-      <h2>Vous n'avez pas de Structure</h2>
+  {% if app.user.roles[0] == "ROLE_ADMIN" or app.user.roles[0] == "ROLE_SUPER_ADMIN" %}
+    {% if partner.Active == true and partner.franchise.active == false %}
+    <div class="alert alert-danger text-center" role="alert">
+      Attention!! La Franchise n'est pas active mais la structure est active
+    </div>
     {% endif %}
+  {% endif %}
+  <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form mb-5">
+      {% if partner %}
+        {% if is_granted("ROLE_ADMIN") %}
+          <div class="d-flex flex-row align-items-center justify-content-between">
+            <h1 class="text-center">{{ partner.Name }}</h1>
+            {{ include('partner/_delete_form.html.twig') }}
+          </div>
+        {% else %}
+          <div class="text-center">
+            <h1>{{ partner.Name }}</h1>
+          </div>
+        {% endif %}
+        <div class="overflow image-container text-center partner-card-container mb-2">
+          <img src="{{ partner.image }}" alt="Today Fit Franchise" width="350px" class="partner-card-show">
+        </div>
+        <article class="partner-show-article">
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Id:</b></p>
+            <p>{{ partner.id }}</p>
+          </div>
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Franchise:</b></p>
+            <p>{{ partner.franchise.name }}</p>
+          </div>
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Nom:</b></p>
+            <p>{{ partner.Name }}</p>
+          </div>
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Email:</b></p>
+            <p>{{ partner.Email }}</p>
+          </div>
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Adresse:</b></p>
+            <p>{{ partner.Address }}</p>
+          </div>
+          <div class="d-flex border-bottom p-1">
+            <p class="partner-show-fields"><b>Active:</b></p>
+            {% if partner.Active and partner.franchise.active %}
+              <span class="border border-success bg-success text-white px-2 py-1 rounded text-success">Oui</span>
+            {% else %}
+              <span class="border border-danger bg-danger text-white px-2 py-1 rounded text-danger">Non</span>
+            {% endif %}
+          </div>
+          <div class="border-bottom p-1">
+            <p class="partner-show-fields col-12"><b>Permissions:</b></p>
+            <div class="row justify-content-center">
+              {% for permission in partner.permissions %}
+                <small class="col-5 text-center border border-success bg-success text-white px-2 py-1 m-1 rounded"> {{ permission.name }} </small>
+              {% endfor %}
+            </div>
+          </div>
+        </article>
+        
+        {% if is_granted("ROLE_ADMIN") %}
+          <section class="container d-grid gap-2 col-xl-6 mt-3">
+            <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('app_partner_index') }}" class="btn btn-warning">Liste des Structures</a>
+          </section>
+        {% endif %}
+      {% else %}
+        <h2>Vous n'avez pas de Structure</h2>
+      {% endif %}
 
-</section>
+  </section>
 {% endblock %}
