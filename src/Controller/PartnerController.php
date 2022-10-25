@@ -15,6 +15,28 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/partner')]
 class PartnerController extends AbstractController
 {
+
+    #[Route('/monStructure', name: 'app_mon_structure_show', methods: ['GET'])]
+    public function showMyClub(PartnerRepository $partnerRepository): Response
+    { 
+        if($this->getUser()){
+          
+          if($this->getUser()->getPartner() != null){
+            $partner = $partnerRepository->find($this->getUser()->getPartner()->getId());
+          } else {
+            $partner = null;
+          }  
+
+          return $this->render('partner/show.html.twig', [
+              'partner' => $partner,
+          ]);
+        }
+
+        $this->addFlash('error', "Vous n'avez pas le droit d'acceder");
+        return $this->redirectToRoute('app_dashboard');
+
+    }
+
     #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
     public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {

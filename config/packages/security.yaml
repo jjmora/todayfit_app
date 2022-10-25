@@ -35,7 +35,7 @@ security:
         #- { path: ^/, roles: ROLE_USER }
         #- { path: ^/login, roles: ROLE_USER }
         - { path: ^/franchise/maFranchise, roles: ROLE_FRANCHISE }
-        - { path: ^/franchise/monStructure, roles: ROLE_STRUCTURE }
+        - { path: ^/partner/monStructure, roles: ROLE_PARTNER }
         - { path: ^/(franchise|partner|permission|admin), roles: ROLE_ADMIN }
         #- { path: ^/register, roles: ROLE_ADMIN }
         #- { path: ^(?!/(login|api)), roles: ROLE_ADMIN }
