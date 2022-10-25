@@ -11,6 +11,10 @@ class DashboardController extends AbstractController
     #[Route('/', name: 'app_dashboard')]
     public function index(): Response
     {
+
+        // Simulate Error 500
+        // throw new \Exception('Something went wrong!');
+
         /** @var User $user */
         $user = $this ->getUser();
 
