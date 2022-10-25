@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    #[Route('/maFranchise', name: 'app_ma_franchise_show', methods: ['GET'])]
+    #[Route('/maFranchise', name: 'app_my_franchise_show', methods: ['GET'])]
     public function showMyFranchise(FranchiseRepository $franchiseRepository): Response
     { 
         if($this->getUser()){

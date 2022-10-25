@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PartnerController extends AbstractController
 {
 
-    #[Route('/monStructure', name: 'app_mon_structure_show', methods: ['GET'])]
+    #[Route('/monStructure', name: 'app_my_partner_show', methods: ['GET'])]
     public function showMyClub(PartnerRepository $partnerRepository): Response
     { 
         if($this->getUser()){

@@ -21,7 +21,12 @@
       {% endif %}
       {% if app.user and app.user.roles[0] == "ROLE_FRANCHISE" %}
         <li class="nav-item">
-          <a class="nav-link active" href="{{ path('app_ma_franchise_show') }}">Ma Franchise</a>
+          <a class="nav-link active" href="{{ path('app_my_franchise_show') }}">Ma Franchise</a>
+        </li> 
+      {% endif %}
+      {% if app.user and app.user.roles[0] == "ROLE_PARTNER" %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('app_my_partner_show') }}">Mon Structure</a>
         </li> 
       {% endif %}
       
