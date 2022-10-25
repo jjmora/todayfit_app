@@ -333,6 +333,7 @@
         },
         "files": [
             "./assets/app.js",
+            "./assets/js/darkMode.js",
             "./assets/bootstrap.js",
             "./assets/controllers.json",
             "./assets/controllers/hello_controller.js",

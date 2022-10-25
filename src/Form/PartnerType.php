@@ -38,7 +38,14 @@ class PartnerType extends AbstractType
             ->add('address', null, [
               'label' => 'Adresse'
             ])
-            ->add('Active')
+            ->add('image')
+            ->add('description')
+            ->add('Active', null, [
+              'label' => 'Active',
+              'label_attr' => [
+                'class' => 'custom-active-check'
+              ]
+            ])
             ->add('franchise', EntityType::class, [
               'class' => Franchise::class,
               'choice_label' => 'name',

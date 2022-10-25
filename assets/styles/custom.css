@@ -1,9 +1,19 @@
+@charset "UTF-8";
 body {
-  /* padding-bottom: 120px; */
+  height: 100vh;
+  margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: rebeccapurple;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+footer {
+  min-height: 100px;
+  margin-top: auto;
 }
 
 .custom-form {
@@ -22,5 +32,63 @@ body {
 
 .btn-indicator {
   cursor: none;
+}
+
+.registration-form ul {
+  list-style: none;
+  color: white;
+  background: lightcoral;
+}
+
+.franchise-title, .partner-title {
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.franchise-title {
+  background-color: orange;
+}
+
+.partner-title {
+  background-color: lightseagreen;
+}
+
+/* Elemento Checkbox, cuando está marcado */
+form fieldset {
+  color: green;
+  border: 1px solid #ced4da;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+#partner_permissions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#partner_permissions input[type="checkbox"] {
+  visibility: hidden;
+}
+
+#partner_permissions input[type="checkbox"] + label {
+  background-color: white;
+  /* Green */
+  border: 1px solid #ced4da;
+  color: #ced4da;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+#partner_permissions input[type="checkbox"]:checked + label {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
 }
 /*# sourceMappingURL=custom.css.map */

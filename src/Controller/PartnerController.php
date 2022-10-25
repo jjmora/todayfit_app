@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Partner;
 use App\Form\PartnerType;
+use App\Form\PartnerEditType;
+use App\Form\SearchPartnerType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/partner')]
 class PartnerController extends AbstractController
 {
-    #[Route('/', name: 'app_partner_index', methods: ['GET'])]
-    public function index(PartnerRepository $partnerRepository): Response
+    #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
+    public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
@@ -22,12 +24,41 @@ class PartnerController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
 
+        //All Partners
+        $allPartners = $partnerRepository->findAll();
+
+        // PAGINATION
+        $page = (int)$page;
+        $qty = 3;
+        $qtyPartners = $partnerRepository->count([]); 
+        $qtyPages = ceil($qtyPartners / $qty);
+        $partners = $partnerRepository->findBy(
+          [],
+          null,
+          $qty,
+          ($page - 1)*$qty
+        );
+
+        $form = $this->createForm(SearchPartnerType::class);
+        $search = $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+          //dd($form);
+
+          $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
+        }
+      
         return $this->render('partner/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
+          'allPartners' => $allPartners,
+          'partners' => $partners,
+          'qtyPages' => $qtyPages,
+          'page' => $page,
+          'qty' => $qty,
+          'form' => $form->createView()
         ]);
     }
 
-    #[Route('/new', name: 'app_partner_new', methods: ['GET', 'POST'])]
+    #[Route('/new/partner', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();
@@ -46,7 +77,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_partner_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_partner_show', methods: ['GET'])]
     public function show(Partner $partner): Response
     {
         return $this->render('partner/show.html.twig', [
@@ -57,7 +88,7 @@ class PartnerController extends AbstractController
     #[Route('/{id}/edit', name: 'app_partner_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Partner $partner, PartnerRepository $partnerRepository): Response
     {
-        $form = $this->createForm(PartnerType::class, $partner);
+        $form = $this->createForm(PartnerEditType::class, $partner);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

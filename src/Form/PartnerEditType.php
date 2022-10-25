@@ -3,40 +3,43 @@
 namespace App\Form;
 
 use App\Entity\Franchise;
+use App\Entity\Partner;
 use App\Entity\Permission;
 use App\Entity\User;
+use App\Repository\FranchiseRepository;
+use App\Repository\PermissionRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FranchiseType extends AbstractType
+class PartnerEditType extends AbstractType
 {
+    private $permissionRepository;
+    private $franchiseRepository;
+
+    public function __construct(PermissionRepository $permissionRepository, FranchiseRepository $franchiseRepository)
+    {
+        $this->permissionRepository = $permissionRepository;
+        $this->franchiseRepository = $franchiseRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name')
-            ->add('Email', null, [
+            ->add('name')
+            ->add('email', null, [
               'label' => 'Adresse E-mail personnelle'
+            ])
+            ->add('address', null, [
+              'label' => 'Adresse'
             ])
             ->add('image')
             ->add('description')
-            ->add('user', EntityType::class, [
-              'class' => User::class,
-              'placeholder' => 'Utilisateurs disponibles',
-              'choice_label' => 'email',
-              'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('u')
-                  ->where('u.roles LIKE :role')
-                  ->setParameter('role', '%"'.'ROLE_FRANCHISE'.'"%')
-                  ->leftJoin(Franchise::class, 'f', 'WITH', 'u = f.user' )
-                  ->andwhere('f.user is NULL');
-                ;
-              },
-              'multiple' => false,
-              'expanded' => false
-            ])
             ->add('Active', null, [
               'label' => 'Active',
               'label_attr' => [
@@ -47,7 +50,7 @@ class FranchiseType extends AbstractType
               'class' => Permission::class,
               'choice_label' => 'name',
               'multiple' => true,
-              'expanded' => true
+              'expanded' => true,
             ])
         ;
     }
@@ -55,7 +58,7 @@ class FranchiseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Franchise::class,
+            'data_class' => Partner::class,
         ]);
     }
 }

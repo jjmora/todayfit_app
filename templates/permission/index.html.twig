@@ -16,6 +16,7 @@
               <tr>
                   <th>Id</th>
                   <th>Name</th>
+                  <th>Image</th>
                   <th>actions</th>
               </tr>
           </thead>
@@ -24,6 +25,7 @@
               <tr>
                   <td>{{ permission.id }}</td>
                   <td>{{ permission.name }}</td>
+                  <td>{{ permission.image }}</td>
                   <td>
                       <a href="{{ path('app_permission_show', {'id': permission.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
                       <a href="{{ path('app_permission_edit', {'id': permission.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>

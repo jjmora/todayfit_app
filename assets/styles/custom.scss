@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
 $primary: orange;
 
 body{
@@ -7,11 +9,26 @@ body{
   flex-direction: column;
 }
 
+h1{
+  font-size: 2.5rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+h2{
+  font-size: 2.5rem;
+  font-family: 'Russo One', sans-serif;
+}
+
 footer{
   //   position: fixed;
   //   bottom: 0px;
   min-height: 100px;
   margin-top: auto;
+}
+
+// DASHBOARD ADMIN
+.dashboard-card-link {
+  text-decoration: none;
 }
 
 // LOGIN FORM
@@ -56,3 +73,192 @@ footer{
   background-color: lightseagreen;
 
 }
+
+// FORMS CUSTOM CSS
+/* Elemento Checkbox, cuando está marcado */
+form fieldset{
+  color: green;
+  border: 1px solid #ced4da;
+  border-radius: 15px;
+  padding: 10px;
+}
+#partner_permissions,
+#franchise_permissions,
+#franchise_edit_permissions,
+#partner_edit_permissions,
+#registration_form_roles,
+#search_partner,
+.custom-active-check {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#partner_permissions input[type="checkbox"],
+#franchise_permissions input[type="checkbox"],
+#franchise_edit_permissions input[type="checkbox"],
+#partner_edit_permissions input[type="checkbox"],
+#registration_form_roles input[type="checkbox"],
+#search_partner input[type="checkbox"],
+#franchise_edit_Active,
+#partner_edit_Active,
+#partner_Active,
+#franchise_Active {
+    visibility: hidden;
+}
+
+#partner_permissions input[type="checkbox"] + label,
+#franchise_permissions input[type="checkbox"] + label,
+#franchise_edit_permissions input[type="checkbox"] + label,
+#partner_edit_permissions input[type="checkbox"] + label,
+#registration_form_roles input[type="checkbox"] + label,
+#franchise_edit_Active,
+#franchise_Active,
+#partner_edit_Active,
+#partner_Active,
+.custom-active-check {
+    background-color: white; /* Green */
+    border: 1px solid #ced4da;
+    color: #ced4da;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:5px;
+}
+
+#search_partner input[type="checkbox"] + label {
+  background-color: white; /* Green */
+  border: 1px solid #ced4da;
+  color: #ced4da;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  font-size: 16px;
+  border-radius:5px;
+}
+
+#partner_permissions input[type="checkbox"]:checked + label,
+#franchise_permissions input[type="checkbox"]:checked + label,
+#franchise_edit_permissions input[type="checkbox"]:checked + label,
+#partner_edit_permissions input[type="checkbox"]:checked + label,
+#registration_form_roles input[type="checkbox"]:checked + label,
+#search_partner input[type="checkbox"]:checked + label,
+#franchise_edit_Active[type="checkbox"]:checked + label,
+#franchise_Active[type="checkbox"]:checked + label,
+#partner_edit_Active[type="checkbox"]:checked + label,
+#partner_Active[type="checkbox"]:checked + label{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+}
+
+// CARD SECTION
+.card-section{
+  max-width: 1200px;
+}
+
+.card{
+  /* width: 20rem; */
+  margin-bottom: 2rem;
+}
+
+.card:hover{
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253)!important;
+}
+
+.card-text{
+  font-size: 0.9rem;
+  padding: 0.4rem 1.9rem;
+}
+
+.overflow{
+  overflow: hidden;
+}
+.card-img-top{
+  transform: scale(1);
+  transition: transform 0.7s ease;
+}
+
+.card-img-top:hover{
+  transform: scale(1.3)
+}
+
+.box-over{
+  background-color: transparent;
+  width: 100%;
+  height: 0px;
+  padding: 0 !important;
+  position: relative;
+}
+
+.box-over-item{
+  background-color: transparent;
+  width: 30%;
+}
+
+.box-over-item-white{
+  width: 70%;
+  height: 50px;
+  position: inherit;
+  top: -48px;
+}
+
+.box-over-active{
+  background-color: white;
+}
+
+.no-active{
+  background-color: rgb(218, 217, 217);
+  color: rgb(113, 113, 113);
+}
+
+.no-active-image{
+  opacity: 20%;
+}
+
+.image-container{
+  position: relative;
+}
+
+.no-active-message{
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  text-align: center;
+
+}
+
+.strokeme {
+  color: #fafafa;
+  /* text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000; */
+  -webkit-text-stroke: 0.5px black;
+}
+
+// DARK MODE
+
+.dark-mode {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #21232f;
+}
+
+[data-theme="dark"] {
+  --bg-color: #21232f;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color)!important;
+  color: var(--text-color) !important;
+}
+
+.hidden-icon {
+  display: none;
+}
+// DARK MODE

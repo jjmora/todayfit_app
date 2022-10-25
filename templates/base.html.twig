@@ -10,47 +10,16 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
+         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('darkMode') }}
         {% endblock %}
-
-        <style>
-          /* Elemento Checkbox, cuando está marcado */
-          form fieldset{
-            color: green;
-            border: 1px solid #ced4da;
-            border-radius: 15px;
-            padding: 10px;
-          }
-          #partner_permissions {
-            display: flex;
-          }
-          #partner_permissions input[type="checkbox"]{
-              visibility: hidden;
-          }
-          #partner_permissions input[type="checkbox"] + label {
-              background-color: white; /* Green */
-              border: 1px solid #ced4da;
-              color: #ced4da;
-              padding: 5px 10px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 16px;
-              border-radius:5px;
-          }
-          #partner_permissions input[type="checkbox"]:checked + label {
-              background-color: #4CAF50; /* Green */
-              border: none;
-              color: white;
-          }
-        </style>
     </head>
-    <body>
+    <body data-theme="light">
 
           {# Header #}
-          <div class="container-fluid bg-warning text-center py-1"><i>Ce site web est une site de démonstration</i></div>
-          {{ include('_nav.html.twig') }}
+          <div class="container-fluid bg-warning text-center py-1"><small><i>Ce site web est une site de démonstration</i></small></div>
+          {{ include('_nav.html.twig') }} 
 
           {# Messages #}
           <div class="container mt-3">

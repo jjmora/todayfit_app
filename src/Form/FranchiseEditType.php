@@ -20,7 +20,14 @@ class FranchiseEditType extends AbstractType
             ->add('Email', null, [
               'label' => 'Adresse E-mail personnelle'
             ])
-            ->add('Active')
+            ->add('image')
+            ->add('description')
+            ->add('Active', null, [
+              'label' => 'Active',
+              'label_attr' => [
+                'class' => 'custom-active-check'
+              ]
+            ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',

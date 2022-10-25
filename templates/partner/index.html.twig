@@ -3,65 +3,183 @@
 {% block title %}Partner index{% endblock %}
 
 {% block body %}
+    <div>
+      {{ form(form) }}
+    </div>
+
     {# Header section #}
     <section class="d-flex flex-row justify-content-between align-items-center">
       <h1>Structures</h1>
       <a href="{{ path('app_partner_new') }}" class="btn btn-danger">Nouvelle Structure</a>
     </section>
     {# Header section #}
-    <div class="table-responsive">
-      <table class="table">
-          <thead>
-              <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>User</th>
-                  <th>Address</th>
-                  <th>Permissions</th>
-                  <th>Active</th>
-                  <th>Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-          {% for partner in partners %}
-              <tr>
-                  <td>{{ partner.id }}</td>
-                  <td>{{ partner.Name }}</td>
-                  <td>{{ partner.Email }}</td>
-                  <td>
-                    {% if partner.user %}
-                      {{ partner.user.email }}
-                    {% else %}
-                      <i>Acun utilisateur asigné</i>
-                    {% endif %}
-                  </td>
-                  <td>{{ partner.Address }}</td>
-                  <td>
-                    {% for permission in partner.permissions %}
-                      <span class="btn btn-sm btn-warning">{{ permission.name }}</span>
-                    {% endfor %}
-                  </td>
-                  <td>{{ partner.Active ? '
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                    </div>
-                  ' : '
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                    </div>
-                  ' }}</td>
-                  <td>
-                      <a href="{{ path('app_partner_show', {'id': partner.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
-                      <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>
-                  </td>
-              </tr>
-          {% else %}
-              <tr>
-                  <td colspan="6">no records found</td>
-              </tr>
-          {% endfor %}
-          </tbody>
-      </table>
-    </div>
+
+    {# Form Search section #}
+    <section class="d-flex flex-row justify-content-between align-items-center">
+    </section>
+    {# Form Search section #}
+
+    {# Tab section #}
+    <section class="container-fluid">
+
+      {# Tab navigation #}
+      <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Accueil</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Vue en table</button>
+        </li>
+      </ul>
+      {# Tab navigation #}
+
+      {# Tab Content #}
+      <div class="tab-content" id="myTabContent">
+
+
+        {# < Card section #}
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+          
+          {# < Card Content section #}
+          <section class='container card-section my-5'>
+            <div class="row">
+              <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
+                
+                <div class='d-flex flex-column flex-sm-row mb-sm-3'>
+                  <h2 class="fw-bold lh-1 mb-0 mb-md-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
+                  <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
+                </div>
+
+                <div class="d-flex flex-column flex-lg-row search-form-partner">
+                  {# {{ form(form) }} #}
+                </div>
+
+              </div>
+
+              {% set link = "/partner/show/" %}
+              {% for partner in partners %}
+                {{ include('partner/_card.html.twig', {
+                  'button_label': 'Go!',
+                  'id': partner.id,
+                  'name' : partner.name,
+                  'permissions' : partner.permissions,
+                  'image': partner.image,
+                  'description': partner.description,
+                  'link': link,
+                  }) }}
+              {% else %}
+                <div class="alert alert-danger" role="alert">
+                  Il n'y a pas de resultat pour votre recherche
+                </div>
+              {% endfor %}
+
+            </div>
+          </section>
+          {# > Card Content section #}
+
+          {# < Pagination section #}
+          <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+              {% if page != 1 %}
+              <li class="page-item">
+                <a class="page-link" 
+                  href={{ path('app_partner_index', {page: page - 1,qty: qty}) }} 
+                >Previous</a>
+              </li>
+              {% endif %}
+              {% for i in range(1, qtyPages) %}
+                <li class="page-item">
+                  <a 
+                    class="{{ i == page ? "active page-link" : "page-link" }}"
+                    href={{ path('app_partner_index', {page: i,qty: qty}) }}
+                  >
+                    {{ i }}
+                  </a>
+                </li>
+              {% endfor %}
+              {% if page != qtyPages %}
+                <li class="page-item">
+                  <a 
+                    class="page-link" 
+                    href="{{ path('app_partner_index', {page: page + 1,qty: qty}) }}" 
+                  >Next</a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+          {# > Pagination section #}
+
+        </div>
+        {# > Card section #}
+
+        {# < Table section #}
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+          <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Franchise</th>
+                        <th>Email</th>
+                        <th>User</th>
+                        <th>Address</th>
+                        <th>Permissions</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for partner in allPartners %}
+                    <tr>
+                        <td>{{ partner.id }}</td>
+                        <td>{{ partner.Name }}</td>
+                        <td>
+                          <span class="btn btn-sm btn-outline-danger">{{ partner.franchise.name }}</span>
+                        </td>
+                        <td>{{ partner.Email }}</td>
+                        <td>
+                          {% if partner.user %}
+                            {{ partner.user.email }}
+                          {% else %}
+                            <i>Acun utilisateur asigné</i>
+                          {% endif %}
+                        </td>
+                        <td>{{ partner.Address }}</td>
+                        <td class="d-grid gap-2 text-success">
+                          {% for permission in partner.permissions %}
+                            <small class="border border-success px-2 py-1 rounded mx-1 my-1"> {{ permission.name }} </small>
+                          {% endfor %}
+                        </td>
+
+                        <td>
+                          {% if partner.Active %}
+                            <span class="border border-success px-2 py-1 rounded text-success">Oui</span>
+                          {% else %}
+                            <span class="border border-danger px-2 py-1 rounded text-danger">Non</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_partner_show', {'id': partner.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
+                            <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+          </div>
+
+        </div>
+        {# > Table section #}
+
+      </div>
+      {# Tab Content #}
+
+    </section>
+    {# Tab section #}
 {% endblock %}

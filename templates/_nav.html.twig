@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+      {# {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %} #}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_franchise_index') }}">Franchises</a>
         </li>
@@ -18,17 +18,22 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
         </li>
-      {% endif %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ path('app_ma_franchise_show') }}">Ma Franchise</a>
+        </li>
+        
+      {# {% endif %} #}
       </ul>
+
       <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown me-3">
           {{ app.user ? app.user.userIdentifier : 'Please Login' }}
         </li>
         <li class="nav-item dropdown">
-          <button type="button" class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+          <button type="button" class="btn btn-primary nav-a py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
             <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="static">
+          <ul class="dropdown-menu dropdown-menu-end bg-primary" data-bs-popper="static">
             {% if app.user  %}
               {% if app.user.roles[0] == "ROLE_ADMIN" %}
                 <li><a href="{{ path('app_register') }}" class="dropdown-item">Registrer Utilisateur</a></li>
@@ -43,6 +48,14 @@
           </ul>
         </li>
       </ul>
+      <section class="mx-2">
+        <div class="dark-mode" data-mode="dark" id="moon">
+          <i class="bi bi-moon-fill"></i>
+        </div>
+        <div class="dark-mode hidden-icon" data-mode="light" id="sun">
+          <i class="bi bi-brightness-high-fill"></i>
+        </div>
+      </section>
     </div>
   </div>
 </nav>
