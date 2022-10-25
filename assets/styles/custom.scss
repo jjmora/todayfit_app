@@ -75,7 +75,7 @@ footer{
 }
 
 // FORMS CUSTOM CSS
-/* Elemento Checkbox, cuando está marcado */
+/* Element Checkbox, when is checked */
 form fieldset{
   color: green;
   border: 1px solid #ced4da;
@@ -234,6 +234,20 @@ form fieldset{
   color: #fafafa;
   /* text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000; */
   -webkit-text-stroke: 0.5px black;
+}
+.partner-card-container{
+  max-height: 200px;
+  // position: relative;
+}
+.partner-card-show {
+  width: 100%;
+  overflow: hidden;
+  // position: absolute;
+  // top: -100px;
+}
+
+.partner-show-fields{
+  width: 150px;
 }
 
 // DARK MODE

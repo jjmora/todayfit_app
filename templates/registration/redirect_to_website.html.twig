@@ -15,9 +15,18 @@
       <p>Vous n'êtes pas connecté</p>
       <a href="{{ path('app_login') }}" class="dropdown-item">Login</a>
     {% endif %}
-    <div>
+    {# <div>
       <a href="http://www.juanjosemora.es" class="btn btn-success my-3">Acceder au site web</a>
-    </div>
+    </div> #}
+    {% if app.user.roles[0] == "ROLE_PARTNER" %}
+      <div>
+        <a href="{{ path('app_my_partner_show') }}" class="btn btn-success my-3">Acceder à mon Panneau d'information</a>
+      </div>
+    {% else %}
+      <div>
+        <a href="{{ path('app_my_franchise_show') }}" class="btn btn-success my-3">Acceder à mon Panneau d'information</a>
+      </div>
+    {% endif %}
     {% if user.passwordReset %}
       <a href="/reset-password" class="btn btn-outline-primary">Modifier mon Mot de Passe</a>
     {% endif %}
