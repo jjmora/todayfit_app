@@ -35,10 +35,6 @@
 
       {# < Drop Menu #}
       <ul class="navbar-nav mb-2 mb-lg-0 ">
-        {# <li class="nav-item dropdown me-3">
-          {{ app.user ? app.user.userIdentifier : 'Please Login' }}
-        </li> #}
-
         {% if app.user  %}
           <li>
             <a href="{{ path('app_logout') }}" class="dropdown-item">
