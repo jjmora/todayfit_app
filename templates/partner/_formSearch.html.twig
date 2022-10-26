@@ -5,15 +5,18 @@
     {# {{ form_widget(form) }} #}
     {# <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button> #}
 
-    <div class="row flex-wrap d-flex">
-      <div class="col-12 col-lg-6">
-          {{ form_row(form.input_data) }}
+    <div class="row d-flex flex-wrap justify-content-between">
+      <div class="col-9 col-lg-6 col-xl-7 mb-2">
+          {{ form_widget(form.input_data) }}
       </div>
-      <div class="col-5 col-lg-2 me-1" id="search_partner">
-          {{ form_row(form.active) }}
+      <div class="col-3 col-lg-2 mb-2" id="search_partner">
+          {{ form_widget(form.active) }}
       </div>
-      <div class="col-6 col-lg-2">
-          {{ form_row(form.Chercher) }}
+      <div class="col-9 col-lg-2">
+          {{ form_widget(form.Chercher) }}
+      </div>
+      <div class="col-3 col-lg-2 col-xl-1">
+        <a class="btn btn-outline-danger btn-reset" href="{{ path('app_partner_index') }}">X</a>
       </div>
       {{ form_rest(form) }}
     </div>

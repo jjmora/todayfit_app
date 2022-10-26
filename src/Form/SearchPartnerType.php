@@ -21,7 +21,7 @@ class SearchPartnerType extends AbstractType
             'label' => false,
             'attr' => [
               'class' => '',
-              'placeholder' => 'Entrez un ou plusieurs mot-clés'
+              'placeholder' => 'Entrez le(s) mot-clés'
             ],
             'required' => false
           ])
@@ -35,7 +35,7 @@ class SearchPartnerType extends AbstractType
           ->add('Chercher', SubmitType::class, [
             'label' => 'Chercher',
             'attr' => [
-              'class' => 'btn btn-warning search-icon ms-3'
+              'class' => 'btn btn-warning search-icon'
             ]
           ])
           // ->add('Reset', ResetType::class, [

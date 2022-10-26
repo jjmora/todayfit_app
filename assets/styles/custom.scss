@@ -87,11 +87,17 @@ form fieldset{
 #franchise_edit_permissions,
 #partner_edit_permissions,
 #registration_form_roles,
-#search_partner,
+// #search_partner,
 .custom-active-check {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+#search_partner,
+.custom-active-check {
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
 }
 #partner_permissions input[type="checkbox"],
 #franchise_permissions input[type="checkbox"],
@@ -103,7 +109,7 @@ form fieldset{
 #partner_edit_Active,
 #partner_Active,
 #franchise_Active {
-    display: none;
+    visibility: hidden;
 }
 
 #partner_permissions input[type="checkbox"] + label,
@@ -134,7 +140,7 @@ form fieldset{
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
-  //display: inline-block;
+  display: inline-block;
   font-size: 16px;
   border-radius:5px;
 }
@@ -152,6 +158,28 @@ form fieldset{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
+}
+
+#search_partner .form-check{
+  margin: 0;
+  padding: 0;
+
+  label{
+    width: 100%;
+  }
+}
+
+.form-search{
+  button[type="submit"] {
+    width: 100%;
+  }
+
+  .btn-reset{
+    width: 100%;
+  }
+}
+#search_partner_active{
+  display: none;
 }
 
 // CARD SECTION

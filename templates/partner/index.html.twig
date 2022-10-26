@@ -43,18 +43,16 @@
           {# < Card Content section #}
           <section class='container card-section my-5'>
             <div class="row">
-              <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
+              <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4' id="search-bar">
                 
-                <div class='d-flex flex-column flex-sm-row mb-sm-3'>
-                  <h2 class="fw-bold lh-1 mb-0 mb-md-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
+                <div class='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
+                  <h2 class="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
                   <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
                 </div>
-
-                <div class="d-flex flex-column flex-lg-row search-form-partner">
+                <div class="col-12 col-xl-7 form-search">
                   {{ include('partner/_formSearch.html.twig') }}
-                </div>
+                </div> 
                 
-
               </div>
 
               {% set link = "/partner/show/" %}
@@ -79,6 +77,7 @@
           {# > Card Content section #}
 
           {# < Pagination section #}
+          {% if filtered == false %}
           <nav class="d-flex justify-content-center">
             <ul class="pagination">
               {% if page != 1 %}
@@ -108,6 +107,7 @@
               {% endif %}
             </ul>
           </nav>
+          {% endif %}
           {# > Pagination section #}
 
         </div>

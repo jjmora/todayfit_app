@@ -40,6 +40,8 @@ class PartnerController extends AbstractController
     #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
     public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {
+        $filtered = false;
+
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
@@ -66,6 +68,7 @@ class PartnerController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
           $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
+          $filtered = true;
         }
       
         return $this->render('partner/index.html.twig', [
@@ -74,7 +77,8 @@ class PartnerController extends AbstractController
           'qtyPages' => $qtyPages,
           'page' => $page,
           'qty' => $qty,
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'filtered' => $filtered,
         ]);
     }
 
