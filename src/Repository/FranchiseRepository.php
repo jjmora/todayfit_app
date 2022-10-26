@@ -21,6 +21,26 @@ class FranchiseRepository extends ServiceEntityRepository
         parent::__construct($registry, Franchise::class);
     }
 
+    public function search($input_data = null, $active = null)
+    {
+      $query = $this->createQueryBuilder('p');
+
+      if($input_data != null){
+        $query
+          ->where('MATCH_AGAINST(p.Name, p.Email, p.description) AGAINST (:input_data boolean)>0')
+          ->setParameter('input_data', $input_data)
+          ;
+      }
+      if($active != null){
+        $query
+          ->andWhere('p.Active = :active')
+          ->setParameter('active', $active)
+          ;
+      }
+
+      return $query->getQuery()->getResult();
+    }
+
     public function add(Franchise $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

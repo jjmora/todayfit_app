@@ -6,6 +6,7 @@ use App\Entity\Franchise;
 use App\Entity\Partner;
 use App\Form\FranchiseType;
 use App\Form\FranchiseEditType;
+use App\Form\SearchPartnerType;
 use App\Repository\FranchiseRepository;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,20 +56,22 @@ class FranchiseController extends AbstractController
         ]);
     }
 
-    #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET'])]
-    public function index(FranchiseRepository $franchiseRepository, $page): Response
+    #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET', 'POST'])]
+    public function index(FranchiseRepository $franchiseRepository, Request $request, $page): Response
     {
+      
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
           //return $this->redirectToRoute('app_dashboard');
         }
 
-        //All Franchises
+        $filtered = false;
+
         $allFranchises = $franchiseRepository->findAll();
 
         // PAGINATION
-        // $page = 1;
+        $page = (int)$page;
         $qty = 3;
         $qtyFranchise = $franchiseRepository->count([]); 
         $qtyPages = ceil($qtyFranchise / $qty);
@@ -80,12 +83,22 @@ class FranchiseController extends AbstractController
           ($page - 1)*$qty
         );
 
+        $form = $this->createForm(SearchPartnerType::class);
+        $search = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+          $franchises = $franchiseRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
+          $filtered = true;
+        }
+
         return $this->render('franchise/index.html.twig', [
             'allFranchises' => $allFranchises,
             'franchises' => $franchises,
             'qtyPages' => $qtyPages,
             'page' => $page,
             'qty' => $qty,
+            'form' => $form->createView(),
+            'filtered' => $filtered,
         ]);
     }
 

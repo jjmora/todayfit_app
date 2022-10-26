@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/partner')]
+#[Route('/structure')]
 class PartnerController extends AbstractController
 {
 
@@ -40,15 +40,15 @@ class PartnerController extends AbstractController
     #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
     public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {
-        $filtered = false;
-
+      
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
           return $this->redirectToRoute('app_dashboard');
         }
-
-        //All Partners
+        
+        $filtered = false;
+        
         $allPartners = $partnerRepository->findAll();
 
         // PAGINATION
@@ -82,7 +82,7 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/new/partner', name: 'app_partner_new', methods: ['GET', 'POST'])]
+    #[Route('/new/structure', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();

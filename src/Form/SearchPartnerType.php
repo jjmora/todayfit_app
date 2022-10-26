@@ -3,10 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use App\Entity\Partner;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,12 +35,7 @@ class SearchPartnerType extends AbstractType
               'class' => 'btn btn-warning search-icon'
             ]
           ])
-          // ->add('Reset', ResetType::class, [
-          //   'attr' => [
-          //     'class' => 'btn btn-outline-danger ms-2'
-          //   ]
-          // ])
-  ;
+          ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,23 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Partner index{% endblock %}
+{% block title %}Partners{% endblock %}
 
 {% block body %}
-    {# <div>
-      {{ form(form) }}
-    </div> #}
-
     {# Header section #}
     <section class="d-flex flex-row justify-content-between align-items-center">
       <h1>Structures</h1>
       <a href="{{ path('app_partner_new') }}" class="btn btn-danger">Nouvelle Structure</a>
     </section>
     {# Header section #}
-
-    {# Form Search section #}
-    <section class="d-flex flex-row justify-content-between align-items-center">
-    </section>
-    {# Form Search section #}
 
     {# Tab section #}
     <section class="container-fluid">
@@ -35,7 +26,6 @@
 
       {# Tab Content #}
       <div class="tab-content" id="myTabContent">
-
 
         {# < Card section #}
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -84,7 +74,7 @@
               <li class="page-item">
                 <a class="page-link" 
                   href={{ path('app_partner_index', {page: page - 1,qty: qty}) }} 
-                >Previous</a>
+                >Précédent</a>
               </li>
               {% endif %}
               {% for i in range(1, qtyPages) %}
@@ -102,7 +92,7 @@
                   <a 
                     class="page-link" 
                     href="{{ path('app_partner_index', {page: page + 1,qty: qty}) }}" 
-                  >Next</a>
+                  >Suivant</a>
                 </li>
               {% endif %}
             </ul>
