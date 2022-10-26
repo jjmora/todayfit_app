@@ -65,8 +65,6 @@ class PartnerController extends AbstractController
         $search = $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-          //dd($form);
-
           $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
         }
       

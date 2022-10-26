@@ -20,13 +20,13 @@ class SearchPartnerType extends AbstractType
           ->add('input_data', SearchType::class, [
             'label' => false,
             'attr' => [
-              'class' => 'form-control',
+              'class' => '',
               'placeholder' => 'Entrez un ou plusieurs mot-clés'
             ],
             'required' => false
           ])
           ->add('active', CheckboxType::class, [
-            'label'    => 'Voir uniquement les Actives',
+            'label'    => 'Actives',
             'required' => false,
             'attr' => [
               'class' => ''
@@ -38,11 +38,11 @@ class SearchPartnerType extends AbstractType
               'class' => 'btn btn-warning search-icon ms-3'
             ]
           ])
-          ->add('Reset', ResetType::class, [
-            'attr' => [
-              'class' => 'btn btn-outline-danger ms-2'
-            ]
-          ])
+          // ->add('Reset', ResetType::class, [
+          //   'attr' => [
+          //     'class' => 'btn btn-outline-danger ms-2'
+          //   ]
+          // ])
   ;
     }
 

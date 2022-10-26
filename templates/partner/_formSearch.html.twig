@@ -1,0 +1,21 @@
+{# this form theme will be applied only to the form of this template #}
+{# {% form_theme form 'bootstrap_5_layout.html.twig' %} #}
+
+{{ form_start(form) }}
+    {# {{ form_widget(form) }} #}
+    {# <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button> #}
+
+    <div class="row flex-wrap d-flex">
+      <div class="col-12 col-lg-6">
+          {{ form_row(form.input_data) }}
+      </div>
+      <div class="col-5 col-lg-2 me-1" id="search_partner">
+          {{ form_row(form.active) }}
+      </div>
+      <div class="col-6 col-lg-2">
+          {{ form_row(form.Chercher) }}
+      </div>
+      {{ form_rest(form) }}
+    </div>
+
+{{ form_end(form) }}

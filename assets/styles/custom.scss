@@ -103,7 +103,7 @@ form fieldset{
 #partner_edit_Active,
 #partner_Active,
 #franchise_Active {
-    visibility: hidden;
+    display: none;
 }
 
 #partner_permissions input[type="checkbox"] + label,
