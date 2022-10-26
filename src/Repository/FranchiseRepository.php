@@ -27,8 +27,10 @@ class FranchiseRepository extends ServiceEntityRepository
 
       if($input_data != null){
         $query
-          ->where('MATCH_AGAINST(p.Name, p.Email, p.description) AGAINST (:input_data boolean)>0')
-          ->setParameter('input_data', $input_data)
+          // ->where('MATCH_AGAINST(p.Name, p.Email, p.description) AGAINST (:input_data boolean)>0')
+          // ->setParameter('input_data', $input_data)
+          ->where('p.Name LIKE :input_data OR p.Email LIKE :input_data OR p.description LIKE :input_data')
+          ->setParameter('input_data', '%'.$input_data.'%')
           ;
       }
       if($active != null){
