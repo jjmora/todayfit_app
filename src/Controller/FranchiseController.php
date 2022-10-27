@@ -6,7 +6,7 @@ use App\Entity\Franchise;
 use App\Entity\Partner;
 use App\Form\FranchiseType;
 use App\Form\FranchiseEditType;
-use App\Form\SearchPartnerType;
+use App\Form\SearchBarType;
 use App\Repository\FranchiseRepository;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +38,7 @@ class FranchiseController extends AbstractController
 
     }
 
-    #[Route('/maFranchise/partner/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
+    #[Route('/maFranchise/structure/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
     public function showMyPartner(Partner $partner, $id, FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository): Response
     {
         $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
@@ -83,7 +83,7 @@ class FranchiseController extends AbstractController
           ($page - 1)*$qty
         );
 
-        $form = $this->createForm(SearchPartnerType::class);
+        $form = $this->createForm(SearchBarType::class);
         $search = $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

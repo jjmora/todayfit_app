@@ -77,7 +77,12 @@
 
         </div>
 
-        {% set link = "/franchise/maFranchise/partner/" %}
+        {% if is_granted("ROLE_ADMIN") %}
+          {% set link = "/structure/show/" %}
+        {% else %}
+          {% set link = "/franchise/maFranchise/structure/" %}
+        {% endif %}
+
         {% for partner in franchise.partner %}
           {{ include('partner/_card.html.twig', {
             'button_label': 'Go!',

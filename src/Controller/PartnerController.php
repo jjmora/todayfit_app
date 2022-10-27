@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Form\PartnerEditType;
-use App\Form\SearchPartnerType;
+use App\Form\SearchBarType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +63,7 @@ class PartnerController extends AbstractController
           ($page - 1)*$qty
         );
 
-        $form = $this->createForm(SearchPartnerType::class);
+        $form = $this->createForm(SearchBarType::class);
         $search = $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
