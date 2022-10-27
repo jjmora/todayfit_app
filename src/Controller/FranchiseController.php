@@ -136,7 +136,7 @@ class FranchiseController extends AbstractController
     #[Route('/show/{id}', name: 'app_franchise_show', methods: ['GET'])]
     public function show(Franchise $franchise): Response
     {
-        return $this->render('franchise/show.html.twig', [
+        return $this->render('franchise/show_admin.html.twig', [
             'franchise' => $franchise,
         ]);
     }

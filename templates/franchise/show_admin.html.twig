@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Franchise{% endblock %}
+
+{% block body %}
+{% if franchise != null %}
+  <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
+
+      <div class="d-flex flex-row align-items-center justify-content-between">
+        <h1>{{ franchise.name }}</h1>
+        
+        {% if is_granted("ROLE_ADMIN") %}
+          {{ include('franchise/_delete_form.html.twig') }}
+        {% endif %}
+        
+      </div>
+      <table class="table">
+          {# <img src="https://images.pexels.com/photos/7676548/pexels-photo-7676548.jpeg" class="card-img-top" alt="today fit"> #}
+          <tbody>
+              <tr>
+                  <th>Id</th>
+                  <td>{{ franchise.id }}</td>
+              </tr>
+              <tr>
+                  <th>Nom</th>
+                  <td>{{ franchise.Name }}</td>
+              </tr>
+              <tr>
+                  <th>E-mail</th>
+                  <td>{{ franchise.Email }}</td>
+              </tr>
+              <tr>
+                  <th>Permissions</th>
+                  <td>
+                    {% for permission in franchise.permissions %}
+                      <small class="border border-success px-2 py-1 rounded"> {{ permission.name }} </small>
+                    {% endfor %}
+                  </td>
+              </tr>
+              <tr>
+                  <th>Active?</th>
+                  <td>
+                    {% if franchise.Active %}
+                      <span class="border border-success px-2 py-1 rounded text-success">Oui</span>
+                    {% else %}
+                      <span class="border border-danger px-2 py-1 rounded text-danger">Non</span>
+                    {% endif %}
+                  </td>
+              </tr>
+
+          </tbody>
+      </table>
+
+      {% if is_granted("ROLE_ADMIN") %}
+        <section class="container d-grid gap-2 col-xl-6">
+          <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}" class="btn btn-primary">Modifier</a>
+          <a href="{{ path('app_franchise_index') }}" class="btn btn-outline-primary">Liste des Franchises</a>
+        </section>
+      {% endif %}
+      
+  </section>
+
+  <section class="container border border-primary py-4 px-4  mt-3 mb-5">
+    {# < Card Content section #}
+    <section class='container card-section my-5'>
+      <div class="row d-flex justify-content-center">
+        <div class='d-flex flex-column flex-xl-row justify-content-center align-items-center mb-4'>
+          <div class='d-flex col-12 col-xl-5 flex-sm-row justify-content-center justify-content-xl-start mb-sm-2 mb-md-3 mb-xl-0'>
+            <h2 class="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4 fs-1">MES CLUBS</h2>
+            <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme fs-1">TODAYFIT</h2>
+          </div>
+
+        </div>
+
+        {% if is_granted("ROLE_ADMIN") %}
+          {% set link = "/structure/show/" %}
+        {% else %}
+          {% set link = "/franchise/maFranchise/structure/" %}
+        {% endif %}
+
+        {% for partner in franchise.partner %}
+          {{ include('partner/_card.html.twig', {
+            'button_label': 'Go!',
+            'id': partner.id,
+            'name' : partner.name,
+            'permissions' : partner.permissions,
+            'image': partner.image,
+            'description': partner.description,
+            'link': link,
+            }) }}
+        {% else %}
+          <div class="alert alert-danger" role="alert">
+            Il n'y a pas de resultat pour votre recherche
+          </div>
+        {% endfor %}
+
+      </div>
+    </section>
+    {# > Card Content section #}
+  </section>
+
+{% else %}
+
+    <div class="d-flex flex-column text-center">
+      <h1 class="">"Vous n'avez pas de Franchise asignée"</h1>
+      <h3>Merci de contacter votre responsable de franchise</h3>
+    </div>
+
+{% endif %}
+
+{% endblock %}
