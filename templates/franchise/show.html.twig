@@ -65,16 +65,15 @@
     <section class='container card-section my-5'>
       <div class="row d-flex justify-content-center">
         <div class='d-flex flex-column flex-xl-row justify-content-center align-items-center mb-4'>
-          
           <div class='d-flex flex-column flex-sm-row mb-sm-3'>
             <h2 class="fw-bold lh-1 mb-0 mb-md-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
             <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
           </div>
-
-          <div class="d-flex flex-column flex-lg-row search-form-partner">
-            {# {{ form(form) }} #}
+        </div>
+        <div>
+          <div class="col-12 form-search">
+            {{ include('franchise/_formSearchMaFranchise.html.twig') }}
           </div>
-
         </div>
 
         {% if is_granted("ROLE_ADMIN") %}
@@ -83,7 +82,7 @@
           {% set link = "/franchise/maFranchise/structure/" %}
         {% endif %}
 
-        {% for partner in franchise.partner %}
+        {% for partner in partners %}
           {{ include('partner/_card.html.twig', {
             'button_label': 'Go!',
             'id': partner.id,

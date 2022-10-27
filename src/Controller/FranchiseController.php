@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    #[Route('/maFranchise', name: 'app_my_franchise_show', methods: ['GET'])]
-    public function showMyFranchise(FranchiseRepository $franchiseRepository): Response
+    #[Route('/maFranchise', name: 'app_my_franchise_show', methods: ['GET', 'POST'])]
+    public function showMyFranchise(FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository, Request $request): Response
     { 
         if($this->getUser()){
           
@@ -26,10 +26,22 @@ class FranchiseController extends AbstractController
             $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
           } else {
             $franchise = null;
-          }  
+          }
+
+          $partners = $franchise->getPartner();
+          
+          $form = $this->createForm(SearchBarType::class);
+          $search = $form->handleRequest($request);
+  
+          if($form->isSubmitted() && $form->isValid()){
+            $partners = $partnerRepository
+              ->searchByFranchise($franchise, $search->get('input_data')->getData(), $search->get('active')->getData());
+          }
 
           return $this->render('franchise/show.html.twig', [
               'franchise' => $franchise,
+              'partners' => $partners,
+              'form' => $form->createView(),
           ]);
         }
 
