@@ -1,7 +1,5 @@
 <h1 align="center">
-    <a href="https://admin.todayfit.fr" target="_blank">
-        <img src="https://admin.todayfit.fr/build/images/logo_white.png" />
-    </a>
+  <img src="https://admin.todayfit.fr/build/images/logo_white.png" />
 </h1>
 
 TodayFit is a website created as a educational project for the "Graduate Développeur Web Full Stack" programme of <b><a href="https://www.studi.com" target="_blank">STUDI</a></b> Digital School
@@ -39,26 +37,30 @@ Before anything, you need the following software installed on your machine:
   * and the other [usual Symfony application requirements][2].
 
 
+
 ⚙️ Installation
 ----------------
 
 To install the project, you must at first clone the code repository :
 ```
-    git@github.com:jjmora/todayfit_backend.git
+    git@github.com:jjmora/todayfit_app.git
 ```
 or 
 ```
-    https://github.com/jjmora/todayfit_backend.git
+    https://github.com/jjmora/todayfit_app.git
 ```
 
-or download the <a href="https://github.com/jjmora/todayfit_backend/archive/refs/heads/master.zip">ZIP</a> version
+or download the <a href="https://github.com/jjmora/todayfit_app/archive/refs/heads/master.zip">ZIP</a> version
 
-Then, this project can be installed by running the install script:
-```
-    cd project/
-    ./install.sh
-```
+Then, 
 
+```
+    cd todayfit_app
+```
+and execute the commands
+```
+    composer install
+```
 
 Application initialisation
 --------------------------
