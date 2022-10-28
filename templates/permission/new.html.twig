@@ -20,9 +20,7 @@
   <script>
     window.onload = (event) => {
       let input = document.getElementById('permission_image')
-      console.log(input.value)
       let image = document.getElementById('permission-new-image')
-      console.log(image)
       input.addEventListener("keyup", function(){
         checkIfImgExists(image)
         image.src = input.value
