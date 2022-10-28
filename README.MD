@@ -1,2 +1,2 @@
 TODAY FIT PROJECT
---STUDI Développeur WEB-- 
+--STUDI Développeur WEB--  

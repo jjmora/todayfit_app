@@ -4,13 +4,67 @@
 
 {% block body %}
     {# Header section #}
-    <section class="d-flex flex-row justify-content-between align-items-center">
-      <h1>Utilisateurs</h1>
-      <a href="{{ path('app_register') }}" class="btn btn-danger">Registrer Nouvel Utilisateur</a>
+    <section class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <h1 class="col-12 text-center text-md-start col-md-6">Utilisateurs</h1>
+      <a href="{{ path('app_register') }}" class="btn btn-danger col-12 col-md-6 col-xl-4">Registrer Nouvel Utilisateur</a>
     </section>
     {# Header section #}
 
-    <table class="table">
+    <article class="mt-3">
+    {% for user in users %}
+      <div class="d-flex flex-wrap border border-warning border-1 shadow-sm rounded p-3 mb-3 col-12 justify-content-start">
+        <p class="col-1 col-lg-1"><b>Id:</b></p>
+        <p class="col-11 col-lg-1">{{ user.id }}</p>
+          {% if user.franchise %}
+            <p class="col-3 my-1 col-lg-2"><b>Name:</b></p>
+            <span class="col-9 my-1 col-lg-3 col-xl-2">{{ user.franchise.name }}</span>
+            <p class="col-12 my-2 col-lg-2"><b>Type:</b></p>
+            <span class="col-12 mt-1 mb-2 col-lg-3 text-center franchise-title"><b>Franchise</b></span>
+            <p class="col-4 col-xl-2"><b>E-mail:</b></p>
+            <p class="col-8 col-xl-4">{{ user.email }}</p>
+            <p class="col-4 col-xl-2"><b>Personnel:</b></p>
+            <p class="col-8 col-xl-4">{{ user.franchise.email }}</p>
+          {% elseif user.partner %}
+            <p class="col-3 my-1 col-lg-2"><b>Name:</b></p>
+            <span class="col-9 my-1 col-lg-3 col-xl-2">{{ user.partner.name }}</span>
+            <p class="col-12 my-2 col-lg-2"><b>Type:</b></p>
+            <span class="col-12 mt-1 mb-2 col-lg-3 text-center partner-title"><b>Structure</b></span>
+            <p class="col-4 col-xl-2"><b>E-mail:</b></p>
+            <p class="col-8 col-xl-4">{{ user.email }}</p>
+            <p class="col-4 col-xl-2"><b>Personnel:</b></p>
+            <p class="col-8 col-xl-4">{{ user.partner.email }}</p>
+          {% else %}
+            <p class="col-3 text-lg-center my-2"><b>Type:</b></p>
+            <span class="col-9 col-lg-7 mt-1 mb-2 text-center border border-info rounded"><b>Aucun typologie choisie</b></span>
+          {% endif %}
+        <p class="col-3 col-lg-2 mb-1 mt-2"><b>Verifié:</b></p>
+        <p class="col-3 col-lg-2 col-xl-4 mb-1 mt-2">{{ user.isVerified ? 
+          '<span class="bg-success text-white px-2 py-1 rounded">Yes</span>' 
+          : 
+          '<span class="bg-danger text-white px-2 py-1 rounded">No</span>' }}</p>
+        <p class="col-3 col-lg-2 mb-1 mt-2"><b>Pass modifié?:</b></p>
+        <p class="col-3 col-lg-6 col-xl-4 mb-1 mt-2">{{ user.passwordReset ? 
+          '<span class="bg-success text-white px-2 py-1 rounded">Yes</span>' 
+          : 
+          '<span class="bg-danger text-white px-2 py-1 rounded">No</span>' }}
+        </p>
+        <p class="col-12 col-lg-2 my-1 my-lg-3"><b>Roles:</b></p>
+        <div class="col-12 col-lg-10 my-lg-3 d-flex flex-wrap justify-content-evenly justify-content-lg-start">
+        {% for role in user.roles %}
+          <p class="col-6 col-lg-3 text-center text-lg-start">{{role}}</p>
+        {% endfor %}
+        </div>
+        <div class="col-12 d-flex justify-content-evenly">
+          <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-success col-5 col-lg-4">Voir détails</a>
+          <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-info col-5 col-lg-4">Modifier</a>
+        </div>
+      </div>
+    {% else %}
+        <p>Il n'y a pas d'utilisateurs dans la base de données</p>
+    {% endfor %}
+    </article>
+
+    {# <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -52,5 +106,5 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
 {% endblock %}

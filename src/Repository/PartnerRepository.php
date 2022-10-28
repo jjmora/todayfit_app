@@ -27,14 +27,51 @@ class PartnerRepository extends ServiceEntityRepository
 
       if($input_data != null){
         $query
-          ->where('MATCH_AGAINST(p.Name, p.Email, p.description, p.Address) AGAINST (:input_data boolean)>0')
-          ->setParameter('input_data', $input_data)
+          ->where('p.Name LIKE :input_data OR p.Email LIKE :input_data OR p.description LIKE :input_data OR p.Address LIKE :input_data')
+          ->setParameter('input_data', '%'.$input_data.'%')
           ;
       }
       if($active != null){
         $query
           ->andWhere('p.Active = :active')
           ->setParameter('active', $active)
+          ;
+      }
+
+      return $query->getQuery()->getResult();
+    }
+
+    public function searchByFranchise($franchise, $input_data = null, $active = null)
+    {
+      $query = $this->createQueryBuilder('p');
+      $franchiseId = $franchise->getId();
+
+      if($input_data != null){
+        $query
+          ->where('
+            p.franchise = :franchise AND p.Name LIKE :input_data 
+            OR p.franchise = :franchise AND p.Email LIKE :input_data 
+            OR p.franchise = :franchise AND p.description LIKE :input_data 
+            OR p.franchise = :franchise AND p.Address LIKE :input_data')
+          ->setParameter('input_data', '%'.$input_data.'%')
+          ->setParameter('franchise', $franchiseId)
+          ;
+      }
+
+      if($active != null){
+        $query
+          ->andWhere('
+            p.franchise = :franchise AND p.Active = :active'
+            )
+          ->setParameter('active', $active)
+          ->setParameter('franchise', $franchiseId)
+          ;
+      }
+
+      if($active == null){
+        $query
+          ->andWhere('p.franchise = :franchise')
+          ->setParameter('franchise', $franchiseId)
           ;
       }
 

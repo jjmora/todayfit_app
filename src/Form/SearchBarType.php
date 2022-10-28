@@ -3,16 +3,13 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use App\Entity\Partner;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchPartnerType extends AbstractType
+class SearchBarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,13 +17,13 @@ class SearchPartnerType extends AbstractType
           ->add('input_data', SearchType::class, [
             'label' => false,
             'attr' => [
-              'class' => 'form-control',
-              'placeholder' => 'Entrez un ou plusieurs mot-clés'
+              'class' => '',
+              'placeholder' => 'Entrez le(s) mot-clés'
             ],
             'required' => false
           ])
           ->add('active', CheckboxType::class, [
-            'label'    => 'Voir uniquement les Actives',
+            'label'    => 'Actives',
             'required' => false,
             'attr' => [
               'class' => ''
@@ -35,15 +32,10 @@ class SearchPartnerType extends AbstractType
           ->add('Chercher', SubmitType::class, [
             'label' => 'Chercher',
             'attr' => [
-              'class' => 'btn btn-warning search-icon ms-3'
+              'class' => 'btn btn-warning search-icon'
             ]
           ])
-          ->add('Reset', ResetType::class, [
-            'attr' => [
-              'class' => 'btn btn-outline-danger ms-2'
-            ]
-          ])
-  ;
+          ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

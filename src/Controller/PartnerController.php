@@ -5,14 +5,14 @@ namespace App\Controller;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Form\PartnerEditType;
-use App\Form\SearchPartnerType;
+use App\Form\SearchBarType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/partner')]
+#[Route('/structure')]
 class PartnerController extends AbstractController
 {
 
@@ -40,13 +40,15 @@ class PartnerController extends AbstractController
     #[Route('/{page?1}', name: 'app_partner_index', methods: ['GET', 'POST'])]
     public function index(PartnerRepository $partnerRepository, Request $request, $page): Response
     {
+      
         if (!$this->isGranted('ROLE_ADMIN')) {
           $this->addFlash('error', "Vous n'avez pas le droit d'accèder");
           
           return $this->redirectToRoute('app_dashboard');
         }
-
-        //All Partners
+        
+        $filtered = false;
+        
         $allPartners = $partnerRepository->findAll();
 
         // PAGINATION
@@ -61,13 +63,12 @@ class PartnerController extends AbstractController
           ($page - 1)*$qty
         );
 
-        $form = $this->createForm(SearchPartnerType::class);
+        $form = $this->createForm(SearchBarType::class);
         $search = $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-          //dd($form);
-
           $partners = $partnerRepository->search($search->get('input_data')->getData(), $search->get('active')->getData());
+          $filtered = true;
         }
       
         return $this->render('partner/index.html.twig', [
@@ -76,11 +77,12 @@ class PartnerController extends AbstractController
           'qtyPages' => $qtyPages,
           'page' => $page,
           'qty' => $qty,
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'filtered' => $filtered,
         ]);
     }
 
-    #[Route('/new/partner', name: 'app_partner_new', methods: ['GET', 'POST'])]
+    #[Route('/new/structure', name: 'app_partner_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PartnerRepository $partnerRepository): Response
     {
         $partner = new Partner();

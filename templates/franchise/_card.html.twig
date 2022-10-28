@@ -2,10 +2,16 @@
 <div class='col-md-6 col-lg-4'>
   {# {% if app.user %} #}
   <div class='card shadow'>
-    <div class="overflow image-container">
-      <img src="{{ image }}" alt="Today Fit Franchise" width="150px" class="card-img-top">
-    </div>
-
+    {% if franchise.active == false %}
+      <div class="overflow image-container no-active-image">
+        <img src="{{ image }}" alt="Today Fit Franchise" width="150px" class="card-img-top">
+      </div>
+      <p class="no-active-message">Non Active</p>
+    {% else %}
+      <div class="overflow image-container">
+        <img src="{{ image }}" alt="Today Fit Franchise" width="150px" class="card-img-top">
+      </div>
+    {% endif %}
     <div class='box-over d-flex flex-row' >
       <div class='card-body box-over-item'></div>
       <div class='box-over-item-white px-4 py-3 box-over-active'>

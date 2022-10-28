@@ -4,7 +4,7 @@
 
 {% block body %}
 {% if franchise != null %}
-  <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form mb-5">
+  <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
 
     {% if is_granted("ROLE_ADMIN") %}
       <div class="d-flex flex-row align-items-center justify-content-between">
@@ -53,9 +53,9 @@
     </article>
 
     {% if is_granted("ROLE_ADMIN") %}
-      <section class="container d-grid gap-2 col-xl-6">
+      <section class="container d-grid gap-2 col-xl-6 mt-3">
         <a href="{{ path('app_franchise_edit', {'id': franchise.id}) }}" class="btn btn-primary">Modifier</a>
-        <a href="{{ path('app_franchise_index') }}" class="btn btn-outline-primary">Liste des Franchises</a>
+        <a href="{{ path('app_franchise_index') }}" class="btn btn-warning">Liste des Franchises</a>
       </section>
     {% endif %}
       
@@ -70,9 +70,7 @@
             <h2 class="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4 fs-1">MES CLUBS</h2>
             <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme fs-1">TODAYFIT</h2>
           </div>
-          <div class="col-12 col-xl-7 form-search">
-            {{ include('franchise/_formSearchMaFranchise.html.twig') }}
-          </div>
+
         </div>
 
         {% if is_granted("ROLE_ADMIN") %}
@@ -81,7 +79,7 @@
           {% set link = "/franchise/maFranchise/structure/" %}
         {% endif %}
 
-        {% for partner in partners %}
+        {% for partner in franchise.partner %}
           {{ include('partner/_card.html.twig', {
             'button_label': 'Go!',
             'id': partner.id,

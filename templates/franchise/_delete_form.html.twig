@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_franchise_delete', {'id': franchise.id}) }}" onsubmit="return confirm('Etes vous sure?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ franchise.id) }}">
-    <button class="btn btn-danger mt-3">Supprimer</button>
+    <button class="btn btn-danger mt-3">Supprimer Franchise</button>
 </form>

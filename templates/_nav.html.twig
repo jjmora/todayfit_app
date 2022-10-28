@@ -7,36 +7,51 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {# < Main Menu #}
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{ path('app_franchise_index') }}">Franchises</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ path('app_partner_index') }}">Structures</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
-        </li>
-      {% endif %}
-      {% if app.user and app.user.roles[0] == "ROLE_FRANCHISE" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ path('app_my_franchise_show') }}">Ma Franchise</a>
-        </li> 
-      {% endif %}
-      {% if app.user and app.user.roles[0] == "ROLE_PARTNER" %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ path('app_my_partner_show') }}">Mon Structure</a>
-        </li> 
-      {% endif %}
-      
+        {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ path('app_franchise_index') }}">Franchises</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('app_partner_index') }}">Structures</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('app_permission_index') }}">Permissions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('app_user_index') }}">Utilisateurs</a>
+          </li>
+        {% endif %}
+        {% if app.user and app.user.roles[0] == "ROLE_FRANCHISE" %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('app_my_franchise_show') }}">Ma Franchise</a>
+          </li> 
+        {% endif %}
+        {% if app.user and app.user.roles[0] == "ROLE_PARTNER" %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ path('app_my_partner_show') }}">Mon Structure</a>
+          </li> 
+        {% endif %}
       </ul>
+      {# > Main Menu #}
 
-      <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
-        <li class="nav-item dropdown me-3">
-          {{ app.user ? app.user.userIdentifier : 'Please Login' }}
-        </li>
-        <li class="nav-item dropdown">
+      {# < Drop Menu #}
+      <ul class="navbar-nav mb-2 mb-lg-0 ">
+        {% if app.user  %}
+          <li>
+            <a href="{{ path('app_logout') }}" class="dropdown-item">
+              <i class="bi bi-person-dash-fill mx-2 text-dark" style="font-size: 2rem;"></i>
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{ path('app_login') }}" class="dropdown-item">
+              <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
+            </a>
+          </li>
+        {% endif %}
+        {# <li class="nav-item dropdown">
           <button type="button" class="btn btn-primary nav-a py-2 px-0 px-lg-2 dropdown-toggle show" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
             <i class="bi bi-person-circle mx-2 text-dark" style="font-size: 2rem;"></i>
           </button>
@@ -53,16 +68,20 @@
               <li><a href="{{ path('app_login') }}" class="dropdown-item">Login</a></li>
             {% endif %}
           </ul>
-        </li>
+        </li> #}
       </ul>
-      <section class="mx-2">
+      {# < Drop Menu #}
+
+      {# < DARK MODE #}
+      {# <section class="mx-2">
         <div class="dark-mode" data-mode="dark" id="moon">
           <i class="bi bi-moon-fill"></i>
         </div>
         <div class="dark-mode hidden-icon" data-mode="light" id="sun">
           <i class="bi bi-brightness-high-fill"></i>
         </div>
-      </section>
+      </section> #}
+      {# > DARK MODE #}
     </div>
   </div>
 </nav>

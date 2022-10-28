@@ -87,12 +87,13 @@ form fieldset{
 #franchise_edit_permissions,
 #partner_edit_permissions,
 #registration_form_roles,
-#search_partner,
+#user_roles,
 .custom-active-check {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 #partner_permissions input[type="checkbox"],
 #franchise_permissions input[type="checkbox"],
 #franchise_edit_permissions input[type="checkbox"],
@@ -102,7 +103,8 @@ form fieldset{
 #franchise_edit_Active,
 #partner_edit_Active,
 #partner_Active,
-#franchise_Active {
+#franchise_Active,
+#user_roles input[type="checkbox"] {
     visibility: hidden;
 }
 
@@ -115,8 +117,9 @@ form fieldset{
 #franchise_Active,
 #partner_edit_Active,
 #partner_Active,
+#user_roles input[type="checkbox"] + label,
 .custom-active-check {
-    background-color: white; /* Green */
+    background-color: white;
     border: 1px solid #ced4da;
     color: #ced4da;
     padding: 5px 10px;
@@ -128,13 +131,13 @@ form fieldset{
 }
 
 #search_partner input[type="checkbox"] + label {
-  background-color: white; /* Green */
+  background-color: white;
   border: 1px solid #ced4da;
   color: #ced4da;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
-  //display: inline-block;
+  display: inline-block;
   font-size: 16px;
   border-radius:5px;
 }
@@ -148,10 +151,33 @@ form fieldset{
 #franchise_edit_Active[type="checkbox"]:checked + label,
 #franchise_Active[type="checkbox"]:checked + label,
 #partner_edit_Active[type="checkbox"]:checked + label,
-#partner_Active[type="checkbox"]:checked + label{
-    background-color: #4CAF50; /* Green */
+#partner_Active[type="checkbox"]:checked + label,
+#user_roles input[type="checkbox"]:checked + label{
+    background-color: #4CAF50;
     border: none;
     color: white;
+}
+
+#search_partner .form-check{
+  margin: 0;
+  padding: 0;
+
+  label{
+    width: 100%;
+  }
+}
+
+.form-search{
+  button[type="submit"] {
+    width: 100%;
+  }
+
+  .btn-reset{
+    width: 100%;
+  }
+}
+#search_partner_active{
+  display: none;
 }
 
 // CARD SECTION
@@ -227,7 +253,7 @@ form fieldset{
   top: 50px;
   width: 100%;
   text-align: center;
-
+  color:rgba(0, 0, 0, 0.8);
 }
 
 .strokeme {
@@ -247,7 +273,16 @@ form fieldset{
 }
 
 .partner-show-fields{
-  width: 150px;
+  width: 180px;
+}
+
+.user-table-fields{
+  //width: 200px;
+}
+
+// LEGAL DOCS
+.legal-text{
+  text-align: justify;
 }
 
 // DARK MODE
