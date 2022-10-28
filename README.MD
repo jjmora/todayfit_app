@@ -9,23 +9,12 @@ Is a website on top of <b><a href="https://symfony.com" target="_blank">Symfony<
 You can test the deployed site here: 
 
 <p align="center">
-  <a href="https://admin.todayfit.fr"><img src="https://admin.todayfit.fr/build/images/logo_white.png" alt="logo todayfit" width="100px" target="_blank" /></a>
+  <a href="https://admin.todayfit.fr" target="_blank" ><img src="https://admin.todayfit.fr/build/images/logo_white.png" alt="logo todayfit" width="100px" /></a>
 </p>
 
 
 TodayFit Application
 ====================
-
-Documentation index
--------------------
-
-  * [Installation](doc/installation.md)
-  * [Data model](doc/model.md)
-  * [Database](doc/data.md)
-  * [Provisioning](doc/provisioning.md)
-  * [Git Workflow](doc/git-workflow.md)
-  * [Environments](doc/environments.md)
-  
 
 📦 Requirements
 ----------------
@@ -35,8 +24,8 @@ Before anything, you need the following software installed on your machine:
   * PHP 8.1.0 or higher
   * Node JS
   * composer
-  * and the other [usual Symfony application requirements][2].
-
+  * and the other <a href="https://symfony.com/doc/current/setup.html#technical-requirements" target="_blank">usual Symfony application requirements</a>
+<br></br>
 
 
 ⚙️ Installation
@@ -54,7 +43,8 @@ or
     https://github.com/jjmora/todayfit_app.git
 ```
 
-or download the <a href="https://github.com/jjmora/todayfit_app/archive/refs/heads/master.zip">ZIP</a> version
+or download the <a href="https://github.com/jjmora/todayfit_app/archive/refs/heads/master.zip">ZIP</a> version.
+<br></br>
 
 Then, 
 ```
@@ -100,7 +90,7 @@ execute the commands
 ```
 
 Database initialisation
------------------------
+--------------------------
 
 The last thing to do to make the project work locally: you must generate a database filled with entities.
 
@@ -117,11 +107,16 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 ```
 
+Mailing
+--------
+If you want to use the Mailing feature you need to populate the "MAILER_DSN=" variable in the ".env" (or ".env.local") file.
+
+
 Admin user
 -----------
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-You need to create first a Admin user. You can do it with mysql commands. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need later).
+You need to create first an Admin user. You can do it with sql commands. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need later).
 ```
 php bin/console security:hash-password
 ```
@@ -133,25 +128,25 @@ Now, you can create an Admin User
 
 You are now able to take a first look to the application.
 Start your server and visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
-Use your new user to login. You can browser the pages but you will be able to see an empty application without any data.
+Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
 
-Populate the DataBase
+📗 Populate the DataBase
 ---------------------
 
 You can use all the project forms to create new entities. We have 4 types of entities with some constraints for its creation:
 
-  * Users => you only need a Admin User -> ok, we got that!
-  * Permissions => you only need a Admin User -> ok, we got that!
-  * Franchises => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise
-  * Partners => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner
+  * **Users** => you only need a Admin User -> ok, we got that!
+  * **Permissions** => you only need a Admin User -> ok, we got that!
+  * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise
+  * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner
 
-Here you will find some SQL commands that you can use to create two new users:
+Here you will find some SQL commands that you can use to create two new users before creating a Franchise and/or a Partner:
 
-Franchise User:
+**Franchise User**:
 ```
 INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('user@franchise.com','["ROLE_FRANCHISE"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
 ```
-Partner User:
+**Partner User**:
 ```
 INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('user@partner.com','["ROLE_PARTNER"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
 ```
