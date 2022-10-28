@@ -22,8 +22,8 @@
       let input = document.getElementById('permission_image')
       let image = document.getElementById('permission-new-image')
       input.addEventListener("keyup", function(){
-        checkIfImgExists(image)
         image.src = input.value
+        checkIfImgExists(image)
       })
     }
 
