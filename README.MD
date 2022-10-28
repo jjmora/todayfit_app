@@ -87,6 +87,7 @@ execute the commands
 ```
     composer install
     npm install
+    npm run build
 ```
 
 Database initialisation
@@ -116,18 +117,22 @@ Admin user
 -----------
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-You need to create first an Admin user. You can do it with sql commands. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need later).
+You need to create first an Admin user. You can do it with sql commands. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
 ```
-Now, you can create an Admin User
+Now, you can create an Admin User with the sql command line. Select the Database and Insert the values
 ```
+  use database_name
+
   INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('user@admin.com','["ROLE_ADMIN"]', 'your-hashed-password', 1, 1);
 
 ```
 
 You are now able to take a first look to the application.
-Start your server and visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
+**Start your server** 
+```php -S localhost:8000 -t public```
+And visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
 Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
 
 📗 Populate the DataBase
