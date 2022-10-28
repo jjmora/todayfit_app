@@ -135,10 +135,12 @@ Use your new user to login. You can browse the pages but you will only be able t
 
 You can use all the project forms to create new entities. We have 4 types of entities with some constraints for its creation:
 
-  * **Users** => you only need a Admin User -> ok, we got that!
-  * **Permissions** => you only need a Admin User -> ok, we got that!
+  * **Users** => you only need an Admin User -> ok, we got that!
+  * **Permissions** => you only need an Admin User -> ok, we got that!
   * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise
   * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner
+
+**One User can be linked to only one Franchise or Parter**
 
 Here you will find some SQL commands that you can use to create two new users before creating a Franchise and/or a Partner:
 
@@ -150,6 +152,8 @@ INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('us
 ```
 INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('user@partner.com','["ROLE_PARTNER"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
 ```
+In order to create a new Franchise and/or Partner you can now use the forms on the website.
+
 
 ✍️ Author
 ----------
@@ -176,3 +180,7 @@ INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('us
 INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('user@partner.com','["ROLE_PARTNER"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
 
 INSERT INTO franchise(name, email, active, user_id) VALUES ('franchise1', 'franchise1@email.com',)
+
+  # possible error with fixtures 
+  SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
+  eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
