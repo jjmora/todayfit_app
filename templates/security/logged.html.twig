@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}You are Logged!{% endblock %}
+
+{% block body %}
+<section class="container col-md-8 col-xl-6 bg-light py-5 px-4 custom-form">
+  <div class="mb-3">
+    <h1 class="h3 mb-3 font-weight-normal">Vous êtes déjà connecté:</h1>
+    <p></p>
+    <h3>{{ app.user.userIdentifier }}</h3>
+    <br></br>
+    <a href="{{ path('app_logout') }}" class="col-12 btn btn-lg btn-primary">Logout</a>
+  </div>
+</section>
+
+{% endblock %}
