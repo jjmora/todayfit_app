@@ -87,7 +87,7 @@ Then, execute the commands
   ```
   DATABASE_URL="mysql://user_name:password@127.0.0.1:3306/database_name?serverVersion=mariadb-10.4.11"
   ```
-  ⚠️ ** If you are going to commit the file *".env"* put all this values in a new *".env.local"* file that won't be commited.
+  > ⚠️ ** If you are going to commit the file *".env"* put all this values in a new *".env.local"* file that won't be commited.
 
   Then build your database schema:
   ```
@@ -102,7 +102,7 @@ If you want to use the Mailing feature you need to populate the "MAILER_DSN=" va
 
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures**. ⚠️
+> ⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures**. ⚠️
 <br></br>
 You need to create first an Admin user. You can do it with sql commands, but first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
@@ -115,7 +115,7 @@ Now, you can create an Admin User with the sql command line. Select the Database
   INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('user@admin.com','["ROLE_ADMIN"]', 'your-hashed-password', 1, 1);
 ``` 
 
-⚠️ *Change 'database_name' for your database name and 'your-hashed-password' for the password created in the preceding step*
+> ⚠️ *Change 'database_name' for your database name and 'your-hashed-password' for the password created in the preceding step*
 <br></br>
 You are now able to take a first look to the application.
 
@@ -138,7 +138,7 @@ Before we need to know the contraints for populating the database related to the
   * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise. This user can't be already linked to another Franchise
   * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner. This user can't be already linked to another Partner
 
-⚠️ **One User can be linked to only one Franchise or Partner** ⚠️
+ > ⚠️ **One User can be linked to only one Franchise or Partner** ⚠️
 
 You have 2 Options: 
 
@@ -147,7 +147,7 @@ You have 2 Options:
   * **The Manual Way**:  You vill use the admin user created before and the forms on the website and/or sql commands
 
 <br></br>
-### 📗 **THE AUTOMATIC OPTION**
+### 📗 **AUTOMATIC - With Data Fixtures**
 
 We'll use Fixtures for populating the Database. Execute the following command
 <br></br>
@@ -160,30 +160,22 @@ php bin/console doctrine:fixtures:load
 
 **All the data from the databse will be deleted** and the sample data will be loaded. Check your database for verification. If you have created a Admin User before, it will be now useless.
 
+:information_source: The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this, just try again the fixture command.
+```
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
+```
+
 The data for the connexion created for the fixture are:
-  - Admin User:
-      email: admin@todayfit.fr
-      password: tfit@pass
-  - Franchise User:
-      email: any of the generated emails, for example: 'idf@todayfit.fr' or 'sud@todayfit.fr' (connected with the admin account, check all the Franchises emails here: http://localhost:8000/admin/user )
-      password: tfit@pass
-  - Partner User:
-      email: any of the generated emails, for example: 'creteil@todayfit.fr' or 'montpellier@todayfit.fr' (connected with the admin account, check all the Franchises emails here: http://localhost:8000/admin/user )
-      password: tfit@pass
 
 | User Role  | Email             | Password  |
 | ---------- |:-----------------:| ---------:|
 | Admin      | admin@todayfit.fr | tfit@pass |
 | Franchise  | idf@todayfit.fr   | tfit@pass | 
 | Partner    | admin@todayfit.fr | tfit@pass |
-ℹ️ :information_source: *Connected with the admin account, check all the Franchises and Partners emails here: http://localhost:8000/admin/user
 
-:information_source: The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this:
-```
-SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
-  eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
-```
-just try again the fixture command.
+:information_source: *Connected with the admin account, check all the Franchises and Partners emails here: http://localhost:8000/admin/user
+
+<br></br>
 
 **MANUAL OPTION**
 
@@ -200,6 +192,18 @@ INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('us
 INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('user@partner.com','["ROLE_PARTNER"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
 ```
 In order to create a new Franchise and/or Partner you can now use the forms on the website.
+
+
+## 📗 Test the Website
+
+**Start your server** 
+
+```php -S localhost:8000 -t public```
+
+And visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
+Use your new user to login. You can browse the website will be loaded with all the sample data.
+
+Enjoy! 😜 😜 
 
 
 ✍️ Author
