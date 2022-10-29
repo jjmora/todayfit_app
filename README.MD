@@ -117,7 +117,7 @@ Admin user
 -----------
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-You need to create first an Admin user. You can do it with sql commands. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
+You need to create first an Admin user. You can do it with sql commands or with Data Fixtures (see below)[fixtures]. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
 ```
@@ -143,19 +143,27 @@ Use your new user to login. You can browse the pages but you will only be able t
 
 You have 2 Options: 
 
-  # The Automatic: The Database will be populated with juste one command on your cli 
+  # The Automatic Way: The Database will be populated with one command on your cli thanks to Data Fixtures 
 
-  # The Manual:  You vill use the forms on the website and / or the sql commands
+  # The Manual Way:  You vill use the forms on the website and / or sql commands
 
-**THE AUTOMATIC OPTION**
+**THE AUTOMATIC OPTION** [fixtures]
 
 We'll use Fixtures for populating the Database
 Execute the following command
+**Attention: this command will DELETE all the data from your Database!**
 
 ```
-
+php bin/console doctrine:fixtures:load
 ```
+All the data from the databse will be deleted and the sample data will be loaded. Check your database for verification.
 
+The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this:
+```
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
+  eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
+```
+just try again the fixture command.
 
 **MANUAL OPTION**
 
@@ -182,7 +190,7 @@ In order to create a new Franchise and/or Partner you can now use the forms on t
 
 
 
-The Database will be populated with juste one command on your cli
+The Database will be populated with just one command on your cli
 
 ✍️ Author
 ----------
