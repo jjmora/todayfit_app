@@ -11,9 +11,11 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+
   public function load(ObjectManager $manager): void
   {
     // < Data
+    $password = '$2y$13$WODq3sjeP3sE.z9h530MD.85tyVnOdCLm.Lfg4YYiUzRrDJVaf72S'; // tfit@pass
     $usersFranchiseArray = [
       ["idf", "https://images.pexels.com/photos/4662356/pexels-photo-4662356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Takimata at sed amet dolor ex ut diam consetetur. Vulputate dolore duo dolor sit sed gubergren nonumy eos at elitr labore no lorem dolores. Est dolore invidunt eos odio aliquyam invidunt. Rebum praesent lorem elit dolore at consetetur et dolor aliquyam cum ut ipsum ipsum lorem."],
       ["sud", "https://images.pexels.com/photos/2247179/pexels-photo-2247179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Ut et vero nonumy aliquyam takimata et at kasd ipsum duis ipsum est accusam euismod. Et amet veniam dolore eirmod sit sea eos ex takimata vulputate congue magna stet erat velit sed diam. Nonumy dolor duis gubergren."],
@@ -181,14 +183,16 @@ class AppFixtures extends Fixture
       ["Jeanne","Garcia"],
       ["Zélie","Perrin"]
     ];
-    $emailServer = ["fake.com", "yahoo.fr", "gmail.com", "protonmail.fr", "proton.me", "hotmail.fr", "hotmail.com", "aol.com", "outlook.com", "outlook.fr", "aim.com", "yahoo.com"];
+    $emailServer = [
+      "fake.com", "yahoo.fr", "gmail.com", "protonmail.fr", "proton.me", "hotmail.fr", "hotmail.com", "aol.com", "outlook.com", "outlook.fr", "aim.com", "yahoo.com"
+    ];
     // > Data
 
     // < Create User Admin
     $adminUser = new User();
     $adminUser->setEmail('admin@todayfit.fr')
       ->setRoles(["ROLE_ADMIN"])
-      ->setPassword('$2y$13$OtvEb693PiG80nziGNHPdupepsaacJiOfh4sEqQS4E.fGVr2im1ai')
+      ->setPassword($password)
       ->setIsVerified(true)
       ->setPasswordReset(true)
       ;
@@ -201,19 +205,11 @@ class AppFixtures extends Fixture
     for ($i = 0; $i < count($usersFranchiseArray); $i++) {
       
       // < Create new Franchise Users
-      $name = mt_rand(0, count($names) - 1);
-      $lastName = mt_rand(0, count($names) - 1);
-      $server = mt_rand(0, count($emailServer)-1);
 
       $newUser = new User();
-      $emailString = str_replace(
-        array('é'),
-        array('e'),
-        strtolower($names[$name][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
-      );
-      $newUser->setEmail($emailString)
+      $newUser->setEmail($usersFranchiseArray[$i][0].'@todayfit.fr')
         ->setRoles(["ROLE_FRANCHISE"])
-        ->setPassword('$2y$13$OtvEb693PiG80nziGNHPdupepsaacJiOfh4sEqQS4E.fGVr2im1ai')
+        ->setPassword($password)
         ->setIsVerified(true)
         ->setPasswordReset(true)
         ;
@@ -224,9 +220,17 @@ class AppFixtures extends Fixture
     
       // < Create new Franchise
       $name = ucwords($usersFranchiseArray[$i][0]);
+      $emailNameIndex = mt_rand(0, count($names) - 1);
+      $lastName = mt_rand(0, count($names) - 1);
+      $server = mt_rand(0, count($emailServer)-1);
+      $emailString = str_replace(
+        array('é','è','ë'),
+        array('e','e','e'),
+        strtolower($names[$emailNameIndex][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
+      );
       $newFranchise = new Franchise();
       $newFranchise->setName($name)
-        ->setEmail($usersFranchiseArray[$i][0].'@todayfit.fr')
+        ->setEmail($emailString)
         ->setActive(mt_rand(0,1))
         ->setUser($newUser)
         ->setImage($usersFranchiseArray[$i][1])
@@ -242,8 +246,6 @@ class AppFixtures extends Fixture
     $allPartnerUsers = [];
     $allPartners = [];
     foreach($usersPartnerArray as $partners){
-      // dump($partners); // all partners arrays with franch name
-      // dump($partners[1]); // all partners arrays only partners array
       for($i = 0; $i < count($partners[1]); $i++){
         // < Create new Partner Users
         $name = mt_rand(0, count($names) - 1);
@@ -254,11 +256,11 @@ class AppFixtures extends Fixture
         $emailString = str_replace(
           array('é','è','ë'),
           array('e','e','e'),
-          strtolower($names[$name][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
+          strtolower($partners[1][$i][0].'@todayfit.fr')
         );
         $newUser->setEmail($emailString)
           ->setRoles(["ROLE_PARTNER"])
-          ->setPassword('$2y$13$OtvEb693PiG80nziGNHPdupepsaacJiOfh4sEqQS4E.fGVr2im1ai')
+          ->setPassword($password)
           ->setIsVerified(true)
           ->setPasswordReset(true)
         ;
@@ -270,17 +272,11 @@ class AppFixtures extends Fixture
         // < Create new Partner  
         $newPartner = new Partner();
         $emailString = str_replace(
-          array('é'),
-          array('e'),
-          strtolower($partners[1][$i][0].'@todayfit.fr')
+          array('é','è','ë'),
+          array('e','e','e'),
+          strtolower($names[$name][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
         );
         $addressString = mt_rand(1, 225).', '.$addresses[0][mt_rand(0, count($addresses[0])-1)].' '.$addresses[1][mt_rand(0, count($addresses[1])-1)];
-
-        //dd(count($usersPartnerArray[$i][1]));
-        //dd($usersPartnerArray[$i][1][0][1]); // image
-        //dump($usersPartnerArray[0][0]);
-        
-        //dd(count($usersPartnerArray));
 
         for($k = 0; $k < count($usersPartnerArray); $k++){
           if($partners[0] == $usersPartnerArray[$k][0]){
@@ -299,8 +295,6 @@ class AppFixtures extends Fixture
             $allPartners[] = $newPartner;
           }
         };
-
-
         // > Create new Partner
       }
     }
@@ -329,12 +323,6 @@ class AppFixtures extends Fixture
       $manager->persist($newPermission);
     }
     // > Create permissions
-
-
-    // foreach($allPartners as $partner){
-    //   dd($partner->getName());
-    // }
-
 
     $manager->flush();
   }
