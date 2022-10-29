@@ -130,13 +130,34 @@ Now, you can create an Admin User with the sql command line. Select the Database
 ```
 
 You are now able to take a first look to the application.
+
 **Start your server** 
+
 ```php -S localhost:8000 -t public```
+
 And visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
 Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
 
 📗 Populate the DataBase
----------------------
+------------------------
+
+You have 2 Options: 
+
+  # The Automatic: The Database will be populated with juste one command on your cli 
+
+  # The Manual:  You vill use the forms on the website and / or the sql commands
+
+**THE AUTOMATIC OPTION**
+
+We'll use Fixtures for populating the Database
+Execute the following command
+
+```
+
+```
+
+
+**MANUAL OPTION**
 
 You can use all the project forms to create new entities. We have 4 types of entities with some constraints for its creation:
 
@@ -159,6 +180,9 @@ INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('u
 ```
 In order to create a new Franchise and/or Partner you can now use the forms on the website.
 
+
+
+The Database will be populated with juste one command on your cli
 
 ✍️ Author
 ----------
