@@ -17,7 +17,7 @@ You can test the deployed site here:
 ====================
 
 ## 📦 Requirements
-----------------
+-------------------
 
 Before anything, you need the following software installed on your machine:
 
