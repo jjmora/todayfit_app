@@ -43,6 +43,10 @@ class FranchiseType extends AbstractType
                 'class' => 'custom-active-check'
               ]
             ])
+            ->add('date', DateType::class, [
+              'widget' => 'choice',
+              'label' => 'Inscrit depuis'
+            ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
               'choice_label' => 'name',

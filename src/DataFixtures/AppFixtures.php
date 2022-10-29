@@ -6,6 +6,8 @@ use App\Entity\Franchise;
 use App\Entity\Partner;
 use App\Entity\Permission;
 use App\Entity\User;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -228,6 +230,14 @@ class AppFixtures extends Fixture
         array('e','e','e'),
         strtolower($names[$emailNameIndex][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
       );
+      
+
+      
+      // Find a randomDate between start_date 2010-01-01 and end_date 2022-10-31
+      $randomDate = date("Y-m-d", mt_rand(1262347200,1667217600));
+      $date = new DateTimeImmutable($randomDate." 12:00 Europe/London");
+      $newDate = DateTime::createFromInterface($date);
+          
       $newFranchise = new Franchise();
       $newFranchise->setName($name)
         ->setEmail($emailString)
@@ -235,6 +245,7 @@ class AppFixtures extends Fixture
         ->setUser($newUser)
         ->setImage($usersFranchiseArray[$i][1])
         ->setDescription($usersFranchiseArray[$i][2])
+        ->setDate($newDate)
         ;
       $manager->persist($newFranchise);
       $allFranchises[] = $newFranchise;
@@ -246,6 +257,8 @@ class AppFixtures extends Fixture
     $allPartnerUsers = [];
     $allPartners = [];
     foreach($usersPartnerArray as $partners){
+      // dump($partners); // all partners arrays with franch name
+      // dump($partners[1]); // all partners arrays only partners array
       for($i = 0; $i < count($partners[1]); $i++){
         // < Create new Partner Users
         $name = mt_rand(0, count($names) - 1);
@@ -277,7 +290,11 @@ class AppFixtures extends Fixture
           strtolower($names[$name][0].'-'.$names[$lastName][0].'@'.$emailServer[$server])
         );
         $addressString = mt_rand(1, 225).', '.$addresses[0][mt_rand(0, count($addresses[0])-1)].' '.$addresses[1][mt_rand(0, count($addresses[1])-1)];
-
+        // Find a randomDate between start_date 2010-01-01 and end_date 2022-10-31
+        $randomDate = date("Y-m-d", mt_rand(1262347200,1667217600));
+        $date = new DateTimeImmutable($randomDate." 12:00 Europe/London");
+        $newDate = DateTime::createFromInterface($date);
+        
         for($k = 0; $k < count($usersPartnerArray); $k++){
           if($partners[0] == $usersPartnerArray[$k][0]){
 
@@ -289,6 +306,7 @@ class AppFixtures extends Fixture
               ->setUser($newUser)
               ->setImage($partners[1][$i][1])
               ->setDescription($partners[1][$i][2])
+              ->setDate($newDate)
               ;
             $manager->persist($newPartner);
 
@@ -323,6 +341,12 @@ class AppFixtures extends Fixture
       $manager->persist($newPermission);
     }
     // > Create permissions
+
+
+    // foreach($allPartners as $partner){
+    //   dd($partner->getName());
+    // }
+
 
     $manager->flush();
   }
