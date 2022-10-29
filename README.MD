@@ -17,7 +17,6 @@ You can test the deployed site here:
 ====================
 
 ## 📦 Requirements
--------------------
 
 Before anything, you need the following software installed on your machine:
 
@@ -29,7 +28,7 @@ Before anything, you need the following software installed on your machine:
 
 
 ## ⚙️ Installation
---------------------------
+
 ### ⚙️ Application initialisation
 
 To install the project, you must at first clone the code repository :
@@ -79,31 +78,29 @@ CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
 
 ```
 
-Then,
-
-execute the commands
+Then, execute the commands
 ```
     composer install
     npm install
     npm run build
 ```
 
-### ⚙️ Database initialisation
+  ### ⚙️ Database initialisation
 
-The last thing to do to make the project work locally: you must generate a database filled with entities.
+  The last thing to do to make the project work locally: you must generate a database filled with entities.
 
-This project uses DoctrineMigrationsBundle, so, first, put your database data access into the "DATABASE_URL=" variable into the ".env" file.
-Something similar to:
-```
-DATABASE_URL="mysql://user_name:password@127.0.0.1:3306/database_name?serverVersion=mariadb-10.4.11"
-```
-** If you are goint to commit the file ".env" put all this values in a new ".env.local" file that won't be commited.
+  This project uses DoctrineMigrationsBundle, so, first, put your database data access into the "DATABASE_URL=" variable into the ".env" file.
+  Something similar to:
+  ```
+  DATABASE_URL="mysql://user_name:password@127.0.0.1:3306/database_name?serverVersion=mariadb-10.4.11"
+  ```
+  ** If you are goint to commit the file ".env" put all this values in a new ".env.local" file that won't be commited.
 
-Then build your database schema:
-```
-php bin/console doctrine:database:create
-php bin/console doctrine:migrations:migrate
-```
+  Then build your database schema:
+  ```
+  php bin/console doctrine:database:create
+  php bin/console doctrine:migrations:migrate
+  ```
 
 ### ⚠️ Mailing
 If you want to use the Mailing feature you need to populate the "MAILER_DSN=" variable in the ".env" (or ".env.local") file.
