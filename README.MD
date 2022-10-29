@@ -2,9 +2,7 @@
   <img src="https://admin.todayfit.fr/build/images/logo_white.png" />
 </h1>
 
-TodayFit is a website created as a educational project for the "Graduate Développeur Web Full Stack" programme of <b><a href="https://www.studi.com" target="_blank">STUDI</a></b> Digital School
-<br></br>
-Is a website on top of <b><a href="https://symfony.com" target="_blank">Symfony</a></b>.
+TodayFit is a website created as an educational project for the "Graduate Développeur Web Full Stack" programme of <b><a href="https://www.studi.com" target="_blank">STUDI</a></b> Digital School. Is a website on top of <b><a href="https://symfony.com" target="_blank">Symfony</a></b>.
 
 You can test the deployed site here: 
 
@@ -14,7 +12,6 @@ You can test the deployed site here:
 
 
 # TodayFit Application
-====================
 
 ## 📦 Requirements
 
@@ -22,7 +19,7 @@ Before anything, you need the following software installed on your machine:
 
   * PHP 8.1.0 or higher
   * Node JS
-  * composer
+  * Composer
   * and the other <a href="https://symfony.com/doc/current/setup.html#technical-requirements" target="_blank">usual Symfony application requirements</a>
 <br></br>
 
@@ -43,13 +40,9 @@ or
 or download the <a href="https://github.com/jjmora/todayfit_app/archive/refs/heads/master.zip">ZIP</a> version.
 <br></br>
 
-Then, 
+Then create the ".env" file
 ```
     cd todayfit_app
-```
-
-Create the ".env" file
-```
     touch .env
 ```
 and put this content inside:
@@ -87,14 +80,14 @@ Then, execute the commands
 
   ### ⚙️ Database initialisation
 
-  The last thing to do to make the project work locally: you must generate a database filled with entities.
+  In order to make the project work locally you must generate a database filled with entities.
 
-  This project uses DoctrineMigrationsBundle, so, first, put your database data access into the "DATABASE_URL=" variable into the ".env" file.
+  This project uses DoctrineMigrationsBundle, so, first, put your database data access into the *"DATABASE_URL="* variable into the *".env"* file.
   Something similar to:
   ```
   DATABASE_URL="mysql://user_name:password@127.0.0.1:3306/database_name?serverVersion=mariadb-10.4.11"
   ```
-  ** If you are goint to commit the file ".env" put all this values in a new ".env.local" file that won't be commited.
+  ⚠️ ** If you are going to commit the file *".env"* put all this values in a new *".env.local"* file that won't be commited.
 
   Then build your database schema:
   ```
@@ -104,13 +97,14 @@ Then, execute the commands
 
 ### ⚠️ Mailing
 If you want to use the Mailing feature you need to populate the "MAILER_DSN=" variable in the ".env" (or ".env.local") file.
-
+<br></br>
 ### ⚙️ Admin user
 
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures*. ⚠️
-You need to create first an Admin user. You can do it with sql commands or with Data Fixtures (see below). But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
+⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures**. ⚠️
+<br></br>
+You need to create first an Admin user. You can do it with sql commands, but first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
 ```
@@ -119,9 +113,10 @@ Now, you can create an Admin User with the sql command line. Select the Database
   use database_name
 
   INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('user@admin.com','["ROLE_ADMIN"]', 'your-hashed-password', 1, 1);
+``` 
 
-```
-
+⚠️ *Change 'database_name' for your database name and 'your-hashed-password' for the password created in the preceding step*
+<br></br>
 You are now able to take a first look to the application.
 
 **Start your server** 
@@ -130,6 +125,7 @@ You are now able to take a first look to the application.
 
 And visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
 Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
+<br></br>
 
 ## 📗 Populate the DataBase
 
@@ -208,7 +204,7 @@ In order to create a new Franchise and/or Partner you can now use the forms on t
 
 ✍️ Author
 ----------
-[![](https://github.com/jjmora.png?size=40)](https://github.com/jjmora) jjmdev
+[![](https://github.com/jjmora.png?size=40)](https://github.com/jjmora) <a href="https://jjmdev.xyz/" target="_blank">jjmdev</a>
 
 
 ERRORS ON TESTS:
