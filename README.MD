@@ -13,10 +13,10 @@ You can test the deployed site here:
 </p>
 
 
-TodayFit Application
+# TodayFit Application
 ====================
 
-📦 Requirements
+## 📦 Requirements
 ----------------
 
 Before anything, you need the following software installed on your machine:
@@ -28,11 +28,9 @@ Before anything, you need the following software installed on your machine:
 <br></br>
 
 
-⚙️ Installation
-----------------
-
-Application initialisation
+## ⚙️ Installation
 --------------------------
+### ⚙️ Application initialisation
 
 To install the project, you must at first clone the code repository :
 ```
@@ -90,8 +88,7 @@ execute the commands
     npm run build
 ```
 
-Database initialisation
---------------------------
+### ⚙️ Database initialisation
 
 The last thing to do to make the project work locally: you must generate a database filled with entities.
 
@@ -108,16 +105,15 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 ```
 
-Mailing
---------
+### ⚠️ Mailing
 If you want to use the Mailing feature you need to populate the "MAILER_DSN=" variable in the ".env" (or ".env.local") file.
 
+⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures*. ⚠️
+### ⚙️ Admin user
 
-Admin user
------------
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-You need to create first an Admin user. You can do it with sql commands or with Data Fixtures [fixtures](see below). But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
+You need to create first an Admin user. You can do it with sql commands or with Data Fixtures (see below). But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
 ```
@@ -129,7 +125,7 @@ Now, you can create an Admin User with the sql command line. Select the Database
 
 ```
 
-> You are now able to take a first look to the application.
+You are now able to take a first look to the application.
 
 **Start your server** 
 
@@ -138,7 +134,7 @@ Now, you can create an Admin User with the sql command line. Select the Database
 And visit "http://localhost:8000/" and it will automatically redirect you to the Login Page.
 Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
 
-📗 Populate the DataBase
+## 📗 Populate the DataBase
 ------------------------
 
 Before we need to know the contraints for populating the database related to the entities relationships.
@@ -150,20 +146,19 @@ Before we need to know the contraints for populating the database related to the
   * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise. This user can't be already linked to another Franchise
   * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner. This user can't be already linked to another Partner
 
-**One User can be linked to only one Franchise or Parter**
+⚠️ **One User can be linked to only one Franchise or Partner** ⚠️
 
 You have 2 Options: 
 
-  * *The Automatic Way*: The Database will be populated with one command on your cli thanks to Data Fixtures 
+  * **The Automatic Way**: The Database will be populated with one command on your cli thanks to Data Fixtures 
 
-  * *The Manual Way*:  You vill use the forms on the website and / or sql commands
+  * **The Manual Way**:  You vill use the admin user created before and the forms on the website and/or sql commands
 
-**THE AUTOMATIC OPTION** [fixtures]
+### 📗 **THE AUTOMATIC OPTION**
 
-We'll use Fixtures for populating the Database
-Execute the following command
+We'll use Fixtures for populating the Database. Execute the following command
 <br></br>
-**Attention: this command will DELETE all the data from your Database!**
+⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️
 
 ```
 php bin/console doctrine:fixtures:load
