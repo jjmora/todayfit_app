@@ -175,7 +175,14 @@ The data for the connexion created for the fixture are:
       email: any of the generated emails, for example: 'creteil@todayfit.fr' or 'montpellier@todayfit.fr' (connected with the admin account, check all the Franchises emails here: http://localhost:8000/admin/user )
       password: tfit@pass
 
-The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this:
+| User Role  | Email             | Password  |
+| ---------- |:-----------------:| ---------:|
+| Admin      | admin@todayfit.fr | tfit@pass |
+| Franchise  | idf@todayfit.fr   | tfit@pass | 
+| Partner    | admin@todayfit.fr | tfit@pass |
+ℹ️ :information_source: *Connected with the admin account, check all the Franchises and Partners emails here: http://localhost:8000/admin/user
+
+:information_source: The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this:
 ```
 SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
   eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
@@ -199,52 +206,11 @@ INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('u
 In order to create a new Franchise and/or Partner you can now use the forms on the website.
 
 
-
-The Database will be populated with just one command on your cli
-
 ✍️ Author
 ----------
 [![](https://github.com/jjmora.png?size=40)](https://github.com/jjmora) jjmdev
 
-[1]: https://symfony.com/doc/current/best_practices.html
-[2]: https://symfony.com/doc/current/setup.html#technical-requirements
-[3]: https://symfony.com/doc/current/setup/web_server_configuration.html
-[4]: https://symfony.com/download
-[5]: https://symfony.com/book
-
-
 
 ERRORS ON TESTS:
 
-  # webpack.config.js / and symfony.lock
-  # js folder with darkMode.js file
-    => darkMode.js
-
   # mailer variable for /register
-
-
-INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES('user@franchise.com','["ROLE_FRANCHISE"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
-INSERT INTO user(email, roles, password, is_verified, password_reset) VALUES ('user@partner.com','["ROLE_PARTNER"]', '$2y$13$V.O21boLwr7KqIMq9nx/VefrsmhS.1yU207Ep3uCjktOIap8lXAD.', 1, 1);
-
-INSERT INTO franchise(name, email, active, user_id) VALUES ('franchise1', 'franchise1@email.com',)
-
-  # possible error with fixtures 
-  SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
-  eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
-
-Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
-
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
