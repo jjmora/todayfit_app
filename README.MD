@@ -117,7 +117,7 @@ Admin user
 -----------
 This project uses a login form, and you need to login to access some particular pages on the application.
 
-You need to create first an Admin user. You can do it with sql commands or with Data Fixtures (see below)[fixtures]. But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
+You need to create first an Admin user. You can do it with sql commands or with Data Fixtures [fixtures](see below). But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
 ```
@@ -129,7 +129,7 @@ Now, you can create an Admin User with the sql command line. Select the Database
 
 ```
 
-You are now able to take a first look to the application.
+> You are now able to take a first look to the application.
 
 **Start your server** 
 
@@ -141,22 +141,45 @@ Use your new user to login. You can browse the pages but you will only be able t
 📗 Populate the DataBase
 ------------------------
 
+Before we need to know the contraints for populating the database related to the entities relationships.
+
+ We have 4 types of entities with some constraints for its creation:
+
+  * **Users** => you only need an Admin User -> ok, we got that!
+  * **Permissions** => you only need an Admin User -> ok, we got that!
+  * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise. This user can't be already linked to another Franchise
+  * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner. This user can't be already linked to another Partner
+
+**One User can be linked to only one Franchise or Parter**
+
 You have 2 Options: 
 
-  # The Automatic Way: The Database will be populated with one command on your cli thanks to Data Fixtures 
+  * *The Automatic Way*: The Database will be populated with one command on your cli thanks to Data Fixtures 
 
-  # The Manual Way:  You vill use the forms on the website and / or sql commands
+  * *The Manual Way*:  You vill use the forms on the website and / or sql commands
 
 **THE AUTOMATIC OPTION** [fixtures]
 
 We'll use Fixtures for populating the Database
 Execute the following command
+<br></br>
 **Attention: this command will DELETE all the data from your Database!**
 
 ```
 php bin/console doctrine:fixtures:load
 ```
-All the data from the databse will be deleted and the sample data will be loaded. Check your database for verification.
+All the data from the databse will be deleted and the sample data will be loaded. Check your database for verification. If you have created a Admin User before, this will be now useless.
+
+The data for the connexion created for the fixture are:
+  - Admin User:
+      email: admin@todayfit.fr
+      password: tfit@pass
+  - Franchise User:
+      email: any of the generated emails, for example: 'idf@todayfit.fr' or 'sud@todayfit.fr' (connected with the admin account, check all the Franchises emails here: http://localhost:8000/admin/user )
+      password: tfit@pass
+  - Partner User:
+      email: any of the generated emails, for example: 'creteil@todayfit.fr' or 'montpellier@todayfit.fr' (connected with the admin account, check all the Franchises emails here: http://localhost:8000/admin/user )
+      password: tfit@pass
 
 The e-mail fields are generated randomly from a list of users and server names. Is unlikely that two equal emails will be generated but in the case you'll have an error like this:
 ```
@@ -167,14 +190,7 @@ just try again the fixture command.
 
 **MANUAL OPTION**
 
-You can use all the project forms to create new entities. We have 4 types of entities with some constraints for its creation:
-
-  * **Users** => you only need an Admin User -> ok, we got that!
-  * **Permissions** => you only need an Admin User -> ok, we got that!
-  * **Franchises** => you need a user with role "ROLE_FRANCHISE" in order to create a new Franchise
-  * **Partners** => you need a user with role "ROLE_PARTNER" and at least one Franchise in order to create a new Partner
-
-**One User can be linked to only one Franchise or Parter**
+You can use all the project forms to create new entities.
 
 Here you will find some SQL commands that you can use to create two new users before creating a Franchise and/or a Partner:
 
