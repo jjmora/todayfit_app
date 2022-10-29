@@ -31,7 +31,7 @@
       </div>
       <div class="d-flex border-bottom p-1">
         <p class="partner-show-fields"><b>Email:</b></p>
-        <p>{{ franchise.Email }}</p>
+        <p>{{ franchise.user.Email }}</p>
       </div>
 
       <div class="d-flex border-bottom p-1">
@@ -90,6 +90,7 @@
             'image': partner.image,
             'description': partner.description,
             'link': link,
+            'email': partner.user.email
             }) }}
         {% else %}
           <div class="alert alert-danger" role="alert">

@@ -49,7 +49,7 @@
                 {{ include('franchise/_card.html.twig', {
                   'button_label': 'Go!',
                   'id': franchise.id,
-                  'email': franchise.email,
+                  'email': franchise.user.email,
                   'name' : franchise.name,
                   'permissions' : franchise.permissions,
                   'image': franchise.image,
