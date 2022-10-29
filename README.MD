@@ -105,11 +105,11 @@ Then, execute the commands
 ### ⚠️ Mailing
 If you want to use the Mailing feature you need to populate the "MAILER_DSN=" variable in the ".env" (or ".env.local") file.
 
-⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures*. ⚠️
 ### ⚙️ Admin user
 
 This project uses a login form, and you need to login to access some particular pages on the application.
 
+⚠️ **You can skip this part and going to **"Populate the Database"** section if you want to load data automatically with fixtures*. ⚠️
 You need to create first an Admin user. You can do it with sql commands or with Data Fixtures (see below). But first you will need a hashed password. Execute the following command and type your password. Copy the Password hash (you will need it later).
 ```
 php bin/console security:hash-password
@@ -132,7 +132,6 @@ And visit "http://localhost:8000/" and it will automatically redirect you to the
 Use your new user to login. You can browse the pages but you will only be able to see an empty application without any data.
 
 ## 📗 Populate the DataBase
-------------------------
 
 Before we need to know the contraints for populating the database related to the entities relationships.
 
@@ -151,6 +150,7 @@ You have 2 Options:
 
   * **The Manual Way**:  You vill use the admin user created before and the forms on the website and/or sql commands
 
+<br></br>
 ### 📗 **THE AUTOMATIC OPTION**
 
 We'll use Fixtures for populating the Database. Execute the following command
@@ -160,7 +160,9 @@ We'll use Fixtures for populating the Database. Execute the following command
 ```
 php bin/console doctrine:fixtures:load
 ```
-All the data from the databse will be deleted and the sample data will be loaded. Check your database for verification. If you have created a Admin User before, this will be now useless.
+⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️
+
+**All the data from the databse will be deleted** and the sample data will be loaded. Check your database for verification. If you have created a Admin User before, it will be now useless.
 
 The data for the connexion created for the fixture are:
   - Admin User:
@@ -229,3 +231,20 @@ INSERT INTO franchise(name, email, active, user_id) VALUES ('franchise1', 'franc
   # possible error with fixtures 
   SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-  
   eva@gmail.com' for key 'UNIQ_8D93D649E7927C74'
+
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the 
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
