@@ -35,7 +35,9 @@
             <p class="col-8 col-xl-4">{{ user.partner.email }}</p>
           {% else %}
             <p class="col-3 text-lg-center my-2"><b>Type:</b></p>
-            <span class="col-9 col-lg-7 mt-1 mb-2 text-center border border-info rounded"><b>Aucun typologie choisie</b></span>
+            <span class="col-9 col-lg-7 mt-1 mb-2 text-center border border-info rounded"><b>Aucune Franchise ou Structure choisie</b></span>
+            <p class="col-4 col-xl-2"><b>E-mail:</b></p>
+            <p class="col-8 col-xl-10">{{ user.email }}</p>
           {% endif %}
         <p class="col-3 col-lg-2 mb-1 mt-2"><b>Verifié:</b></p>
         <p class="col-3 col-lg-2 col-xl-4 mb-1 mt-2">{{ user.isVerified ? 
@@ -64,47 +66,4 @@
     {% endfor %}
     </article>
 
-    {# <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>E-mail</th>
-                <th>
-                  <span class="franchise-title">Franchise</span> 
-                  ou 
-                  <span class="partner-title">Structure</span></th>
-                <th>Roles</th>
-                <th>Verifié?</th>
-                <th>Password modifié?</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                  {% if user.franchise %}
-                    <span class="franchise-title">{{ user.franchise.name }} | {{ user.franchise.email }}</span>
-                  {% endif %}
-                  {% if user.partner %}
-                    <span class="partner-title">{{ user.partner.name }} | {{ user.partner.email }}</span>
-                  {% endif %}
-                </td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.passwordReset ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table> #}
 {% endblock %}

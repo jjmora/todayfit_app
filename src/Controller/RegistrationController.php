@@ -67,7 +67,7 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_user_index');
             //redirect to external url
-            return $this->redirect('http://www.juanjosemora.es');
+            //return $this->redirect('http://todayfit.fr');
         }
 
         return $this->render('registration/register.html.twig', [
