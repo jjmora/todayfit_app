@@ -53,7 +53,7 @@ class PartnerController extends AbstractController
 
         // PAGINATION
         $page = (int)$page;
-        $qty = 3;
+        $qty = 6;
         $qtyPartners = $partnerRepository->count([]); 
         $qtyPages = ceil($qtyPartners / $qty);
         $partners = $partnerRepository->findBy(
