@@ -28,7 +28,7 @@ Before anything, you need the following software installed on your machine:
 <br></br>
 
 
-⚙️ ## Installation
+⚙️ ##Installation
 
 
 Application initialisation
