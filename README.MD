@@ -146,17 +146,16 @@ You have 2 Options:
 
   * **The Manual Way**:  You vill use the admin user created before and the forms on the website and/or sql commands
 
-<br></br>
 ### 📗 **AUTOMATIC - With Data Fixtures**
 
 We'll use Fixtures for populating the Database. Execute the following command
 <br></br>
-⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️
+👇⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️👇
 
 ```
 php bin/console doctrine:fixtures:load
 ```
-⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️
+☝️⚠️ **Attention: this command will DELETE all the data from your Database!** ⚠️☝️
 
 **All the data from the databse will be deleted** and the sample data will be loaded. Check your database for verification. If you have created a Admin User before, it will be now useless.
 
@@ -167,17 +166,16 @@ SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'leo-eva@g
 
 The data for the connexion created for the fixture are:
 
-| User Role  | Email             | Password  |
-| ---------- |:-----------------:| ---------:|
-| Admin      | admin@todayfit.fr | tfit@pass |
-| Franchise  | idf@todayfit.fr   | tfit@pass | 
-| Partner    | admin@todayfit.fr | tfit@pass |
+| User Role  | Email                    | Password  |
+| ---------- |:------------------------:| ---------:|
+| Admin      | admin@todayfit.fr        | tfit@pass |
+| Franchise  | idf@todayfit.fr          | tfit@pass | 
+| Partner    | montepellier@todayfit.fr | tfit@pass |
 
 :information_source: *Connected with the admin account, check all the Franchises and Partners emails here: http://localhost:8000/admin/user
 
-<br></br>
 
-**MANUAL OPTION**
+### 📗 **MANUAL OPTION**
 
 You can use all the project forms to create new entities.
 
