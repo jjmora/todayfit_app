@@ -10,6 +10,7 @@ use App\Repository\FranchiseRepository;
 use App\Repository\PermissionRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -47,8 +48,10 @@ class PartnerEditType extends AbstractType
               ]
             ])
             ->add('date', DateType::class, [
-              'widget' => 'choice',
-              'label' => 'Inscrit depuis'
+              'widget' => 'choice', 
+              'label' => 'Inscrit depuis',
+              'format' => 'dd-MM-yyyy',
+              'years' => range(date('2010'), date('Y') + 2),
             ])
             ->add('permissions', EntityType::class, [
               'class' => Permission::class,
