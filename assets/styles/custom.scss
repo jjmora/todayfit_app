@@ -65,9 +65,15 @@ footer{
 
 .franchise-title,
 .partner-title{
-  color: white;
   padding: 5px 10px;
   border-radius: 10px;
+}
+
+.franchise-title{
+  color: rgb(104, 68, 2);
+}
+.partner-title{
+  color: darkblue;
 }
 
 .franchise-title{
