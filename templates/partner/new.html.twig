@@ -18,6 +18,8 @@
 {% endblock %}
 
 {% block javascripts %}
+  {# let the menu load #}
+  {{ parent() }} 
   <script>
     window.onload = () => {
       let franchise = document.querySelector("#partner_franchise");
