@@ -207,8 +207,3 @@ Enjoy! 😜 😜
 ✍️ Author
 ----------
 [![](https://github.com/jjmora.png?size=40)](https://github.com/jjmora) <a href="https://jjmdev.xyz/" target="_blank">jjmdev</a>
-
-
-ERRORS ON TESTS:
-
-  # mailer variable for /register
