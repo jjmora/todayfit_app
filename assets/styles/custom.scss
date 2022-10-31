@@ -63,7 +63,8 @@ footer{
   }
 }
 
-.franchise-title, .partner-title{
+.franchise-title,
+.partner-title{
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
@@ -71,6 +72,10 @@ footer{
 
 .franchise-title{
   background-color: $primary;
+}
+
+.partner-title{
+  background-color: lightseagreen;
 }
 
 // FORMS CUSTOM CSS
