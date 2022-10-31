@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Se connecter{% endblock %}
 
 {% block body %}
 <section class="container col-md-8 col-xl-6 bg-light py-5 px-4 custom-form">
@@ -12,7 +12,7 @@
       {% if app.user %}
           <div class="mb-3">
             <p>Vous êtes connecté: {{ app.user.userIdentifier }} </p>
-            <a href="{{ path('app_logout') }} class="btn btn-lg btn-primary"">Logout</a>
+            <a href="{{ path('app_logout') }} class="btn btn-lg btn-primary"">Se déconnecter</a>
           </div>
       {% else %}
           <h1 class="h3 mb-3 font-weight-normal">S'il vous plaît, identifiez-vous</h1>
