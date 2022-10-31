@@ -16,7 +16,7 @@
     <div class='box-over d-flex flex-row' >
       <div class='card-body box-over-item'></div>
       <div class='box-over-item-white px-4 py-3 box-over-active'>
-        <h4 class='card-title'>{{name}}</h4>
+        <h4 class='card-title'>{{ name }}</h4>
       </div>
     </div>
 
@@ -41,7 +41,10 @@
 
       <div class='d-flex justify-content-between align-items-center px-4 pt-4'>
         
-        <small><img src="https://www.svgrepo.com/show/427089/packet.svg" class="mx-2" width="20px" />email@email.com</small>
+        <small>
+          <img src="https://www.svgrepo.com/show/427089/packet.svg" class="mx-2" width="20px" />
+          {{ partner.user.email }}
+        </small>
         <a href="{{ link }}{{ id }}" class='btn btn-outline-success'>
           {{ button_label|default('Go') }}  
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-right-circle ms-2" viewBox="0 0 16 16">
@@ -52,7 +55,7 @@
 
     </div>
     <div class="card-footer">
-      <small class="text-muted">Partner depuis le 25/05/2016</small>
+      <small class="text-muted">Partner depuis le {{ partner.date|date("d/m/Y") }}</small>
     </div>
 
   </div>

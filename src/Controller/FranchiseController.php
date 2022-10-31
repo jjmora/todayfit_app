@@ -84,7 +84,7 @@ class FranchiseController extends AbstractController
 
         // PAGINATION
         $page = (int)$page;
-        $qty = 3;
+        $qty = 6;
         $qtyFranchise = $franchiseRepository->count([]); 
         $qtyPages = ceil($qtyFranchise / $qty);
 

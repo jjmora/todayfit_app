@@ -17,6 +17,8 @@
 {% endblock %}
 
 {% block javascripts %}
+  {# let the menu load #}
+  {{ parent() }} 
   <script>
     window.onload = (event) => {
       let input = document.getElementById('permission_image')
