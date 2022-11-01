@@ -26,7 +26,6 @@
       franchise.addEventListener("change", function(){
         let form = this.closest("form");
         let indexData = this.value; // =>return the id
-        console.log(this.name)
         let data = this.name + "=" + this.value;
         
         fetch(form.action, { 

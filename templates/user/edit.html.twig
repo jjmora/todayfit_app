@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer Utilisateur{% endblock %}
+{% block title %}Modifier Utilisateur{% endblock %}
 
 {% block body %}
     <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 mb-5 custom-form">
-      <h1>Editer Utilisateur</h1>
+      <h1>Modifier Utilisateur</h1>
 
       {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
       <a href="{{ path('app_user_index') }}" class="btn btn-warning mr-3">Retour à la liste</a>
