@@ -17,7 +17,9 @@
           {{ form_row(registrationForm.roles) }}
           {# {{ form_row(registrationForm.agreeTerms) }} #}
 
-          <button type="submit" class="btn btn-warning">Registrer</button>
+          <button type="submit" class="btn btn-primary">Registrer</button>
+
       {{ form_end(registrationForm) }}
+          <a href="{{ path('app_user_index') }}" class="my-3 btn btn-warning">Retourner à la liste</a>
     </section>
 {% endblock %}

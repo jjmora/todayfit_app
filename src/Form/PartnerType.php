@@ -32,7 +32,9 @@ class PartnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('Name', null, [
+              'label' => 'Nom'
+            ])
             ->add('email', null, [
               'label' => 'Adresse E-mail personnelle'
             ])
@@ -58,6 +60,7 @@ class PartnerType extends AbstractType
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
               'choice_label' => 'email',
+              'label' => 'Utilisateur',
               'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                   ->where('u.roles LIKE :role')
