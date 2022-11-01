@@ -1,0 +1,21 @@
+{# this form theme will be applied only to the form of this template #}
+{# {% form_theme form 'bootstrap_5_layout.html.twig' %} #}
+
+{{ form_start(form) }}
+    <div class="row d-flex flex-wrap justify-content-between">
+      <div class="col-9 col-xl-5 mb-2">
+          {{ form_widget(form.input_data) }}
+      </div>
+      <div class="col-3 col-xl-3 mb-2" id="search_partner">
+          {{ form_widget(form.type) }}
+      </div>
+      <div class="col-9 col-xl-2">
+          {{ form_widget(form.Chercher) }}
+      </div>
+      <div class="col-3 col-xl-2">
+        <a class="btn btn-outline-danger btn-reset" href="{{ path('app_user_index') }}"><b>X</b></a>
+      </div>
+      {{ form_rest(form) }}
+    </div>
+
+{{ form_end(form) }}

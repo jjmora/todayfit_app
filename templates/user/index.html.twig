@@ -6,9 +6,12 @@
 <div class="container col-lg-8">
     {# Header section #}
     <section class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <h1 class="col-12 text-center text-md-start col-md-6">Utilisateurs</h1>
-      <a href="{{ path('app_register') }}" class="btn btn-danger col-12 col-md-6 col-xl-4">Registrer Nouvel Utilisateur</a>
+      <h1 class="col-12 text-center text-md-start col-md-7">Utilisateurs ({{ usersQty }})</h1>
+      <a href="{{ path('app_register') }}" class="btn btn-danger col-12 col-md-5 mb-3">Registrer Nouvel Utilisateur</a>
     </section>
+    <div class="col-12 form-search">
+      {{ include('user/_formUserSearch.html.twig') }}
+    </div>
     {# Header section #}
 
     <article class="mt-3">

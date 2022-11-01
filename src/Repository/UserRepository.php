@@ -24,6 +24,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
+    public function search($input_data = null, $type = null)
+    {
+      $query = $this->createQueryBuilder('u');
+
+      if($input_data != null){
+        $query
+          ->where('u.email LIKE :input_data')
+          ->setParameter('input_data', '%'.$input_data.'%')
+          ;
+      }
+      if($type != null){
+        $query
+          ->andWhere('u.roles LIKE :type')
+          ->setParameter('type', '%'.$type.'%')
+          ;
+      }
+
+      return $query->getQuery()->getResult();
+    }
+
     public function add(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
