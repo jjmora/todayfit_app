@@ -19,7 +19,9 @@ class FranchiseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name')
+            ->add('Name', null, [
+              'label' => 'Nom'
+            ])
             ->add('Email', null, [
               'label' => 'Adresse E-mail personnelle'
             ])
@@ -29,6 +31,7 @@ class FranchiseType extends AbstractType
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
               'choice_label' => 'email',
+              'label' => 'Utilisateur',
               'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                   ->where('u.roles LIKE :role')
