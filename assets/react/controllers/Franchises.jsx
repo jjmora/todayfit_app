@@ -2,58 +2,147 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const Franchises = (props) => {
+  const [ allFranchises, setAllFranchises ] = useState()
+  const [ filteredFranchises, setFilteredFranchises ] = useState()
+  const [ inputValue, setInputValue ] = useState('')
+  const [ activeState, setActiveState ] = useState('all')
+  
+  const [ filterActive, setFilterActive ] = useState('all')
   const [ franchises, setFranchises ] = useState(null)
-  const [ allFranchises, setAllFranchises ] = useState(null)
-  const [ filter, setFilter ] = useState('all')
-  const [ inputQuery, setInputQuery ] = useState('')
+  
+  const [ filteredByInput, setFilteredByInput ] = useState(null)
+  const [ filterByClick, setFilterByClick ] = useState(null)
+
   const baseUrl = 'http://localhost:8000/franchise'
   const currBaseUrl = window.location.href
 
+  // Load Data at document loading
   useEffect( () => {
     axios.get(`${baseUrl}/franchise_json`)
       .then(response => {
-        setFranchises(response.data.franchises)
+        console.log('Initial Data: ', response.data.franchises)
         setAllFranchises(response.data.franchises)
-        console.log(response.data.franchises)
-        // setFranchises(response.data['hydra:member'])
-        // setAllFranchises(response.data['hydra:member'])
+        setFilteredFranchises(response.data.franchises)
+        
+        setFranchises(response.data.franchises)
+        setFilteredByInput(response.data.franchises)
+        setFilterByClick(response.data.franchises)
       })
       .catch((error) => {
         console.log(error);
       })
   }, [])
 
-      // const baseUrl = 'https://admin.todayfit.fr/api'
-
-      // useEffect( () => {
-      //   setFranchises(props.allFranchises)
-      //   setAllFranchises(props.allFranchises)
-      // })
-
   useEffect( () => {
-    if(filter === 'active'){
-      let activesFranchises = allFranchises.filter( (fr, k) => {
-        return fr.active === true
-      })
-      setFranchises(activesFranchises)
-    } else if(filter === 'non-active') {
-      let nonActivesFranchises = allFranchises.filter( (fr, k) => {
-        return fr.active === false
-      })
-      setFranchises(nonActivesFranchises)
-    }
-  }, [filter])
+    // if(filterActive === 'active'){
+    //   let activesFranchises = filteredByInput.filter( (fr, k) => {
+    //     return fr.active === true
+    //   })
+    //   setFranchises(activesFranchises)
+    // } else if(filterActive === 'non-active') {
+    //   let nonActivesFranchises = filteredByInput.filter( (fr, k) => {
+    //     return fr.active === false
+    //   })
+    //   setFranchises(nonActivesFranchises)
+    // } else {
+    //   setFranchises(filteredByInput)
+    // }
+    filterByActiveState(filterActive, filterByInputValue(inputValue))
+  }, [filterActive])
 
-  const handleClick = (e) => {
-    setFilter(e.target.id)
+
+
+  // const filterValues = (e) => {
+  //   // const inputFieldValue = document.querySelector('#form-input')
+  //   // input_value + filter
+  //   if(e.target.value === "") {
+  //     return allFranchises
+  //   } else {
+  //     filterByInputValue(e.target.value)
+  //   }
+  // }
+
+  // const handleInputField = (e) => {
+  //   if(e.target.value === "") return allFranchises
+  //   let filteredFranchises = allFranchises.filter( (fr, k) => {
+  //     return fr.email.includes(e.target.value) || fr.user.email.includes(e.target.value)
+  //   } )
+  //   setFranchises(filteredFranchises)
+  // }
+
+  // return Franchises filtered only by "value"
+  const filterByInputValue = (value) => {
+    console.log('Value form filterByInputValue: ', value)
+    if(value) {
+      allFranchises.filter( (fr, k) => {
+        return ( (fr.user.email.includes(value)) || (fr.email.includes(value)) )
+      })
+    } else {
+      return allFranchises
+    }
   }
 
+  //return Franchises filtered by Active State
+  const filterByActiveState = (value, data) => {
+    if(value === 'active'){
+      let activesFranchises = data.filter( (fr, k) => {
+        return fr.active === true
+      })
+      //setFranchises(activesFranchises)
+    } else if(value === 'non-active') {
+      let nonActivesFranchises = data.filter( (fr, k) => {
+        return fr.active === false
+      })
+      //setFranchises(nonActivesFranchises)
+    } else {
+      //setFranchises(filteredByInput)
+      return data
+    }
+  }
+
+  const handleClick = (e) => {
+    setActiveState(e.target.id)
+  }
+  
   const handleInputField = (e) => {
-    if(e.target.value === "") return allFranchises
-    let filteredFranchises = allFranchises.filter( (fr, k) => {
-      return fr.email.includes(e.target.value) || fr.user.email.includes(e.target.value)
-    } )
-    setFranchises(filteredFranchises)
+    setInputValue(e.target.value)
+
+  }
+  useEffect( () => {
+    handleFilterForm()
+  }, [activeState, inputValue])
+
+  const handleFilterForm = () => {
+    console.log('Filter :', activeState)
+    console.log('Input Value :', inputValue)
+    console.log('Filtered Franchises :', filteredFranchises)
+    console.log('All Franchises :', allFranchises)
+
+    let dataByInput
+    if(inputValue) {
+      dataByInput = allFranchises.filter( (fr, k) => {
+        return ( (fr.user.email.includes(inputValue)) || (fr.email.includes(inputValue)) )
+      })
+    } else {
+      dataByInput = allFranchises
+    }
+    console.log('Data by input:', dataByInput)
+
+    let dataByActiveState
+    if(activeState === 'active'){
+      dataByActiveState = dataByInput.filter( (fr, k) => {
+        return fr.active === true
+      })
+    } else if(activeState === 'non-active') {
+      dataByActiveState = dataByInput.filter( (fr, k) => {
+        return fr.active === false
+      })
+    } else {
+      dataByActiveState = dataByInput
+    }
+  
+    setFilteredFranchises(dataByActiveState)
+    console.log('DatabyActiveState: ', dataByActiveState)
   }
 
   return (
@@ -61,12 +150,14 @@ const Franchises = (props) => {
       <div>
         <h4>Franchises Filter</h4>
         <ul className='active-filter'>
+          <li onClick={handleClick} id="all">All</li>
           <li onClick={handleClick} id="active">Active</li>
           <li onClick={handleClick} id="non-active">Non Active</li>
         </ul>
       </div>
       <div className='search-input-wrapper'>
         <input 
+          id="form-input"
           type="search" 
           className='search-input' 
           placeholder='Please enter your text here...'
@@ -75,7 +166,7 @@ const Franchises = (props) => {
       </div>
       <div>
         {
-          franchises?.map( (franchise) => {
+          filteredFranchises?.map( (franchise) => {
             return(
                 <div key={franchise.id} className="franchise-wrapper">
                   <h3>{franchise.name}</h3>
@@ -99,5 +190,6 @@ const Franchises = (props) => {
     </>
   )
 }
+
 
 export default Franchises
