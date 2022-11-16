@@ -7,7 +7,11 @@
   <h1>React Controller</h1>
   <section id="react-test-section">
     <div>
-      
+      {# <p>Current User -> {{ app.user.email }}</p>
+      <p>First Franchise -> {{ variable }}</p>
+      <div {{ react_component('FranchisesComponent', { 'variable': variable }) }}></div> #}
+      {{ dump(franchises) }}
+      <div {{ react_component('Franchises', { 'propsFranchises': franchises|json_encode }) }}></div>
     </div>
   </section>
 </div>
