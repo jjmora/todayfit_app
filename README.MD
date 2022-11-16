@@ -1,6 +1,8 @@
-<h1 align="center">
+<h1>React Components VERSION</h1>
+
+<h2 align="center">
   <img src="https://admin.todayfit.fr/build/images/logo_white.png" />
-</h1>
+</h2>
 
 TodayFit is a website created as an educational project for the "Graduate Développeur Web Full Stack" programme of <b><a href="https://www.studi.com" target="_blank">STUDI</a></b> Digital School. Is a website on top of <b><a href="https://symfony.com" target="_blank">Symfony</a></b>.
 
