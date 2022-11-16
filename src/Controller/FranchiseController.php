@@ -10,9 +10,11 @@ use App\Form\SearchBarType;
 use App\Repository\FranchiseRepository;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
@@ -68,6 +70,29 @@ class FranchiseController extends AbstractController
         ]);
     }
 
+
+    // JSON RESPONSE
+    #[Route('/franchise_json', name: 'app_franchise_json')]
+    public function index_json(FranchiseRepository $franchiseRepository): JsonResponse
+    {
+        
+        $allFranchises = $franchiseRepository->findAll();
+        
+        $variable = $allFranchises[0]->getName();
+        
+        return $this->json([
+          'code' => 200,
+          'nb_of_results' => count($allFranchises),
+          'variable' => $variable,
+          'franchises' => $allFranchises
+          ], 200, [], [ObjectNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
+            return $object->getId();
+            }
+          ]);
+    }
+    // JSON RESPONSE
+
+
     #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET', 'POST'])]
     public function index(FranchiseRepository $franchiseRepository, Request $request, $page): Response
     {
@@ -87,12 +112,17 @@ class FranchiseController extends AbstractController
         $qty = 6;
         $qtyFranchise = $franchiseRepository->count([]); 
         $qtyPages = ceil($qtyFranchise / $qty);
+        if(($page - 1)*$qty > 0) {
+          $offset = ($page - 1)*$qty;
+        } else {
+          $offset = 0;
+        }
 
         $franchises = $franchiseRepository->findBy(
           [],
           null,
           $qty,
-          ($page - 1)*$qty
+          $offset
         );
 
         $form = $this->createForm(SearchBarType::class);
