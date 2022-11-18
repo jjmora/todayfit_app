@@ -290,6 +290,23 @@ form fieldset{
   width: 180px;
 }
 
+// FILTER
+.active-filter {
+  list-style: none;
+
+  li{
+    border: $primary solid 1px;
+    border-radius: 5px;
+    margin: 0 5px;
+    padding: 5px 7px;
+  }
+}
+
+.filter-active{
+  background-color: $primary;
+  font-weight: bolder;
+}
+
 // LEGAL DOCS
 .legal-text{
   text-align: justify;

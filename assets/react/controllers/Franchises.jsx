@@ -27,6 +27,14 @@ const Franchises = (props) => {
 
   const handleClick = (e) => {
     setActiveState(e.target.id)
+    let parent = e.currentTarget.parentElement
+    console.log(parent)
+    let children = parent.children
+    console.log(children)
+    for(let child of children) {
+      child.classList.remove('filter-active')
+    }
+    e.target.classList.add('filter-active')
   }
   
   const handleInputField = (e) => {
@@ -46,12 +54,12 @@ const Franchises = (props) => {
 
     let dataByActiveState
     if(activeState === 'active'){
-      dataByActiveState = dataByInput.filter( (fr, k) => {
-        return fr.active === true
+      dataByActiveState = dataByInput?.filter( (fr, k) => {
+        return fr.isActive === true
       })
     } else if(activeState === 'non-active') {
-      dataByActiveState = dataByInput.filter( (fr, k) => {
-        return fr.active === false
+      dataByActiveState = dataByInput?.filter( (fr, k) => {
+        return fr.isActive === false
       })
     } else {
       dataByActiveState = dataByInput
@@ -63,11 +71,10 @@ const Franchises = (props) => {
   return (
     <>
       <div>
-        <h4>Franchises Filter</h4>
-        <ul className='active-filter'>
-          <li onClick={handleClick} id="all">All</li>
-          <li onClick={handleClick} id="active">Active</li>
-          <li onClick={handleClick} id="non-active">Non Active</li>
+        <ul className='d-flex flex-row justify-content-center active-filter'>
+          <li onClick={handleClick} className="filter-active" id="all">All</li>
+          <li onClick={handleClick} className="" id="active">Active</li>
+          <li onClick={handleClick} className="" id="non-active">Non Active</li>
         </ul>
       </div>
 
@@ -87,11 +94,10 @@ const Franchises = (props) => {
       <section>
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         {
-          filteredFranchises?.map( (franchise) => {
-            console.log(franchise)
+          filteredFranchises?.map( (franchise, key) => {
             return(
               <Card
-                key={franchise.id}
+                key={key}
                 franchiseId={franchise.id}
                 franchiseName={franchise.name}
                 franchiseEmail={franchise.email}
@@ -107,33 +113,8 @@ const Franchises = (props) => {
         }
         </div>
       </section>
-
-      {/* <div>
-        {
-          filteredFranchises?.map( (franchise) => {
-            return(
-                <div key={franchise.id} className="franchise-wrapper">
-                  <h3>{franchise.name}</h3>
-                  <p>
-                    <b>Email : </b>
-                    <span>{franchise.user.email}</span>
-                  </p>
-                  <p>
-                    <b>Email Perso: </b>
-                    <span>{franchise.email}</span>
-                  </p>
-                  <p>
-                    <b>Active: </b>
-                    {franchise.active ? <span className='active'>Oui</span> : <span className='non-active'>Non</span>}
-                  </p>
-                </div>
-            )}
-          )
-        }
-      </div> */}
     </>
   )
 }
-
 
 export default Franchises

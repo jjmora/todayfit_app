@@ -1,119 +1,45 @@
 import React, { useEffect, useState } from 'react'
 
-const Card = ({ key, franchiseId, franchiseName, franchiseDescription, franchiseEmail, franchiseEmailPerso, permissions, franchiseDate, franchiseIsActive, franchiseImage }) => {
-  const [ filteredPermissions, setFilteredPermissions ] = useState()
+const Card = ({ 
+  franchiseId, franchiseName, franchiseDescription, franchiseEmail, franchiseEmailPerso, 
+  permissions, franchiseDate, franchiseIsActive, franchiseImage 
+}) => {
   
-  // const permissionFn = (value) => {
-  //   return value.slice(17)
-  // }
-
-  // useEffect(() => {
-
-  //   let filteredProps = props.permissions?.filter( (p, k) => {
-  //       return props.franchise.permissions.includes(p.id)
-  //     })
-  //   setFilteredPermissions(filteredProps)
-
-  //   filterPermissions()
-  // }, [])
-
-  // const filterPermissions = () => {
-  //   console.log('Props Permissions: ', props.permissions)
-  // }
-
-  // const permissionDiv = (obj) => {
-  //   return (
-  //   <article className="col-6 p-2" key={obj.id}>
-  //     <div className="p-3 shadow rounded">
-  //       <img src={obj.image} alt="Today Fit Franchise" width="30px" className="text-primary" />
-  //       <br/>
-  //       <b className=''>{obj.name}</b>
-  //     </div>
-  //   </article>
-  //   )
-  // }
-
-  // const filterData = () => {
-  //   let data = 'init data'
-  //   data = props.permissions?.map( (permission) => {
-  //     <p>{permission.id}</p>
-  //   })
-  //   console.log('Perm Data: ', data)
-  // }
-
   return (
     <>
-
       <div className="col mb-4">
         <div className="card h-100 shadow">
-          <img src={franchiseImage} width="150px" className="card-img-top" alt={`Today Fit ${franchiseName} franchise`}/>
+          { 
+            franchiseIsActive == false ? (
+              <>
+                <div className="overflow image-container no-active-image">
+                  <img src={ franchiseImage } alt={`Today Fit ${franchiseName} franchise`} width="150px" className="card-img-top" />
+                </div>
+                <p className="no-active-message">Non Active</p>
+              </>
+            ) : (
+              <div className="overflow image-container">
+                <img src={ franchiseImage } alt={`Today Fit ${franchiseName} franchise`} width="150px" className="card-img-top"/>
+              </div>
+            ) 
+          }
+          <div className='box-over d-flex flex-row' >
+            <div className='card-body box-over-item'></div>
+            <div className='box-over-item-white px-4 py-3 box-over-active'>
+              <h4 className='card-title'>{ franchiseName}</h4>
+            </div>
+          </div>
+
           <div className="card-body">
-            <h5 className="card-title">{franchiseName}</h5>
-            <p className="card-text">{franchiseDescription}</p>
+            <p className="card-text text-justify">{franchiseDescription}</p>
 
             <div className="d-flex flex-row flex-wrap">
               {/* < PERMISSION */}
-              {/* {
-                props.franchise.permissions?.map( (permission) => {
-                  return (
-                    <article className="col-6 p-2" key={permission}>
-                      <p>{ permissionFn(permission)}</p>
-                    </article>
-                  )
-                })
-              } */}
-
-              {/* {
-                props.franchise.permissions?.map( (p) => {
-                  return <p>{permissionFn(p)}</p>
-                })
-              } */}
-              {/* 
-              {
-                props.permissions?.map( (p) => {
-                    return <p>{p}</p>
-                  })
-                  // .filter( permission => permission.id === '1')
-              }     
-              */}
-              {/* {
-                JSON.stringify(props.permissions?.filter( (permission, key) => {
-                  return (permission.id = '1')
-                }))
-              }
-              */}
-
-              {/* {
-                props.permissions?.map( (permission) => {
-                    return (
-                      <div>
-                        <p>{permission.id}</p>
-                        <br/>
-                      </div>
-                      // if(permission.id.toString() === permissionFn(p)){
-                      //   //
-                      //   return (
-                      //     <article className="col-6 p-2" key={permission.id}>
-                      //       <div className="p-3 shadow rounded">
-                      //         <img src={permission.image} alt="Today Fit Franchise" width="30px" className="text-primary" />
-                      //         <br/>
-                      //         <b className=''>{permission.name}</b>
-                      //       </div>
-                      //     </article>
-                      //   )
-                      //   //
-                      // } else {
-                      //   'no'
-                      // }
-                    )
-                  })
-              } */}
-
               {
                 permissions?.map( (permission) => {
                   return (
                     <article className="col-6 p-2" key={permission.id}>
-                      <div className="p-3 shadow rounded">
+                      <div className="p-3 shadow rounded d-flex flex-column">
                         <img src={permission.image} alt="Today Fit Franchise" width="30px" className="text-primary" />
                         <b className=''>{permission.name}</b>
                       </div>
@@ -121,20 +47,6 @@ const Card = ({ key, franchiseId, franchiseName, franchiseDescription, franchise
                   )
                 })
               }
-              {/* {
-                props.permissions?.map( (permission) => {
-                  return (
-                    <article className="col-6 p-2" key={permission.id}>
-                      <div className="p-3 shadow rounded">
-                        <img src={permission.image} alt="Today Fit Franchise" width="30px" className="text-primary" />
-                        <br/>
-                        {permission.id}
-                        <b className=''>{permission.name}</b>
-                      </div>
-                    </article>
-                  )
-                })
-              }  */}
               {/* > PERMISSION */}
             </div>
 
@@ -152,43 +64,6 @@ const Card = ({ key, franchiseId, franchiseName, franchiseDescription, franchise
 
           <div className="card-footer">
             <small className="text-muted">Franchisé depuis le { franchiseDate }</small>
-          </div>
-
-        </div>
-      </div>
-
-      <div className='col-md-5 col-lg-4 px-5'>
-        <div className='card shadow'>
-          { franchiseIsActive == false ? (
-              <>
-                <div className="overflow image-container no-active-image">
-                  <img src={ franchiseImage } alt="Today Fit Franchise" width="150px" className="card-img-top" />
-                </div>
-                <p className="no-active-message">Non Active</p>
-              </>
-            ) : (
-              <div className="overflow image-container">
-                <img src={ franchiseImage } alt="Today Fit Franchise" width="150px" className="card-img-top"/>
-              </div>
-            ) 
-          }
-          <div className='box-over d-flex flex-row' >
-            <div className='card-body box-over-item'></div>
-            <div className='box-over-item-white px-4 py-3 box-over-active'>
-              {/* <h4 className='card-title'>{ props.franchise_name}</h4> */}
-              <h4 className='card-title'>{ franchiseName}</h4>
-            </div>
-          </div>
-
-          <div className='card-body'>
-            <p className='card-text pt-4 text-justify'>
-              { franchiseDescription }
-            </p>
-
-
-
-
-
           </div>
 
         </div>

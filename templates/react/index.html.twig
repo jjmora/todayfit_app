@@ -3,14 +3,18 @@
 {% block title %}React Controller{% endblock %}
 
 {% block body %}
-<div class="react-test-wrapper">
-  <h1>React Controller</h1>
-  <section id="react-test-section">
-    <div>
-      {# <p>Current User -> {{ app.user.email }}</p>
-      <p>First Franchise -> {{ variable }}</p>
-      <div {{ react_component('FranchisesComponent', { 'variable': variable }) }}></div> #}
-      <div {{ react_component('Franchises', { 'variable': variable })}}></div>
+  <section class='container card-section my-5'>
+    <div class="row">
+      <div class='d-flex flex-column justify-content-md-between align-items-center mb-4'>
+      
+        <div className='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
+          <h2 className="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
+          <h2 className="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
+        </div>
+        
+        <div {{ react_component('Franchises', { 'variable': variable })}}></div>
+
+      </div>
     </div>
   </section>
 </div>
