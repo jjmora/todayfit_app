@@ -1,23 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Card from './Card'
 
 const Franchises = (props) => {
+  const [ allData, setAllData] = useState()
+
+  const [ franchisesArray, setFranchisesArray ] = useState()
+  const [ allPermissions, setAllPermissions ] = useState()
   const [ allFranchises, setAllFranchises ] = useState()
   const [ filteredFranchises, setFilteredFranchises ] = useState()
   const [ inputValue, setInputValue ] = useState('')
   const [ activeState, setActiveState ] = useState('all')
   
 
-  const baseUrl = 'http://localhost:8000/franchise'
+  const baseUrl = 'http://localhost:8000'
   const currBaseUrl = window.location.href
 
   // Load Data at document loading
   useEffect( () => {
-    axios.get(`${baseUrl}/franchise_json`)
+    axios.get(`${baseUrl}/franchise/franchise_json`)
       .then(response => {
-        console.log('Initial Data: ', response.data.franchises)
+        console.log('Initial Data: ', response.data)
+        setFranchisesArray(response.data.franchisesArray)
+        setAllPermissions(response.data.permissions)
         setAllFranchises(response.data.franchises)
         setFilteredFranchises(response.data.franchises)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
+
+  // Load Data at document loading
+  useEffect( () => {
+    axios.get(`${baseUrl}/api/permissions`)
+      .then(response => {
+        console.log('Permissions Data: ', response.data['hydra:member'])
+        setAllPermissions(response.data['hydra:member'])
       })
       .catch((error) => {
         console.log(error);
@@ -89,25 +108,19 @@ const Franchises = (props) => {
         {
           filteredFranchises?.map( (franchise) => {
             return(
-              <div className="col mb-4">
-                <div className="card h-100">
-                  <img src="https://via.placeholder.com/150" width="150px" className="card-img-top" alt="..."/>
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  </div>
-                  <div className="card-footer">
-                    <small className="text-muted">Last updated 3 mins ago</small>
-                  </div>
-                </div>
-              </div>
+              <Card
+                key={franchise.id}
+                franchise={franchise}
+                permissions={allPermissions}
+                fr={franchisesArray}
+              />
             )
           })
         }
         </div>
       </section>
 
-      <div>
+      {/* <div>
         {
           filteredFranchises?.map( (franchise) => {
             return(
@@ -129,7 +142,7 @@ const Franchises = (props) => {
             )}
           )
         }
-      </div>
+      </div> */}
     </>
   )
 }

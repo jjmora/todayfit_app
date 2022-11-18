@@ -9,6 +9,7 @@ use App\Form\FranchiseEditType;
 use App\Form\SearchBarType;
 use App\Repository\FranchiseRepository;
 use App\Repository\PartnerRepository;
+use App\Repository\PermissionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,17 +74,44 @@ class FranchiseController extends AbstractController
 
     // JSON RESPONSE
     #[Route('/franchise_json', name: 'app_franchise_json')]
-    public function index_json(FranchiseRepository $franchiseRepository): JsonResponse
+    public function index_json(FranchiseRepository $franchiseRepository, PermissionRepository $permissionRepository): JsonResponse
     {
         
         $allFranchises = $franchiseRepository->findAll();
-        
+        $allPermissions = $permissionRepository->findAll();
+
+        $franchisesArray = [];
+        $j = 0;
+        foreach($allFranchises as $franchise){
+          $franchisesArray[$j] = array(
+            "id" => $franchise->getId(), 
+            "name" => $franchise->getName(), 
+            "email_perso" => $franchise->getEmail(), 
+            "email" => $franchise->getUser()->getEmail(),
+            "permissions" => $franchise->getPermissions()
+          );
+          $j = $j + 1;
+        }
+
+        $permissionsArray = [];
+        $i = 0;
+        foreach($allPermissions as $permission){
+          $permissionsArray[$i] = array(
+            "id" => $permission->getId(), 
+            "name" => $permission->getName(), 
+            "image" => $permission->getImage() 
+          );
+          $i = $i + 1;
+        }
+       
         $variable = $allFranchises[0]->getName();
         
         return $this->json([
           'code' => 200,
           'nb_of_results' => count($allFranchises),
           'variable' => $variable,
+          'franchisesArray' => $franchisesArray,
+          'permisions' => $permissionsArray,
           'franchises' => $allFranchises
           ], 200, [], [ObjectNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
             return $object->getId();
