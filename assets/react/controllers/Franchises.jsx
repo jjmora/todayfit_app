@@ -3,11 +3,7 @@ import axios from 'axios'
 import Card from './Card'
 
 const Franchises = (props) => {
-  const [ allData, setAllData] = useState()
-
   const [ franchisesArray, setFranchisesArray ] = useState()
-  const [ allPermissions, setAllPermissions ] = useState()
-  const [ allFranchises, setAllFranchises ] = useState()
   const [ filteredFranchises, setFilteredFranchises ] = useState()
   const [ inputValue, setInputValue ] = useState('')
   const [ activeState, setActiveState ] = useState('all')
@@ -22,21 +18,7 @@ const Franchises = (props) => {
       .then(response => {
         console.log('Initial Data: ', response.data)
         setFranchisesArray(response.data.franchisesArray)
-        setAllPermissions(response.data.permissions)
-        setAllFranchises(response.data.franchises)
-        setFilteredFranchises(response.data.franchises)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, [])
-
-  // Load Data at document loading
-  useEffect( () => {
-    axios.get(`${baseUrl}/api/permissions`)
-      .then(response => {
-        console.log('Permissions Data: ', response.data['hydra:member'])
-        setAllPermissions(response.data['hydra:member'])
+        setFilteredFranchises(response.data.franchisesArray)
       })
       .catch((error) => {
         console.log(error);
@@ -49,17 +31,16 @@ const Franchises = (props) => {
   
   const handleInputField = (e) => {
     setInputValue(e.target.value)
-
   }
 
   useEffect( () => {
     let dataByInput
     if(inputValue) {
-      dataByInput = allFranchises.filter( (fr, k) => {
-        return ( (fr.user.email.includes(inputValue)) || (fr.email.includes(inputValue)) )
+      dataByInput = franchisesArray?.filter( (fr, k) => {
+        return ( (fr.email.includes(inputValue)) || (fr.email_perso.includes(inputValue)) || (fr.name.includes(inputValue)))
       })
     } else {
-      dataByInput = allFranchises
+      dataByInput = franchisesArray
     }
     console.log('Data by input:', dataByInput)
 
@@ -107,12 +88,19 @@ const Franchises = (props) => {
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         {
           filteredFranchises?.map( (franchise) => {
+            console.log(franchise)
             return(
               <Card
                 key={franchise.id}
-                franchise={franchise}
-                permissions={allPermissions}
-                fr={franchisesArray}
+                franchiseId={franchise.id}
+                franchiseName={franchise.name}
+                franchiseEmail={franchise.email}
+                franchiseEmailPerso={franchise.email_perso}
+                permissions={franchise.permissions}
+                franchiseDate={franchise.date}
+                franchiseIsActive={franchise.isActive}
+                franchiseImage={franchise.image}
+                franchiseDescription={franchise.description}
               />
             )
           })

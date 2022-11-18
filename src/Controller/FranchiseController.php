@@ -88,7 +88,11 @@ class FranchiseController extends AbstractController
             "name" => $franchise->getName(), 
             "email_perso" => $franchise->getEmail(), 
             "email" => $franchise->getUser()->getEmail(),
-            "permissions" => $franchise->getPermissions()
+            "image" => $franchise->getImage(),
+            "description" => $franchise->getDescription(),
+            "permissions" => $franchise->getPermissions(),
+            "date" => $franchise->getDate(),
+            "isActive" => $franchise->isActive()
           );
           $j = $j + 1;
         }
