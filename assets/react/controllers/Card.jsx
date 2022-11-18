@@ -110,13 +110,11 @@ const Card = ({ key, franchiseId, franchiseName, franchiseDescription, franchise
               } */}
 
               {
-                props.permissions?.map( (permission) => {
+                permissions?.map( (permission) => {
                   return (
                     <article className="col-6 p-2" key={permission.id}>
                       <div className="p-3 shadow rounded">
                         <img src={permission.image} alt="Today Fit Franchise" width="30px" className="text-primary" />
-                        <br/>
-                        {permission.id}
                         <b className=''>{permission.name}</b>
                       </div>
                     </article>
