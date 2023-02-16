@@ -3,6 +3,7 @@
 {% block title %}Structures{% endblock %}
 
 {% block body %}
+  {# Check if Structure IS ACTIVE but Franchise IS NOT #}
   {% if app.user.roles[0] == "ROLE_ADMIN" or app.user.roles[0] == "ROLE_SUPER_ADMIN" %}
     {% if partner.Active == true and partner.franchise.active == false %}
     <div class="alert alert-danger text-center" role="alert">
@@ -10,6 +11,7 @@
     </div>
     {% endif %}
   {% endif %}
+  
   <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form mb-5">
       {% if partner %}
         {% if is_granted("ROLE_ADMIN") %}

@@ -16,24 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class PartnerController extends AbstractController
 {
 
-    #[Route('/monStructure', name: 'app_my_partner_show', methods: ['GET'])]
+    #[Route('/monstructure', name: 'app_my_partner_show', methods: ['GET'])]
     public function showMyClub(PartnerRepository $partnerRepository): Response
     { 
-        if($this->getUser()){
-          
-          if($this->getUser()->getPartner() != null){
-            $partner = $partnerRepository->find($this->getUser()->getPartner()->getId());
-          } else {
-            $partner = null;
-          }  
-
-          return $this->render('partner/show.html.twig', [
-              'partner' => $partner,
-          ]);
+      
+      if($this->getUser()){
+        if($this->isGranted('ROLE_ADMIN')){
+          $this->addFlash('error', "Vous êtes Admin. Entrez comme Structure pour voir ce contenu");
+          return $this->redirectToRoute('app_dashboard');
         }
+        
+        if($this->getUser()->getPartner() != null){
+          $partner = $partnerRepository->find($this->getUser()->getPartner()->getId());
+        } else {
+          $partner = null;
+        }  
 
-        $this->addFlash('error', "Vous n'avez pas le droit d'acceder");
-        return $this->redirectToRoute('app_dashboard');
+        return $this->render('partner/show.html.twig', [
+            'partner' => $partner,
+        ]);
+      }
+
+      $this->addFlash('error', "Vous n'avez pas le droit d'acceder");
+      return $this->redirectToRoute('app_dashboard');
 
     }
 
@@ -56,11 +61,17 @@ class PartnerController extends AbstractController
         $qty = 6;
         $qtyPartners = $partnerRepository->count([]); 
         $qtyPages = ceil($qtyPartners / $qty);
+        if(($page - 1)*$qty > 0) {
+          $offset = ($page - 1)*$qty;
+        } else {
+          $offset = 0;
+        }
+
         $partners = $partnerRepository->findBy(
           [],
           null,
           $qty,
-          ($page - 1)*$qty
+          $offset
         );
 
         $form = $this->createForm(SearchBarType::class);

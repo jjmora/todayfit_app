@@ -20,11 +20,16 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    #[Route('/maFranchise', name: 'app_my_franchise_show', methods: ['GET', 'POST'])]
+    #[Route('/mafranchise', name: 'app_my_franchise_show', methods: ['GET', 'POST'])]
     public function showMyFranchise(FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository, Request $request): Response
     { 
         if($this->getUser()){
           
+          if($this->isGranted('ROLE_ADMIN')){
+            $this->addFlash('error', "Vous êtes Admin. Entrez comme Franchise pour voir ce contenu");
+            return $this->redirectToRoute('app_dashboard');
+          }
+
           if($this->getUser()->getFranchise() != null){
             $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
           } else {
@@ -53,7 +58,7 @@ class FranchiseController extends AbstractController
 
     }
 
-    #[Route('/maFranchise/structure/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
+    #[Route('/mafranchise/structure/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
     public function showMyPartner(Partner $partner, $id, FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository): Response
     {
         $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
