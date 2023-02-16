@@ -6,6 +6,8 @@ use App\Entity\Permission;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PermissionType extends AbstractType
 {
@@ -13,9 +15,22 @@ class PermissionType extends AbstractType
     {
         $builder
             ->add('Name', null, [
-              'label' => 'Nom'
+              'label' => 'Nom',
+            //   'constraints' => [
+            //     new NotBlank([
+            //         'message' => 'Entrez un Nom svp',
+            //     ]),
+            //     new Length([
+            //         'min' => 3,
+            //         'minMessage' => 'Le Nom doit avoir au moins {{ limit }} caracterès',
+            //         'max' => 50,
+            //         'maxMessage' => 'Le Nom doit avoir au maximum {{ limit }} caracterès',
+            //     ]),
+            // ],
             ])
-            ->add('image')
+            ->add('image', null, [
+              'label' => 'Image URL'
+            ])
         ;
     }
 

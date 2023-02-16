@@ -22,10 +22,12 @@ class Permission
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(
+      message: 'Le Nom ne peux pas être vide',
+    )]
     #[Assert\Length(
       min: 3,
-      max: 30,
+      max: 50,
       minMessage: 'Le Nom doit avoir au moins {{ limit }} caractères',
       maxMessage: 'Le Nom doit avoir au maximum {{ limit }} caractères',
     )]
@@ -38,6 +40,9 @@ class Permission
     private Collection $partners;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(
+      message: "La valeur n'est pas une URL valide",
+    )]
     private ?string $image = null;
 
     public function __construct()
