@@ -28,7 +28,7 @@ class PermissionType extends AbstractType
             //     ]),
             // ],
             ])
-            ->add('image', null, [
+            ->add('image', null, [ // null make Symfony detect automatically the type
               'label' => 'Image URL'
             ])
         ;
