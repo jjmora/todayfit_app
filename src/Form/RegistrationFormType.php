@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 class RegistrationFormType extends AbstractType
 {
@@ -63,6 +64,9 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 20,
                     ]),
+                    new NotCompromisedPassword([
+                      'message'=> "Ce mot de passe a été declaré comme volé dans le site https://haveibeenpwned.com/, il ne doit pas être utilisé. Veuillez utiliser un autre mot de passe",
+                    ])
                 ],
             ])
         ;
