@@ -30,7 +30,7 @@ class FranchiseRepository extends ServiceEntityRepository
           // ->where('MATCH_AGAINST(p.Name, p.Email, p.description) AGAINST (:input_data boolean)>0')
           // ->setParameter('input_data', $input_data)
           ->where('p.Name LIKE :input_data OR p.Email LIKE :input_data OR p.description LIKE :input_data')
-          ->setParameter('input_data', '%'.$input_data.'%')
+          ->setParameter('input_data', '%'.$input_data.'%') // %  is used to represent anything before, after or whole string.
           ;
       }
       if($active != null){

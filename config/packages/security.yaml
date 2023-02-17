@@ -34,9 +34,9 @@ security:
         #- { path: ^/admin, roles: ROLE_ADMIN }
         #- { path: ^/, roles: ROLE_USER }
         #- { path: ^/login, roles: ROLE_USER }
-        - { path: ^/franchise/maFranchise, roles: ROLE_FRANCHISE }
-        - { path: ^/partner/monStructure, roles: ROLE_PARTNER }
-        - { path: ^/(franchise|partner|permission|admin), roles: ROLE_ADMIN }
+        - { path: ^/franchise/maFranchise, roles: ROLE_FRANCHISE, requires_channel: '%env(SECURE_SCHEME)%'  }
+        - { path: ^/partner/monStructure, roles: ROLE_PARTNER, requires_channel: '%env(SECURE_SCHEME)%'  }
+        - { path: ^/(franchise|partner|permission|admin), roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%'  }
         #- { path: ^/register, roles: ROLE_ADMIN }
         #- { path: ^(?!/(login|api)), roles: ROLE_ADMIN }
         
