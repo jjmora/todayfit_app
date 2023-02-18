@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from './Card'
+import Pagination from './Pagination'
 
 const Franchises = (props) => {
   const [ franchisesArray, setFranchisesArray ] = useState()
@@ -12,7 +13,7 @@ const Franchises = (props) => {
   const [ postsPerPage, setPostsPerPage ] = useState(6);
 
   const baseUrl = 'http://localhost:8000'
-  const currBaseUrl = window.location.href
+  // const currBaseUrl = window.location.href
 
   const lastPostIndex = currentPage * postsPerPage // 1 * 6 = 6
   const firstPostIndex = lastPostIndex - postsPerPage // 6 - 6 = 0
@@ -24,7 +25,6 @@ const Franchises = (props) => {
         console.log('Initial Data: ', response.data)
         setFranchisesArray(response.data.franchisesArray)
         setFilteredFranchises(response.data.franchisesArray.slice(firstPostIndex, lastPostIndex))
-        // const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
       })
       .catch((error) => {
         console.log(error);
@@ -73,14 +73,12 @@ const Franchises = (props) => {
     // console.log("Data By Input .", dataByInput)
     // console.log("Data By Active State :", dataByActiveState)
     // console.log("Type: ", typeof(dataByActiveState))
-    // const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
+    const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
     // console.log("Curr Posts: ", dataByActiveState)
 
-    // setFilteredFranchises(currentPosts)
-    setFilteredFranchises(dataByActiveState)
-  }, [activeState, inputValue])
-
-
+    setFilteredFranchises(currentPosts)
+    //setFilteredFranchises(dataByActiveState)
+  }, [activeState, inputValue, currentPage])
 
   return (
     <>
@@ -127,9 +125,13 @@ const Franchises = (props) => {
         }
         </div>
       </section>
-      {/* <section>
-        <div className=''><b>Anterior</b></div>
-      </section> */}
+      <section>
+        <Pagination 
+          totalPosts={franchisesArray?.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </section>
     </>
   )
 }
