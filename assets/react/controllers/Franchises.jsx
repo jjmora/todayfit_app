@@ -7,10 +7,15 @@ const Franchises = (props) => {
   const [ filteredFranchises, setFilteredFranchises ] = useState()
   const [ inputValue, setInputValue ] = useState('')
   const [ activeState, setActiveState ] = useState('all')
-  
+  //Pagination
+  const [ currentPage, setCurrentPage ] = useState(1);
+  const [ postsPerPage, setPostsPerPage ] = useState(6);
 
   const baseUrl = 'http://localhost:8000'
   const currBaseUrl = window.location.href
+
+  const lastPostIndex = currentPage * postsPerPage // 1 * 6 = 6
+  const firstPostIndex = lastPostIndex - postsPerPage // 6 - 6 = 0
 
   // Load Data at document loading
   useEffect( () => {
@@ -18,7 +23,8 @@ const Franchises = (props) => {
       .then(response => {
         console.log('Initial Data: ', response.data)
         setFranchisesArray(response.data.franchisesArray)
-        setFilteredFranchises(response.data.franchisesArray)
+        setFilteredFranchises(response.data.franchisesArray.slice(firstPostIndex, lastPostIndex))
+        // const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
       })
       .catch((error) => {
         console.log(error);
@@ -64,9 +70,17 @@ const Franchises = (props) => {
     } else {
       dataByActiveState = dataByInput
     }
-  
+    // console.log("Data By Input .", dataByInput)
+    // console.log("Data By Active State :", dataByActiveState)
+    // console.log("Type: ", typeof(dataByActiveState))
+    // const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
+    // console.log("Curr Posts: ", dataByActiveState)
+
+    // setFilteredFranchises(currentPosts)
     setFilteredFranchises(dataByActiveState)
   }, [activeState, inputValue])
+
+
 
   return (
     <>
@@ -113,6 +127,9 @@ const Franchises = (props) => {
         }
         </div>
       </section>
+      {/* <section>
+        <div className=''><b>Anterior</b></div>
+      </section> */}
     </>
   )
 }

@@ -28,7 +28,7 @@ class ReactController extends AbstractController
         
 
         return $this->render('react/index.html.twig', [
-            'variable' => $variable
+            // 'variable' => $variable
         ]);
     }
 }
