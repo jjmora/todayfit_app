@@ -3,7 +3,7 @@ import axios from 'axios'
 import Card from './Card'
 import Pagination from './Pagination'
 
-const Franchises = (props) => {
+const Franchises = () => {
   const [ franchisesArray, setFranchisesArray ] = useState()
   const [ filteredFranchises, setFilteredFranchises ] = useState()
   const [ inputValue, setInputValue ] = useState('')
@@ -11,6 +11,7 @@ const Franchises = (props) => {
   //Pagination
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ postsPerPage, setPostsPerPage ] = useState(6);
+  const [ filteredItemsQty, setFilteredItemsQty ] = useState(100)
 
   const baseUrl = 'http://localhost:8000'
   // const currBaseUrl = window.location.href
@@ -25,6 +26,7 @@ const Franchises = (props) => {
         console.log('Initial Data: ', response.data)
         setFranchisesArray(response.data.franchisesArray)
         setFilteredFranchises(response.data.franchisesArray.slice(firstPostIndex, lastPostIndex))
+        setFilteredItemsQty(response.data.franchisesArray.length)
       })
       .catch((error) => {
         console.log(error);
@@ -63,18 +65,22 @@ const Franchises = (props) => {
       dataByActiveState = dataByInput?.filter( (fr, k) => {
         return fr.isActive === true
       })
+      console.log("X :", dataByActiveState?.length)
+      setFilteredItemsQty(dataByActiveState?.length)
+
     } else if(activeState === 'non-active') {
       dataByActiveState = dataByInput?.filter( (fr, k) => {
         return fr.isActive === false
       })
+      console.log("X :", dataByActiveState?.length)
+      setFilteredItemsQty(dataByActiveState?.length)
     } else {
       dataByActiveState = dataByInput
+      console.log("X :", dataByActiveState?.length)
+      setFilteredItemsQty(dataByActiveState?.length)
     }
-    // console.log("Data By Input .", dataByInput)
-    // console.log("Data By Active State :", dataByActiveState)
-    // console.log("Type: ", typeof(dataByActiveState))
+
     const currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex)
-    // console.log("Curr Posts: ", dataByActiveState)
 
     setFilteredFranchises(currentPosts)
     //setFilteredFranchises(dataByActiveState)
@@ -125,13 +131,18 @@ const Franchises = (props) => {
         }
         </div>
       </section>
-      <section>
-        <Pagination 
-          totalPosts={franchisesArray?.length}
-          postsPerPage={postsPerPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </section>
+      <nav className='pagination-section d-flex justify-content-center'>
+        {
+          filteredItemsQty > 6 ? (
+            <Pagination 
+            totalPosts={franchisesArray?.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+          ) : ''
+        }
+      </nav>
     </>
   )
 }

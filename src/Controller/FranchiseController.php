@@ -87,6 +87,7 @@ class FranchiseController extends AbstractController
 
         $franchisesArray = [];
         $j = 0;
+        //TO DO - PUT IN SERVICE
         foreach($allFranchises as $franchise){
           $franchisesArray[$j] = array(
             "id" => $franchise->getId(), 

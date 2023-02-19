@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const Pagination = ({ totalPosts, postsPerPage, setCurrentPage }) => {
+const Pagination = ({
+  totalPosts,
+  postsPerPage,
+  setCurrentPage,
+  currentPage,
+}) => {
   const [pages, setPages] = useState([]);
   let pagesArray = [];
 
@@ -15,25 +20,53 @@ const Pagination = ({ totalPosts, postsPerPage, setCurrentPage }) => {
     setPages(pagesArray);
   }, [totalPosts]);
 
-
   return (
     <div>
-      {/* <ul>
-        {pages.map((page, index) => {
-          return (
-            <li key={index} class="page-item">
-              <a className="page-link" href="">
-                {page}
-              </a>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {currentPage > 1 ? (
+            <li class="page-item">
+              <button
+                aria-label="Previous"
+                className="page-link"
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </button>
             </li>
-          );
-        })}
-      </ul> */}
-      {
-        pages.map( (page, index) => {
-          return (<button key={index} onClick={ () => setCurrentPage(page)}>{page}</button>)
-        })
-      }
+          ) : (
+            ""
+          )}
+
+          {pages.map((page, index) => {
+            return (
+              <li className="page-item">
+                <button
+                  key={index}
+                  className="page-link"
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              </li>
+            );
+          })}
+
+          {currentPage < Math.ceil(totalPosts / postsPerPage) ? (
+            <li class="page-item">
+              <button
+                aria-label="Next"
+                className="page-link"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </li>
+          ) : (
+            ""
+          )}
+        </ul>
+      </nav>
     </div>
   );
 };

@@ -22,9 +22,9 @@ class ReactController extends AbstractController
     public function index(FranchiseRepository $franchiseRepository): Response
     {              
         
-        $allFranchises = $franchiseRepository->findAll();
+        //$allFranchises = $franchiseRepository->findAll();
         
-        $variable = $allFranchises[0]->getName();
+        // $variable = $allFranchises[0]->getName();
         
 
         return $this->render('react/index.html.twig', [
