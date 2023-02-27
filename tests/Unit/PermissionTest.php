@@ -3,8 +3,7 @@
 namespace App\Tests\Unit;
 
 use App\Entity\Permission;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Console\Helper\Dumper;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase; // let us use the validator
 
 class PermissionTest extends KernelTestCase
 {

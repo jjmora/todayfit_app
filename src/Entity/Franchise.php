@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
 #[ORM\Index(name: 'franchise', columns: ['name', 'email', 'description'], flags: ['fulltext'])]
@@ -22,7 +23,7 @@ class Franchise
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
