@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 #[ORM\Index(name: 'partner', columns: ['name', 'email', 'description', 'address'], flags: ['fulltext'])]
@@ -23,9 +24,22 @@ class Partner
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: "Le nom ne peux pas être vide",
+    )]
+    #[Assert\Length(
+      min: 3,
+      max: 50,
+      minMessage: 'Le Nom doit avoir au moins {{ limit }} caractères',
+      maxMessage: 'Le Nom doit avoir au maximum {{ limit }} caractères',
+    )]
     private ?string $Name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email()]
+    #[Assert\NotBlank(
+      message: "L'email ne peux pas être vide",
+    )]
     private ?string $Email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -35,6 +49,9 @@ class Partner
     private ?bool $Active = null;
 
     #[ORM\ManyToOne(inversedBy: 'partner')]
+    #[Assert\NotBlank(
+      message: "Veuillez sélectionner une Franchise dans la liste",
+    )]
     private ?Franchise $franchise = null;
 
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'partners')]
@@ -67,7 +84,7 @@ class Partner
         return $this->Name;
     }
 
-    public function setName(string $Name): self
+    public function setName(?string $Name): self
     {
         $this->Name = $Name;
 
@@ -79,7 +96,7 @@ class Partner
         return $this->Email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(?string $Email): self
     {
         $this->Email = $Email;
 

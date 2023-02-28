@@ -32,11 +32,15 @@ class PartnerEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('email', null, [
-              'label' => 'Adresse E-mail personnelle'
+            ->add('Name', null, [
+              'label' => 'Nom',
+              'required' => false
             ])
-            ->add('address', null, [
+            ->add('Email', null, [
+              'label' => 'Adresse E-mail personnelle',
+              'required' => false
+            ])
+            ->add('Address', null, [
               'label' => 'Adresse'
             ])
             ->add('image')

@@ -20,10 +20,12 @@ class FranchiseType extends AbstractType
     {
         $builder
             ->add('Name', null, [
-              'label' => 'Nom'
+              'label' => 'Nom',
+              'required' => false
             ])
             ->add('Email', null, [
-              'label' => 'Adresse E-mail personnelle'
+              'label' => 'Adresse E-mail personnelle',
+              'required' => false
             ])
             ->add('image')
             ->add('description')
@@ -31,7 +33,7 @@ class FranchiseType extends AbstractType
               'class' => User::class,
               'placeholder' => 'Utilisateurs disponibles',
               'choice_label' => 'email',
-              'label' => 'Utilisateur',
+              'required' => false,
               'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                   ->where('u.roles LIKE :role')

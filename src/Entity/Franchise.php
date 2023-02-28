@@ -54,6 +54,9 @@ class Franchise
 
     #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(
+      message: "Veuillez sélectionner un utilisateur dans la liste",
+    )]
     private ?User $user = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -81,7 +84,7 @@ class Franchise
         return $this->Name;
     }
 
-    public function setName(string $Name): self
+    public function setName(?string $Name): self
     {
         $this->Name = $Name;
 
@@ -93,7 +96,7 @@ class Franchise
         return $this->Email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(?string $Email): self
     {
         $this->Email = $Email;
 
