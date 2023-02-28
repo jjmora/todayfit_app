@@ -190,9 +190,9 @@ class FranchiseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $franchiseRepository->add($franchise, true);
+          $franchiseRepository->add($franchise, true);
 
-            return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
+          return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('franchise/new.html.twig', [

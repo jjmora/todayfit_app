@@ -25,9 +25,22 @@ class Franchise
     private ?int $id = null;
     
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: "Le nom ne peux pas être vide",
+    )]
+    #[Assert\Length(
+      min: 3,
+      max: 50,
+      minMessage: 'Le Nom doit avoir au moins {{ limit }} caractères',
+      maxMessage: 'Le Nom doit avoir au maximum {{ limit }} caractères',
+    )]
     private ?string $Name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: "L'email ne peux pas être vide",
+    )]
+    #[Assert\Email()]
     private ?string $Email = null;
 
     #[ORM\Column]

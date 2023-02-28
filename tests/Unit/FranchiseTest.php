@@ -3,15 +3,23 @@
 namespace App\Tests\Unit;
 
 use App\Entity\Franchise;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase; // let us use the validator
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FranchiseTest extends KernelTestCase
+class FranchiseTest extends WebTestCase
 {
   public function getEntity(): Franchise
   {
+    $userRepository = static::getContainer()->get(UserRepository::class);
+    $testUser = $userRepository->findOneByEmail('test@test.fr');
+
     return (new Franchise())
-      ->setName('abc')
-      ->setImage('');
+      ->setName('')
+      ->setEmail('abc@email.com')
+      ->setImage('')
+      ->setDescription('Lorem ipsum')
+      ->setUser($testUser)
+      ;
   }
 
   public function testEntityIsValid(): void
@@ -19,9 +27,9 @@ class FranchiseTest extends KernelTestCase
     self::bootKernel();
     $container = static::getContainer();
 
-    $permission = $this->getEntity();
+    $franchise = $this->getEntity();
 
-    $errors = $container->get('validator')->validate($permission);
+    $errors = $container->get('validator')->validate($franchise);
 
     $this->assertCount(0, $errors);
   }
