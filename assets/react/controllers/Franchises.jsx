@@ -64,11 +64,18 @@ const Franchises = () => {
     // Filter dat by User Input - by inputValue
 
     if (inputValue) {
+      let lowerCaseInputValue = inputValue.toLowerCase()
       dataByInput = franchisesArray?.filter((fr, k) => {
+        let email = fr.email
+        email = email.toLowerCase()
+        let email_perso = fr.email_perso
+        email_perso = email_perso.toLowerCase()
+        let name = fr.name
+        name = name.toLowerCase()
         return (
-          fr.email.includes(inputValue) ||
-          fr.email_perso.includes(inputValue) ||
-          fr.name.includes(inputValue)
+          fr.email.includes(lowerCaseInputValue) ||
+          fr.email_perso.includes(lowerCaseInputValue) ||
+          fr.name.includes(lowerCaseInputValue)
         );
       });
     } else {
