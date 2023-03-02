@@ -204,8 +204,11 @@ class FranchiseController extends AbstractController
     #[Route('/show/{id}', name: 'app_franchise_show', methods: ['GET'])]
     public function show(Franchise $franchise): Response
     {
+        $partnersCount = count($franchise->getPartner());
+
         return $this->render('franchise/show_admin.html.twig', [
             'franchise' => $franchise,
+            'partnersCount' => $partnersCount
         ]);
     }
 
@@ -227,7 +230,7 @@ class FranchiseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_franchise_delete', methods: ['POST'])]
+    #[Route('/show/{id}', name: 'app_franchise_delete', methods: ['POST'])]
     public function delete(Request $request, Franchise $franchise, FranchiseRepository $franchiseRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$franchise->getId(), $request->request->get('_token'))) {
