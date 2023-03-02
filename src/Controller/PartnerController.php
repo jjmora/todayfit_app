@@ -138,11 +138,12 @@ class PartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_partner_delete', methods: ['POST'])]
+    #[Route('/show/{id}', name: 'app_partner_delete', methods: ['POST'])]
     public function delete(Request $request, Partner $partner, PartnerRepository $partnerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$partner->getId(), $request->request->get('_token'))) {
             $partnerRepository->remove($partner, true);
+            $this->addFlash('error', "La Structure a bien été supprimée");
         }
 
         return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
