@@ -2,5 +2,5 @@
   {# onsubmit="return confirm('Etes vous sure?');" #}
 >
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ franchise.id) }}">
-    <button class="btn btn-danger mt-3">Supprimer Franchise</button>
+    <button class="btn btn-danger mt-3" id="btn-delete-franchise">Supprimer Franchise</button>
 </form>

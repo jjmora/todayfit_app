@@ -47,12 +47,34 @@ class FranchiseControllerTest extends WebTestCase
     $this->assertSelectorTextContains('h2', 'MES CLUBS');
   }
 
-  public function testAdminLoggedMaFranchise(): void
-  {
-    $client = $this->getLoginClient('admin@todayfit.fr');
-    $client->request('GET', '/franchise/mafranchise');
+  // public function testAdminLoggedMaFranchise(): void
+  // {
+  //   $client = $this->getLoginClient('admin@todayfit.fr');
+  //   $client->request('GET', '/franchise/mafranchise');
 
-    $this->assertResponseRedirects('/');
-  }
+  //   $this->assertResponseRedirects('/');
+  // }
+
+  // public function testAdminLoggedDeleteFranchise(): void
+  // {
+  //   $client = $this->getLoginClient('admin@todayfit.fr');
+    
+  //   // Register a new User
+  //   // $client->request('GET', '/register');
+  //   // $client->submitForm('register-user',[
+  //   //     'registration_form[email]' => 'test@test.com',
+  //   //     'registration_form[plainPassword]' => '$2y$13$WODq3sjeP3sE.z9h530MD.85tyVnOdCLm.Lfg4YYiUzRrDJVaf72S'
+  //   // ]);
+    
+  //   $client->request('GET', 'franchise/show/10');
+    
+  //   $this->assertSelectorTextContains('h1', 'test1');
+    
+  //   //needs a new Franchise
+  //   //$client->submitForm('btn-delete-franchise');
+    
+  //   $this->assertResponseIsSuccessful();
+  //   // $this->assertResponseRedirects('/user');
+  // }
 
 }

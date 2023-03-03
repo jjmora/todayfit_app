@@ -75,8 +75,8 @@ class PermissionController extends AbstractController
     #[Route('/{id}', name: 'app_permission_delete', methods: ['POST'])]
     public function delete(Request $request, Permission $permission, PermissionRepository $permissionRepository): Response
     {
-        dd('test');
-        if ($this->isCsrfTokenValid('delete'.$permission->getId(), $request->request->get('_token'))) {
+
+      if ($this->isCsrfTokenValid('delete'.$permission->getId(), $request->request->get('_token'))) {
             $permissionRepository->remove($permission, true);
         }
 
