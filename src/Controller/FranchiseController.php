@@ -227,9 +227,12 @@ class FranchiseController extends AbstractController
             return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $partnersCount = count($franchise->getPartner());
+
         return $this->renderForm('franchise/edit.html.twig', [
             'franchise' => $franchise,
             'form' => $form,
+            'partnersCount' => $partnersCount
         ]);
     }
 

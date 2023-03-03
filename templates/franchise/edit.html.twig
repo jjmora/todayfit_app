@@ -8,9 +8,38 @@
     <h1>Modifier Franchise</h1>
 
     {{ include('franchise/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-    {{ include('franchise/_delete_form.html.twig') }}
-    <a href="{{ path('app_franchise_index') }}" class="btn btn-warning">Retourner à la liste</a>
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Supprimer Franchise
+    </button>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûre?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% if partnersCount > 0 %}
+              <div class="alert alert-danger">
+                <p class="delete-btn"><b>ATTENTION!</b></p>
+                <p class="delete-btn"><i>La Franchise <b>{{ franchise.Name }}</b> a {{ partnersCount }} Structures. Vous ne pouvez pas supprimer une Franchise avec des Structures asignées.</i></p>
+              </div>
+            {% else %}
+              <div class="alert alert-danger">
+                <p>La Franchise <b>{{ franchise.Name }}</b> sera supprimée</p>
+              </div>
+              {{ include('franchise/_delete_form.html.twig') }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <a href="{{ path('app_franchise_index') }}" class="btn btn-warning">Retourner à la liste</a>
 
 </section>
 {% endblock %}
