@@ -37,5 +37,3 @@ window.onload = () => {
       });
   });
 };
-
-console.log('DynamicSearchForm')

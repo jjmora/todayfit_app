@@ -23,5 +23,3 @@ const checkIfImgExists = (image) => {
   img.onerror = imageNotFound;
   img.src = image.src;
 };
-
-alert('EditPermission')
