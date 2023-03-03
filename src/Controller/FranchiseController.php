@@ -191,8 +191,11 @@ class FranchiseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
           $franchiseRepository->add($franchise, true);
+          $id = $franchise->getId();
 
-          return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
+          $this->addFlash('success', "La Franchise a bien été crée");
+
+          return $this->redirectToRoute('app_franchise_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('franchise/new.html.twig', [
@@ -235,6 +238,7 @@ class FranchiseController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$franchise->getId(), $request->request->get('_token'))) {
             $franchiseRepository->remove($franchise, true);
+            $this->addFlash('error', "La Franchise a bien été supprimée");
         }
 
         return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
