@@ -66,9 +66,7 @@ class AppFixtures extends Fixture
       ],
       [
         "sud-ouest",
-        [
-          ["Bayonne", "https://images.pexels.com/photos/3838937/pexels-photo-3838937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Lorem ipsum dolor sit amet ipsum sanctus at clita. Ea vel dolores voluptua erat labore invidunt. Vulputate dolores dolor feugiat duo kasd kasd iriure et. Erat vero eum ut tempor et praesent feugait erat nibh diam ut ipsum luptatum ut takimata."]
-        ] 
+        [] 
       ],
       [
         "nord", 
@@ -342,12 +340,6 @@ class AppFixtures extends Fixture
       $manager->persist($newPermission);
     }
     // > Create permissions
-
-
-    // foreach($allPartners as $partner){
-    //   dd($partner->getName());
-    // }
-
 
     $manager->flush();
   }
