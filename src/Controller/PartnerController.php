@@ -129,7 +129,10 @@ class PartnerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $partnerRepository->add($partner, true);
 
-            return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);
+            $id = $partner->getId();
+            
+            $this->addFlash('success', "La Structure a bien été mise à jour");
+            return $this->redirectToRoute('app_partner_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('partner/edit.html.twig', [

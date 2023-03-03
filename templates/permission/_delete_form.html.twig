@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('app_permission_delete', {'id': permission.id}) }}" onsubmit="return confirm('Etes vous sure?');">
+<form method="post" action="{{ path('app_permission_delete', {'id': permission.id}) }}">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ permission.id) }}">
     <button class="btn btn-danger mt-3">Supprimer Permission</button>
 </form>

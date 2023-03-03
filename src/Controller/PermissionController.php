@@ -63,6 +63,7 @@ class PermissionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $permissionRepository->add($permission, true);
 
+            $this->addFlash('success', "La Permission a bien été mise à jour");
             return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,6 +79,7 @@ class PermissionController extends AbstractController
 
       if ($this->isCsrfTokenValid('delete'.$permission->getId(), $request->request->get('_token'))) {
             $permissionRepository->remove($permission, true);
+            $this->addFlash('error', "La Permission a bien été supprimée");
         }
 
         return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);

@@ -224,7 +224,9 @@ class FranchiseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $franchiseRepository->add($franchise, true);
 
-            return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
+            $id = $franchise->getId();
+            $this->addFlash('success', "La Franchise a bien été mise à jour");
+            return $this->redirectToRoute('app_franchise_show', [ 'id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
         $partnersCount = count($franchise->getPartner());
