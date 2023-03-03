@@ -66,9 +66,35 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $partners = [];
+        if($user->getFranchise()){
+          $partners = $user->getFranchise()->getPartner();
+        }
+
+        $partnerArray = [];
+        foreach($partners as $partner){
+          $partnerArray[] = $partner;
+        }
+
+
+
+        $noAsigned = true;
+        $asignedAs = '';
+
+        if($user->getFranchise()){
+          $noAsigned = false;
+          $asignedAs = 'franchise';
+        } else if ($user->getPartner()){
+          $noAsigned = false;
+          $asignedAs = 'partner';
+        }
+
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'partnersCount' => count($partnerArray),
+            'noAsigned' => $noAsigned,
+            'asignedAs' => $asignedAs,
         ]);
     }
 
@@ -77,6 +103,7 @@ class UserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
+            $this->addFlash('error', "L'utilisateur a bien été supprimé");
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
