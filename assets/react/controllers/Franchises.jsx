@@ -122,37 +122,52 @@ const Franchises = () => {
 
   return (
     <>
-      <div>
-        <ul className="d-flex flex-row justify-content-center active-filter">
-          <li onClick={handleFilterClick} className="filter-active" id="all">
-            Tout
-          </li>
-          <li onClick={handleFilterClick} className="" id="active">
-            Active
-          </li>
-          <li onClick={handleFilterClick} className="" id="non-active">
-            Non Active
-          </li>
-        </ul>
+      <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
+        
+        <div class='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
+          <h2 class="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
+          <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
+        </div>
+
+        <div class="col-12 col-xl-4 form-search">
+          <div>
+            <ul className="d-flex flex-row justify-content-center active-filter">
+              <li onClick={handleFilterClick} className="filter-active" id="all">
+                Tout
+              </li>
+              <li onClick={handleFilterClick} className="" id="active">
+                Active
+              </li>
+              <li onClick={handleFilterClick} className="" id="non-active">
+                Non Active
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="input-group mb-3">
+          <input
+            id="form-input"
+            type="search"
+            className="form-control"
+            placeholder="Entrez le(s) mot(s) clé(s)..."
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+            onChange={handleInputField}
+          />
+          <span
+            className="input-group-text bg-primary text-white"
+            id="basic-addon1"
+          >
+            <i className="bi bi-search"></i>
+          </span>
+        </div>
+
       </div>
 
-      <div className="input-group mb-3">
-        <input
-          id="form-input"
-          type="search"
-          className="form-control"
-          placeholder="Entrez le(s) mot(s) clé(s)..."
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-          onChange={handleInputField}
-        />
-        <span
-          className="input-group-text bg-primary text-white"
-          id="basic-addon1"
-        >
-          <i className="bi bi-search"></i>
-        </span>
-      </div>
+
+
+
       <div>
         <p>{errorOnLoading}</p>
       </div>
