@@ -1,6 +1,5 @@
-window.onload = (event) => {
-  permission("Juanjo");
-};
+require('bootstrap')
+
 window.onload = (event) => {
   let input = document.getElementById("permission_image");
   let image = document.getElementById("permission-image");

@@ -14,8 +14,9 @@ class PermissionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name', null, [
+            ->add('name', null, [
               'label' => 'Nom',
+              'required' => false,
             //   'constraints' => [
             //     new NotBlank([
             //         'message' => 'Entrez un Nom svp',
@@ -29,7 +30,8 @@ class PermissionType extends AbstractType
             // ],
             ])
             ->add('image', null, [ // null make Symfony detect automatically the type
-              'label' => 'Image URL'
+              'label' => 'Image URL',
+              'empty_data' => 'https://www.svgrepo.com/show/340721/no-image.svg'
             ])
         ;
     }

@@ -91,19 +91,17 @@ class PartnerType extends AbstractType
 
     $formModifier = function (FormInterface $form, Franchise $franchise = null) {
 
-      //$allPermissions = $this->permissionRepository->findAll();
-      if (isset($franchiseId)) {
-        $franchiseId = $franchise->getId();
-      } else {
-        $franchiseId = 1;
-      }
+      $firstPermission = $this->permissionRepository->findOneBy([])->getId();
+      
+      $franchiseId = $franchise->getId();
       $selectedFranchise = $this->franchiseRepository->find($franchiseId);
       $preFranchisePermissions = $selectedFranchise->getPermissions()->toArray();
 
       $selectedPermissions = [];
 
       foreach ($preFranchisePermissions as $permission) {
-        $selectedPermissions[$permission->getId() - 1] = ['checked' => true];
+        $currentId = ($permission->getId()) - $firstPermission;
+        $selectedPermissions[$currentId] = ['checked' => true];
       }
 
       $form
