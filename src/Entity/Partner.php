@@ -58,6 +58,9 @@ class Partner
     private Collection $permissions;
 
     #[ORM\OneToOne(inversedBy: 'partner', cascade: ['persist', 'remove'])]
+    #[Assert\NotBlank(
+      message: "Veuillez sélectioner un utilisateur de la liste",
+    )]
     private ?User $user = null;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -93,10 +93,19 @@ class PartnerType extends AbstractType
 
       $firstPermission = $this->permissionRepository->findOneBy([])->getId();
       
-      $franchiseId = $franchise->getId();
+      if($franchise){
+        $franchiseId = $franchise->getId();
+      } else {
+        $franchiseId = 1;
+      }
       $selectedFranchise = $this->franchiseRepository->find($franchiseId);
-      $preFranchisePermissions = $selectedFranchise->getPermissions()->toArray();
+      
+      if($selectedFranchise){
+        $preFranchisePermissions = $selectedFranchise->getPermissions()->toArray();
+      } else {
+        $preFranchisePermissions = [];
 
+      }
       $selectedPermissions = [];
 
       foreach ($preFranchisePermissions as $permission) {

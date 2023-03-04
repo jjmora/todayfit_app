@@ -23,8 +23,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-                <p>La Structure <b>{{ partner.Name }}</b> sera supprimée</p>
-                {{ include('partner/_delete_form.html.twig') }}
+            <div class="alert alert-danger">
+              <p>La Structure <b>{{ partner.Name }}</b> sera supprimée</p>
+              {{ include('partner/_delete_form.html.twig') }}
+            </div>
           </div>
         </div>
       </div>
