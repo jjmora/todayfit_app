@@ -32,11 +32,12 @@ class FranchiseController extends AbstractController
 
           if($this->getUser()->getFranchise() != null){
             $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
+            $partners = $franchise->getPartner();
           } else {
             $franchise = null;
+            $partners = null;
           }
 
-          $partners = $franchise->getPartner();
           
           $form = $this->createForm(SearchBarType::class);
           $search = $form->handleRequest($request);
