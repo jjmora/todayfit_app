@@ -6,15 +6,24 @@
 <div class="container col-lg-8">
     {# Header section #}
     <section class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <h1 class="col-12 text-center text-md-start col-md-7">Utilisateurs ({{ usersQty }})</h1>
+      <h1 class="col-12 text-center text-md-start col-md-7">Utilisateurs <span id="user-qty">({{ usersQty }})</span></h1>
+      {# <h1 class="col-12 text-center text-md-start col-md-7">Utilisateurs ({{ usersQty }})</h1> #}
       <a href="{{ path('app_register') }}" class="btn btn-danger col-12 col-md-5 mb-3">Registrer Nouvel Utilisateur</a>
     </section>
+
+    {# static form #}
     <div class="col-12 form-search">
       {{ include('user/_formUserSearch.html.twig') }}
     </div>
+
+    {# dynamic form #}
+    {# <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
+      {{ include('user/_formUserSearch.html.twig') }}
+    </div> #}
     {# Header section #}
 
-    <article class="mt-3">
+    <article class="mt-3" id="userwrapper">
     {% for user in users %}
       <div class="d-flex flex-wrap border border-warning border-1 shadow-sm rounded p-3 mb-3 col-12 justify-content-start">
         <p class="col-1 col-lg-1"><b>Id:</b></p>
@@ -71,3 +80,8 @@
     </article>
 </div>
 {% endblock %}
+
+{# Dynamic Form with Vanilla JS #}
+{# {% block javascripts %}
+  {{ encore_entry_script_tags('userSearchForm') }}
+{% endblock %} #}

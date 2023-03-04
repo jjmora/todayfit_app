@@ -23,7 +23,8 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('editPermission', './assets/js/editPermission.js')
     .addEntry('newPermission', './assets/js/newPermission.js')
-    .addEntry('dynamicSearchForm', './assets/js/dynamicSearchForm.js')
+    .addEntry('dynamicSearchForm', './assets/js/newPartnerForm.js')
+    // .addEntry('userSearchForm', './assets/js/userSearchForm.js') //Dynamic Form with Vanilla JS
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

@@ -9,12 +9,12 @@
       {# {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }} #}
       {{ include('user/_formEdit.html.twig', {'button_label': 'Mettre à jour'}) }}
       <a href="{{ path('app_user_index') }}" class="btn btn-warning mr-3">Retour à la liste</a>
-      <!-- Button trigger modal -->
+      {# Button trigger modal #}
       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Supprimer Utilisateur 
       </button>
 
-      <!-- Modal -->
+      {# Modal #}
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">

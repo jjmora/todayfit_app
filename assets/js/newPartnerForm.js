@@ -1,8 +1,6 @@
 require('bootstrap')
 
 window.onload = () => {
-  //let firstSelectPartnerFranchise = document.querySelector('#partner_franchise').firstChild.disabled = true
-
   let franchise = document.querySelector("#partner_franchise");
   franchise.addEventListener("change", function(){
     let form = this.closest("form");
