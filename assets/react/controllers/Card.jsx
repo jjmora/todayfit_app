@@ -5,6 +5,24 @@ const Card = ({
   permissions, franchiseDate, franchiseIsActive, franchiseImage 
 }) => {
   
+  const handleDateFormat = (unformattedDate) => {
+    let newDate = new Date(unformattedDate)
+    let yy = newDate.getFullYear()
+    let dd = newDate.getDate()
+    dd = prependZero(dd)
+    let mm = newDate.getMonth()
+    mm = prependZero(mm+1)
+    const newFormattedDate = `${dd}/${mm}/${yy}`
+    return newFormattedDate
+  }
+
+  const prependZero = (nb) => {
+    if(nb < 10){
+      return `0${nb}`
+    }
+    return nb
+  }
+
   return (
     <>
       <div className="col mb-4">
@@ -63,7 +81,7 @@ const Card = ({
           </div>
 
           <div className="card-footer">
-            <small className="text-muted">Franchisé depuis le { franchiseDate }</small>
+            <small className="text-muted">Franchisé depuis le {handleDateFormat(franchiseDate)}</small>
           </div>
 
         </div>
