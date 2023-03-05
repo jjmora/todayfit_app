@@ -11,9 +11,9 @@ const Pagination = ({
 
   useEffect(() => {
     if (totalPosts) {
-      console.log("totalPosts :", totalPosts);
+      // console.log("totalPosts :", totalPosts);
     }
-    console.log("PostPerPage: ", postsPerPage);
+    // console.log("PostPerPage: ", postsPerPage);
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
       pagesArray.push(i);
     }
@@ -23,9 +23,9 @@ const Pagination = ({
   return (
     <div>
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul className="pagination">
           {currentPage > 1 ? (
-            <li class="page-item">
+            <li className="page-item">
               <button
                 aria-label="Previous"
                 className="page-link"
@@ -40,7 +40,7 @@ const Pagination = ({
 
           {pages.map((page, index) => {
             return (
-              <li className="page-item">
+              <li className="page-item" key={index}>
                 <button
                   key={index}
                   className="page-link"
@@ -53,7 +53,7 @@ const Pagination = ({
           })}
 
           {currentPage < Math.ceil(totalPosts / postsPerPage) ? (
-            <li class="page-item">
+            <li className="page-item">
               <button
                 aria-label="Next"
                 className="page-link"

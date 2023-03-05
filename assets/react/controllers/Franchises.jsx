@@ -60,7 +60,7 @@ const Franchises = () => {
   };
 
   useEffect(() => {
-    console.log("FilteredFranchises: ", filteredFranchises);
+    // console.log("FilteredFranchises: ", filteredFranchises);
     // Filter dat by User Input - by inputValue
 
     if (inputValue) {
@@ -81,39 +81,39 @@ const Franchises = () => {
     } else {
       dataByInput = franchisesArray;
     }
-    console.log("Data by input:", dataByInput);
-    console.log("FranchiseArray:", franchisesArray);
+    // console.log("Data by input:", dataByInput);
+    // console.log("FranchiseArray:", franchisesArray);
 
     // by activeState
     if (activeState === "active") {
       dataByActiveState = dataByInput?.filter((fr, k) => {
         return fr.isActive === true;
       });
-      console.log("X :", dataByActiveState);
-      console.log("X :", dataByActiveState?.length);
+      // console.log("X :", dataByActiveState);
+      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     } else if (activeState === "non-active") {
       dataByActiveState = dataByInput?.filter((fr, k) => {
         return fr.isActive === false;
       });
-      console.log("X :", dataByActiveState?.length);
+      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     } else {
       dataByActiveState = dataByInput;
-      console.log("X :", dataByActiveState?.length);
+      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     }
 
-    console.log("firstPostIndex: ", firstPostIndex);
-    console.log("firstPostIndex: ", lastPostIndex);
+    // console.log("firstPostIndex: ", firstPostIndex);
+    // console.log("firstPostIndex: ", lastPostIndex);
     let currentPosts = dataByActiveState
     if (dataByActiveState?.length > 6) {
       currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex);
     }
-    console.log("CurrentPosts:", currentPosts);
+    // console.log("CurrentPosts:", currentPosts);
 
     //setFilteredFranchises(currData);
     setFilteredFranchises(currentPosts);
@@ -122,14 +122,14 @@ const Franchises = () => {
 
   return (
     <>
-      <div class='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
+      <div className='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
         
-        <div class='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
-          <h2 class="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
-          <h2 class="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
+        <div className='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
+          <h2 className="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
+          <h2 className="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
         </div>
 
-        <div class="col-12 col-xl-4 form-search">
+        <div className="col-12 col-xl-4 form-search">
           <div>
             <ul className="d-flex flex-row justify-content-center active-filter">
               <li onClick={handleFilterClick} className="filter-active" id="all">
