@@ -9,6 +9,7 @@ const Franchises = () => {
   const [inputValue, setInputValue] = useState("");
   const [activeState, setActiveState] = useState("all");
   const [errorOnLoading, setErrorOnLoading] = useState();
+  const [loading, setLoading] = useState(true);
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(6);
@@ -34,7 +35,7 @@ const Franchises = () => {
           response.data.franchisesArray.slice(firstPostIndex, lastPostIndex)
         );
         setFilteredItemsQty(response.data.franchisesArray.length);
-        setErrorOnLoading();
+        setLoading(false)
       })
       .catch((error) => {
         //console.log(error);
@@ -64,14 +65,14 @@ const Franchises = () => {
     // Filter dat by User Input - by inputValue
 
     if (inputValue) {
-      let lowerCaseInputValue = inputValue.toLowerCase()
+      let lowerCaseInputValue = inputValue.toLowerCase();
       dataByInput = franchisesArray?.filter((fr, k) => {
-        let email = fr.email
-        email = email.toLowerCase()
-        let email_perso = fr.email_perso
-        email_perso = email_perso.toLowerCase()
-        let name = fr.name
-        name = name.toLowerCase()
+        let email = fr.email;
+        email = email.toLowerCase();
+        let email_perso = fr.email_perso;
+        email_perso = email_perso.toLowerCase();
+        let name = fr.name;
+        name = name.toLowerCase();
         return (
           fr.email.includes(lowerCaseInputValue) ||
           fr.email_perso.includes(lowerCaseInputValue) ||
@@ -109,7 +110,7 @@ const Franchises = () => {
 
     // console.log("firstPostIndex: ", firstPostIndex);
     // console.log("firstPostIndex: ", lastPostIndex);
-    let currentPosts = dataByActiveState
+    let currentPosts = dataByActiveState;
     if (dataByActiveState?.length > 6) {
       currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex);
     }
@@ -122,17 +123,24 @@ const Franchises = () => {
 
   return (
     <>
-      <div className='d-flex flex-column flex-xl-row justify-content-md-between align-items-center mb-4'>
-        
-        <div className='d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0'>
-          <h2 className="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">MES CLUBS</h2>
-          <h2 className="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">TODAYFIT</h2>
+      <div className="d-flex flex-column flex-xl-row justify-content-md-between align-items-center my-5">
+        <div className="d-flex col-12 col-lg-5 flex-sm-row justify-content-center justify-content-lg-start mb-sm-2 mb-md-3 mb-xl-0">
+          <h2 className="fw-bold lh-1 mb-0 me-md-3 text-uppercase mb-2 me-4">
+            MES CLUBS
+          </h2>
+          <h2 className="fw-bold lh-1 mb-4 mb-sm-0 text-uppercase strokeme">
+            TODAYFIT
+          </h2>
         </div>
 
         <div className="col-12 col-xl-4 form-search">
           <div>
             <ul className="d-flex flex-row justify-content-center active-filter">
-              <li onClick={handleFilterClick} className="filter-active" id="all">
+              <li
+                onClick={handleFilterClick}
+                className="filter-active"
+                id="all"
+              >
                 Tout
               </li>
               <li onClick={handleFilterClick} className="" id="active">
@@ -162,36 +170,49 @@ const Franchises = () => {
             <i className="bi bi-search"></i>
           </span>
         </div>
-
       </div>
-
-
-
 
       <div>
         <p>{errorOnLoading}</p>
       </div>
-      <section>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-          {filteredFranchises?.map((franchise, key) => {
-            return (
-              <Card
-                key={key}
-                franchiseId={franchise.id}
-                franchiseName={franchise.name}
-                franchiseEmail={franchise.email}
-                franchiseEmailPerso={franchise.email_perso}
-                permissions={franchise.permissions}
-                franchiseDate={franchise.date}
-                franchiseIsActive={franchise.isActive}
-                franchiseImage={franchise.image}
-                franchiseDescription={franchise.description}
-              />
-            );
-          })}
+      {loading ? (
+        <div className="d-flex justify-content-center mb-5">
+          <div className="lds-grid">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
-      </section>
-      <nav className="pagination-section d-flex justify-content-center">
+      ) : (
+        <section>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+            {filteredFranchises?.map((franchise, key) => {
+              return (
+                <Card
+                  key={key}
+                  franchiseId={franchise.id}
+                  franchiseName={franchise.name}
+                  franchiseEmail={franchise.email}
+                  franchiseEmailPerso={franchise.email_perso}
+                  permissions={franchise.permissions}
+                  franchiseDate={franchise.date}
+                  franchiseIsActive={franchise.isActive}
+                  franchiseImage={franchise.image}
+                  franchiseDescription={franchise.description}
+                />
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      <nav className="pagination-section d-flex justify-content-center mb-3">
         {filteredItemsQty > 6 ? (
           <Pagination
             totalPosts={franchisesArray?.length}
