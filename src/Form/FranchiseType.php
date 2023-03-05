@@ -27,7 +27,7 @@ class FranchiseType extends AbstractType
         'label' => 'Adresse E-mail personnelle',
         'required' => false
       ])
-      ->add('image', null, ['empty_data' => 'https://www.svgrepo.com/show/340721/no-image.svg'])
+      ->add('image', null, ['empty_data' => 'https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'])
       ->add('description')
       ->add('user', EntityType::class, [
         'class' => User::class,

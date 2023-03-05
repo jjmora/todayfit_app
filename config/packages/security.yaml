@@ -33,7 +33,7 @@ security:
     access_control:
         - { path: ^/franchise/mafranchise, roles: ROLE_FRANCHISE }
         - { path: ^/partner/monstructure, roles: ROLE_PARTNER} 
-        - { path: ^/(franchise|franchise/franchise_json|partner|permission|admin), roles: ROLE_ADMIN } ## at the end
+        - { path: ^/(franchise|franchise/franchise_json|partner|permission|admin|react), roles: ROLE_ADMIN } ## at the end
 
         #- { path: ^/admin, roles: ROLE_ADMIN }
         #- { path: ^/, roles: ROLE_USER }
