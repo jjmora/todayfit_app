@@ -309,6 +309,11 @@ form fieldset{
 }
 
 // PAGINATION
+.page-link-active {
+  background-color: $primary !important;
+  color: white !important;
+  font-weight: bold;
+}
 .arrow {
   &::before {
     position: relative;
