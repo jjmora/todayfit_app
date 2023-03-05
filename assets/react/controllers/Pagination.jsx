@@ -5,20 +5,23 @@ const Pagination = ({
   postsPerPage,
   setCurrentPage,
   currentPage,
+  filteredItemsQty
 }) => {
   const [pages, setPages] = useState([]);
   let pagesArray = [];
 
   useEffect(() => {
-    if (totalPosts) {
-      // console.log("totalPosts :", totalPosts);
-    }
+    console.log('Filtered Franchises: ', filteredItemsQty)
+
+    // if (totalPosts) {
+    //   console.log("totalPosts :", totalPosts);
+    // }
     // console.log("PostPerPage: ", postsPerPage);
-    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filteredItemsQty / postsPerPage); i++) {
       pagesArray.push(i);
     }
     setPages(pagesArray);
-  }, [totalPosts]);
+  }, [totalPosts, filteredItemsQty]);
 
   return (
     <div>

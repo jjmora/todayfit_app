@@ -198,6 +198,7 @@ const Franchises = () => {
             postsPerPage={postsPerPage}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
+            filteredItemsQty={filteredItemsQty}
           />
         ) : (
           ""
