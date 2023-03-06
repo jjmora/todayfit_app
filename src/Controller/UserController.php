@@ -76,8 +76,6 @@ class UserController extends AbstractController
           $partnerArray[] = $partner;
         }
 
-
-
         $noAsigned = true;
         $asignedAs = '';
 

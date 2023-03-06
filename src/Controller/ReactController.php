@@ -20,15 +20,8 @@ class ReactController extends AbstractController
 {
     #[Route('/react', name: 'app_react')]
     public function index(FranchiseRepository $franchiseRepository): Response
-    {              
-        
-        //$allFranchises = $franchiseRepository->findAll();
-        
-        // $variable = $allFranchises[0]->getName();
-        
+    {                
 
-        return $this->render('react/index.html.twig', [
-            // 'variable' => $variable
-        ]);
+        return $this->render('react/index.html.twig');
     }
 }

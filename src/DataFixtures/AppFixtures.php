@@ -17,8 +17,8 @@ class AppFixtures extends Fixture
   public function load(ObjectManager $manager): void
   {
     // < Data
-    $adminPassword = '$2y$13$WODq3sjeP3sE.z9h530MD.85tyVnOdCLm.Lfg4YYiUzRrDJVaf72S';
-    $password = '$2y$13$WODq3sjeP3sE.z9h530MD.85tyVnOdCLm.Lfg4YYiUzRrDJVaf72S';
+    $adminPassword = '$2y$13$arcM.EoLQWhLNZIsV6HJMu6tuIpI4Vu8oQhYpXbBhW3NPdo0hnRV6';
+    $password = '$2y$13$arcM.EoLQWhLNZIsV6HJMu6tuIpI4Vu8oQhYpXbBhW3NPdo0hnRV6';
     $usersFranchiseArray = [
       ["idf", "https://images.pexels.com/photos/4662356/pexels-photo-4662356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Takimata at sed amet dolor ex ut diam consetetur. Vulputate dolore duo dolor sit sed gubergren nonumy eos at elitr labore no lorem dolores. Est dolore invidunt eos odio aliquyam invidunt. Rebum praesent lorem elit dolore at consetetur et dolor aliquyam cum ut ipsum ipsum lorem."],
       ["sud", "https://images.pexels.com/photos/2247179/pexels-photo-2247179.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Ut et vero nonumy aliquyam takimata et at kasd ipsum duis ipsum est accusam euismod. Et amet veniam dolore eirmod sit sea eos ex takimata vulputate congue magna stet erat velit sed diam. Nonumy dolor duis gubergren."],

@@ -1,3 +1,5 @@
+require('bootstrap')
+
 window.onload = () => {
   let inputField = document.querySelector("#search_user_bar_input_data");
   const currentUrl = window.location.href;

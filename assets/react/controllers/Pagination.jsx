@@ -46,7 +46,6 @@ const Pagination = ({
               <li className="page-item" key={index}>
                 <button
                   key={index}
-                  // className="page-link"
                   className={currentPage == page ? "page-link page-link-active" : "page-link"}
                   onClick={() => setCurrentPage(page)}
                 >

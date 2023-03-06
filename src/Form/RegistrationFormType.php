@@ -36,22 +36,11 @@ class RegistrationFormType extends AbstractType
               ],
               'choices' => [
                 'Admin' => 'ROLE_ADMIN',
-                // 'Super Admin' => 'ROLE_SUPER_ADMIN',
                 'Franchise' => 'ROLE_FRANCHISE',
                 'Structure' => 'ROLE_PARTNER'
               ],
             ])
-            // ->add('agreeTerms', CheckboxType::class, [
-            //     'mapped' => false,
-            //     'constraints' => [
-            //         new IsTrue([
-            //             'message' => 'You should agree to our terms.',
-            //         ]),
-            //     ],
-            // ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -61,7 +50,6 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 8,
                         'minMessage' => 'Votre mote de passe doit avoir au moins {{ limit }} caracterès',
-                        // max length allowed by Symfony for security reasons
                         'max' => 20,
                     ]),
                     new NotCompromisedPassword([

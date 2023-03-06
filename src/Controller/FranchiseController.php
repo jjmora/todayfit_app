@@ -77,7 +77,6 @@ class FranchiseController extends AbstractController
         ]);
     }
 
-
     // JSON RESPONSE
     #[Route('/franchise_json', name: 'app_franchise_json')]
     public function index_json(FranchiseRepository $franchiseRepository, PermissionRepository $permissionRepository): JsonResponse
@@ -114,13 +113,10 @@ class FranchiseController extends AbstractController
           );
           $i = $i + 1;
         }
-       
-        $variable = $allFranchises[0]->getName();
-        
+               
         return $this->json([
           'code' => 200,
           'nb_of_results' => count($allFranchises),
-          'variable' => $variable,
           'franchisesArray' => $franchisesArray,
           'permisions' => $permissionsArray,
           'franchises' => $allFranchises

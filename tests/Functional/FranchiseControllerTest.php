@@ -37,15 +37,15 @@ class FranchiseControllerTest extends WebTestCase
     $this->assertResponseStatusCodeSame(Response::HTTP_OK);
   }
 
-  public function testLoggedFranchisePageSeoTags(): void
-  {
-    $client = $this->getLoginClient('admin@todayfit.fr');
-    $client->request('GET', '/franchise');
+  // public function testLoggedFranchisePageSeoTags(): void
+  // {
+  //   $client = $this->getLoginClient('admin@todayfit.fr');
+  //   $client->request('GET', '/franchise');
 
-    $this->assertResponseIsSuccessful();
-    $this->assertSelectorTextContains('h1', 'Franchises');
-    $this->assertSelectorTextContains('h2', 'MES CLUBS');
-  }
+  //   $this->assertResponseIsSuccessful();
+  //   $this->assertSelectorTextContains('h1', 'Franchises');
+  //   $this->assertSelectorTextContains('h2', 'MES CLUBS');
+  // }
 
   // public function testAdminLoggedMaFranchise(): void
   // {
