@@ -9,24 +9,16 @@ body{
   margin: 0;
   display: flex;
   flex-direction: column;
-  //font-family: 'Roboto', sans-serif !important;
   font-family: 'Montserrat', sans-serif !important;
 }
 
-h1{
-  font-size: 2.5rem;
-  font-family: 'Russo One', sans-serif;
-}
-
+h1,
 h2{
   font-size: 2.5rem;
   font-family: 'Russo One', sans-serif;
 }
 
 footer{
-  //   position: fixed;
-  //   bottom: 0px;
-  min-height: 100px;
   margin-top: auto;
 }
 
@@ -71,16 +63,10 @@ footer{
 
 .franchise-title{
   color: rgb(104, 68, 2);
+  background-color: $primary;
 }
 .partner-title{
   color: rgb(10, 87, 83);
-}
-
-.franchise-title{
-  background-color: $primary;
-}
-
-.partner-title{
   background-color: lightseagreen;
 }
 
@@ -103,13 +89,6 @@ form fieldset{
   flex-direction: row;
   flex-wrap: wrap;
 }
-
-// #search_partner,
-// .custom-active-check {
-//   // display: flex;
-//   // flex-direction: row;
-//   // flex-wrap: wrap;
-// }
 
 #partner_permissions input[type="checkbox"],
 #franchise_permissions input[type="checkbox"],
