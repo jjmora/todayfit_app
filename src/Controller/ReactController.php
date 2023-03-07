@@ -18,10 +18,10 @@ use Symfony\Component\Serializer\Serializer;
 
 class ReactController extends AbstractController
 {
-    #[Route('/react', name: 'app_react')]
-    public function index(FranchiseRepository $franchiseRepository): Response
-    {                
+    // #[Route('/react', name: 'app_react')]
+    // public function index(FranchiseRepository $franchiseRepository): Response
+    // {                
 
-        return $this->render('react/index.html.twig');
-    }
+    //     return $this->render('react/index.html.twig');
+    // }
 }

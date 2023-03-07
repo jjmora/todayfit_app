@@ -40,7 +40,6 @@ class SearchController extends AbstractController
     public function searchActiveFranchise($search, FranchiseRepository $franchiseRepository, Request $request): Response
     {
       $form = $this->createForm(SearchBarType::class);
-      dump($search);
       if($search != null && $search != 'all'){
         $allFranchises = $franchiseRepository->search($search);
         $franchisesQty = count($allFranchises);
