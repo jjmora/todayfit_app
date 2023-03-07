@@ -28,21 +28,7 @@ class AppFixtures extends Fixture
       ["nord-est", "https://images.pexels.com/photos/703016/pexels-photo-703016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Placerat duo dolor elitr nonumy est ullamcorper nulla dolor dolor augue sit sea duo ipsum sadipscing. Invidunt diam sed diam sanctus eirmod consequat magna est rebum stet accusam nonumy eu autem quis et. Sanctus est hendrerit in aliquyam ipsum. Et iriure vero ex sed. Duis nulla consequat."],
       ["nord-ouest", "https://images.pexels.com/photos/4164841/pexels-photo-4164841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "At ea lorem ex nonumy takimata stet justo diam in nisl dolore in diam ullamcorper. Eos velit sit kasd et takimata erat et eum. No lorem ea. Lorem eum te. Et diam eirmod autem ea nibh. Takimata dolor et ipsum sed nonumy et erat dolores ad facilisis sea sanctus amet justo invidunt et. Takimata diam ad eos lorem elitr sanctus. Ut no ipsum tempor dolore."],
       ["centre", "https://images.pexels.com/photos/13460163/pexels-photo-13460163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", "Est at ipsum nonumy aliquam elitr invidunt velit sit dolor eos hendrerit tempor facilisis kasd. Autem nonummy at et stet justo ipsum elitr. Eos labore eos ea amet sadipscing nostrud voluptua lorem eos est lorem eos in. Est aliquyam iriure labore liber lorem at augue dolor clita vero ut et invidunt sed ea tempor."],
-      ["test1", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test2", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test3", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test4", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test5", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test6", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test7", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test8", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test9", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test10", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test11", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test12", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test13", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test14", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
-      ["test15", "https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", ""],
+      ["lyon", "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=600", "Est at ipsum nonumy aliquam elitr invidunt velit sit dolor eos hendrerit tempor facilisis kasd. Autem nonummy at et stet justo ipsum elitr. Eos labore eos ea amet sadipscing nostrud voluptua lorem eos est lorem eos in. Est aliquyam iriure labore liber lorem at augue dolor clita vero ut et invidunt sed ea tempor."],
     ];
     $usersPartnerArray = [
       [   // $usersPartnerArray[$i]
