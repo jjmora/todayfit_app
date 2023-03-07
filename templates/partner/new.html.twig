@@ -3,7 +3,7 @@
 {% block title %}Nouvelle Structure{% endblock %}
 
 {% block body %}
-<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form">
+<section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 custom-form mb-5">
 
   <div class="container d-flex flex-column justify-content-center">
     <section class="custom-form">
@@ -18,35 +18,5 @@
 {% endblock %}
 
 {% block javascripts %}
-  {# let the menu load #}
-  {{ parent() }} 
-  <script>
-    window.onload = () => {
-      let franchise = document.querySelector("#partner_franchise");
-      franchise.addEventListener("change", function(){
-        let form = this.closest("form");
-        let indexData = this.value; // =>return the id
-        let data = this.name + "=" + this.value;
-        
-        fetch(form.action, { 
-          method: form.getAttribute("method"),
-          body: data,
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset:utf-8"
-          }
-        })
-        .then(response => response.text())
-        .then(html => {
-          let content = document.createElement("html");
-          content.innerHTML = html;
-          let nouveauSelect = content.querySelector("#partner_permissions");
-          console.log(nouveauSelect)
-          document.querySelector("#partner_permissions").replaceWith(nouveauSelect);
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      })
-    }
-  </script>
+  {{ encore_entry_script_tags('newPartnerForm') }}
 {% endblock %}

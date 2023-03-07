@@ -9,26 +9,35 @@ use App\Form\FranchiseEditType;
 use App\Form\SearchBarType;
 use App\Repository\FranchiseRepository;
 use App\Repository\PartnerRepository;
+use App\Repository\PermissionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 #[Route('/franchise')]
 class FranchiseController extends AbstractController
 {
-    #[Route('/maFranchise', name: 'app_my_franchise_show', methods: ['GET', 'POST'])]
+    #[Route('/mafranchise', name: 'app_my_franchise_show', methods: ['GET', 'POST'])]
     public function showMyFranchise(FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository, Request $request): Response
     { 
         if($this->getUser()){
           
-          if($this->getUser()->getFranchise() != null){
-            $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
-          } else {
-            $franchise = null;
+          if($this->isGranted('ROLE_ADMIN')){
+            $this->addFlash('error', "Vous êtes Admin. Entrez comme Franchise pour voir ce contenu");
+            return $this->redirectToRoute('app_dashboard');
           }
 
-          $partners = $franchise->getPartner();
+          if($this->getUser()->getFranchise() != null){
+            $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
+            $partners = $franchise->getPartner();
+          } else {
+            $franchise = null;
+            $partners = null;
+          }
+
           
           $form = $this->createForm(SearchBarType::class);
           $search = $form->handleRequest($request);
@@ -50,7 +59,7 @@ class FranchiseController extends AbstractController
 
     }
 
-    #[Route('/maFranchise/structure/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
+    #[Route('/mafranchise/structure/{id}', name: 'app_franchise_partner_show', methods: ['GET'])]
     public function showMyPartner(Partner $partner, $id, FranchiseRepository $franchiseRepository, PartnerRepository $partnerRepository): Response
     {
         $franchise = $franchiseRepository->find($this->getUser()->getFranchise()->getId());
@@ -67,6 +76,57 @@ class FranchiseController extends AbstractController
             'partners' => $partners
         ]);
     }
+
+    // JSON RESPONSE
+    #[Route('/franchise_json', name: 'app_franchise_json')]
+    public function index_json(FranchiseRepository $franchiseRepository, PermissionRepository $permissionRepository): JsonResponse
+    {
+        
+        $allFranchises = $franchiseRepository->findAll();
+        $allPermissions = $permissionRepository->findAll();
+
+        $franchisesArray = [];
+        $j = 0;
+        //TO DO - PUT IN SERVICE
+        foreach($allFranchises as $franchise){
+          $franchisesArray[$j] = array(
+            "id" => $franchise->getId(), 
+            "name" => $franchise->getName(), 
+            "email_perso" => $franchise->getEmail(), 
+            "email" => $franchise->getUser()->getEmail(),
+            "image" => $franchise->getImage(),
+            "description" => $franchise->getDescription(),
+            "permissions" => $franchise->getPermissions(),
+            "date" => $franchise->getDate(),
+            "isActive" => $franchise->isActive()
+          );
+          $j = $j + 1;
+        }
+
+        $permissionsArray = [];
+        $i = 0;
+        foreach($allPermissions as $permission){
+          $permissionsArray[$i] = array(
+            "id" => $permission->getId(), 
+            "name" => $permission->getName(), 
+            "image" => $permission->getImage() 
+          );
+          $i = $i + 1;
+        }
+               
+        return $this->json([
+          'code' => 200,
+          'nb_of_results' => count($allFranchises),
+          'franchisesArray' => $franchisesArray,
+          'permisions' => $permissionsArray,
+          'franchises' => $allFranchises
+          ], 200, [], [ObjectNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
+            return $object->getId();
+            }
+          ]);
+    }
+    // JSON RESPONSE
+
 
     #[Route('/{page?1}', name: 'app_franchise_index', methods: ['GET', 'POST'])]
     public function index(FranchiseRepository $franchiseRepository, Request $request, $page): Response
@@ -87,12 +147,17 @@ class FranchiseController extends AbstractController
         $qty = 6;
         $qtyFranchise = $franchiseRepository->count([]); 
         $qtyPages = ceil($qtyFranchise / $qty);
+        if(($page - 1)*$qty > 0) {
+          $offset = ($page - 1)*$qty;
+        } else {
+          $offset = 0;
+        }
 
         $franchises = $franchiseRepository->findBy(
           [],
           null,
           $qty,
-          ($page - 1)*$qty
+          $offset
         );
 
         $form = $this->createForm(SearchBarType::class);
@@ -122,9 +187,12 @@ class FranchiseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $franchiseRepository->add($franchise, true);
+          $franchiseRepository->add($franchise, true);
+          $id = $franchise->getId();
 
-            return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
+          $this->addFlash('success', "La Franchise a bien été crée");
+
+          return $this->redirectToRoute('app_franchise_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('franchise/new.html.twig', [
@@ -136,8 +204,11 @@ class FranchiseController extends AbstractController
     #[Route('/show/{id}', name: 'app_franchise_show', methods: ['GET'])]
     public function show(Franchise $franchise): Response
     {
+        $partnersCount = count($franchise->getPartner());
+
         return $this->render('franchise/show_admin.html.twig', [
             'franchise' => $franchise,
+            'partnersCount' => $partnersCount
         ]);
     }
 
@@ -150,20 +221,26 @@ class FranchiseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $franchiseRepository->add($franchise, true);
 
-            return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);
+            $id = $franchise->getId();
+            $this->addFlash('success', "La Franchise a bien été mise à jour");
+            return $this->redirectToRoute('app_franchise_show', [ 'id' => $id ], Response::HTTP_SEE_OTHER);
         }
+
+        $partnersCount = count($franchise->getPartner());
 
         return $this->renderForm('franchise/edit.html.twig', [
             'franchise' => $franchise,
             'form' => $form,
+            'partnersCount' => $partnersCount
         ]);
     }
 
-    #[Route('/{id}', name: 'app_franchise_delete', methods: ['POST'])]
+    #[Route('/show/{id}', name: 'app_franchise_delete', methods: ['POST'])]
     public function delete(Request $request, Franchise $franchise, FranchiseRepository $franchiseRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$franchise->getId(), $request->request->get('_token'))) {
             $franchiseRepository->remove($franchise, true);
+            $this->addFlash('error', "La Franchise a bien été supprimée");
         }
 
         return $this->redirectToRoute('app_franchise_index', [], Response::HTTP_SEE_OTHER);

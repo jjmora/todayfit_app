@@ -14,14 +14,14 @@
     <section class="container-fluid">
 
       {# Tab navigation #}
-      <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+      {# <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Accueil</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Vue en table</button>
         </li>
-      </ul>
+      </ul> #}
       {# Tab navigation #}
 
       {# Tab Content #}
@@ -103,71 +103,6 @@
 
         </div>
         {# > Card section #}
-
-        {# < Table section #}
-        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-
-          <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Franchise</th>
-                        <th>Email</th>
-                        <th>Utilisateur</th>
-                        <th>Adresse</th>
-                        <th>Permissions</th>
-                        <th>Active</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for partner in allPartners %}
-                    <tr>
-                        <td>{{ partner.id }}</td>
-                        <td>{{ partner.Name }}</td>
-                        <td>
-                          <span class="btn btn-sm btn-outline-danger">{{ partner.franchise.name }}</span>
-                        </td>
-                        <td>{{ partner.Email }}</td>
-                        <td>
-                          {% if partner.user %}
-                            {{ partner.user.email }}
-                          {% else %}
-                            <i>Acun utilisateur asigné</i>
-                          {% endif %}
-                        </td>
-                        <td>{{ partner.Address }}</td>
-                        <td class="d-grid gap-2 text-success">
-                          {% for permission in partner.permissions %}
-                            <small class="border border-success px-2 py-1 rounded mx-1 my-1"> {{ permission.name }} </small>
-                          {% endfor %}
-                        </td>
-
-                        <td>
-                          {% if partner.Active %}
-                            <span class="border border-success px-2 py-1 rounded text-success">Oui</span>
-                          {% else %}
-                            <span class="border border-danger px-2 py-1 rounded text-danger">Non</span>
-                          {% endif %}
-                        </td>
-                        <td>
-                            <a href="{{ path('app_partner_show', {'id': partner.id}) }}" class="btn btn-sm btn-outline-success">Voir détails</a>
-                            <a href="{{ path('app_partner_edit', {'id': partner.id}) }}" class="btn btn-sm btn-outline-info">Modifier</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="6">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-          </div>
-
-        </div>
-        {# > Table section #}
 
       </div>
       {# Tab Content #}

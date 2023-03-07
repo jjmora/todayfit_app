@@ -9,26 +9,20 @@ body{
   margin: 0;
   display: flex;
   flex-direction: column;
-  //font-family: 'Roboto', sans-serif !important;
   font-family: 'Montserrat', sans-serif !important;
 }
 
-h1{
-  font-size: 2.5rem;
-  font-family: 'Russo One', sans-serif;
-}
-
+h1,
 h2{
   font-size: 2.5rem;
   font-family: 'Russo One', sans-serif;
 }
 
+// FOOTER
 footer{
-  //   position: fixed;
-  //   bottom: 0px;
-  min-height: 100px;
   margin-top: auto;
 }
+
 
 // DASHBOARD ADMIN
 .dashboard-card-link {
@@ -71,16 +65,10 @@ footer{
 
 .franchise-title{
   color: rgb(104, 68, 2);
+  background-color: $primary;
 }
 .partner-title{
   color: rgb(10, 87, 83);
-}
-
-.franchise-title{
-  background-color: $primary;
-}
-
-.partner-title{
   background-color: lightseagreen;
 }
 
@@ -102,13 +90,6 @@ form fieldset{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-#search_partner,
-.custom-active-check {
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
 }
 
 #partner_permissions input[type="checkbox"],
@@ -196,6 +177,7 @@ form fieldset{
 #search_partner_active{
   display: none;
 }
+
 
 // CARD SECTION
 .card-section{
@@ -290,7 +272,124 @@ form fieldset{
   width: 180px;
 }
 
+// FILTER
+.active-filter {
+  list-style: none;
+
+  li{
+    border: $primary solid 1px;
+    border-radius: 5px;
+    margin: 0 5px;
+    padding: 5px 7px;
+  }
+}
+
+.filter-active{
+  background-color: $primary;
+  font-weight: bolder;
+}
+
+// PAGINATION
+.page-link-active {
+  background-color: $primary !important;
+  color: white !important;
+  font-weight: bold;
+}
+.arrow {
+  &::before {
+    position: relative;
+    /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+    content: '';
+    /* By using an em scale, the arrows will size with the font */
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+    border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+  }
+
+  &.left {
+    transform: rotate(-135deg) translate(-50%);
+  } 
+
+  &.right {
+    transform: rotate(45deg);
+  }
+}
+
 // LEGAL DOCS
 .legal-text{
   text-align: justify;
 }
+
+
+// LOADER
+
+.lds-grid {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-grid div {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $primary;
+  animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+  top: 8px;
+  left: 8px;
+  animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+  top: 8px;
+  left: 32px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+  top: 8px;
+  left: 56px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+  top: 32px;
+  left: 8px;
+  animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+  top: 32px;
+  left: 32px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+  top: 32px;
+  left: 56px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+  top: 56px;
+  left: 8px;
+  animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+  top: 56px;
+  left: 32px;
+  animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+  top: 56px;
+  left: 56px;
+  animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+

@@ -64,7 +64,8 @@ class RegistrationController extends AbstractController
                     ])
             );
             // do anything else you need here, like send an email
-
+            
+            $this->addFlash('success', "L'utilisateur à bien été enregistré");
             return $this->redirectToRoute('app_user_index');
             //redirect to external url
             //return $this->redirect('http://todayfit.fr');

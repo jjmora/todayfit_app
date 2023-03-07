@@ -23,6 +23,8 @@ class AdminController extends AbstractController
       //   return $this->redirectToRoute('app_dashboard');
       // }
 
+
+      
         $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
 
         /** @var User $user */

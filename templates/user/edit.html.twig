@@ -6,8 +6,53 @@
     <section class="container col-md-8 col-xl-6 border border-primary py-4 px-4 mb-5 custom-form">
       <h1>Modifier Utilisateur</h1>
 
-      {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+      {# {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }} #}
+      {{ include('user/_formEdit.html.twig', {'button_label': 'Mettre à jour'}) }}
       <a href="{{ path('app_user_index') }}" class="btn btn-warning mr-3">Retour à la liste</a>
-      {{ include('user/_delete_form.html.twig') }}
+      {# Button trigger modal #}
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Supprimer Utilisateur 
+      </button>
+
+      {# Modal #}
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûre?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <p>Vous allez supprimer l'utilisateur <b>{{ user.email }}</b> </p>
+
+              {% if "ROLE_ADMIN" in user.roles %}
+                <div class="alert alert-danger">
+                  <p>Vous ne pouvez pas supprimer un utilisateur <b>avec le rôle ADMIN </b></p>
+                </div>
+              {% elseif (asignedAs == 'franchise' and partnersCount > 0) %}
+                <div class="alert alert-danger">
+                  <p>Vous ne pouvez pas supprimer un utilisateur asigné a une <b>Franchise avec des Structures.</b></p>
+                </div>
+              {% else %}
+                <div class="alert alert-danger">
+                  {% if asignedAs == 'partner' %}
+                    <p>La Structure "<b>{{ user.partner.name }}</b>" est liée a cet utilisateur. Si vous supprimez l'utilisateur, <b>vous allez supprimer également la Structure.</b></p>
+                  {% elseif asignedAs == 'franchise' %}
+                    <p>La Frachise "<b>{{ user.franchise.name }}</b>" est liée a cet utilisateur. Si vous supprimez l'utilisateur, <b>vous allez supprimer également la Franchise.</b></p>
+                  {% else %}
+                    <p>L'utilisateur n'a pas de Franchise ni de Structure asignée</p> 
+                  {% endif %}
+                </div>
+                
+                {{ include('user/_delete_form.html.twig') }}
+              
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+          
     </section>
 {% endblock %}

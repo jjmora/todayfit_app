@@ -18,10 +18,12 @@ class SearchUserBarType extends AbstractType
             'label' => false,
             'attr' => [
               'class' => '',
-              'placeholder' => 'Entrez le(s) mot-clés'
+              'placeholder' => 'Entrez le(s) mot-clés (au moins 3 caractères)'
             ],
             'required' => false
           ])
+
+          // // Comment this for Dynamic Search Form
           ->add('type', ChoiceType::class,[
             'required' => false,
             'multiple' => false,
@@ -42,6 +44,8 @@ class SearchUserBarType extends AbstractType
               'class' => 'btn btn-warning search-icon'
             ]
           ])
+          // // Comment this for Dynamic Search Form
+
           ;
     }
 

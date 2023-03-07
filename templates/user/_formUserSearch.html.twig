@@ -1,6 +1,4 @@
-{# this form theme will be applied only to the form of this template #}
-{# {% form_theme form 'bootstrap_5_layout.html.twig' %} #}
-
+{# static form #}
 {{ form_start(form) }}
     <div class="row d-flex flex-wrap justify-content-between">
       <div class="col-9 col-xl-5 mb-2">
@@ -19,3 +17,12 @@
     </div>
 
 {{ form_end(form) }}
+
+
+{# dynamic form #}
+{# <div class="form-control">
+  {{ form_start(form) }}
+        {{ form_widget(form.input_data) }}
+        {{ form_rest(form) }}
+  {{ form_end(form) }}
+</div> #}

@@ -49,9 +49,7 @@ class PermissionController extends AbstractController
     #[Route('/{id}', name: 'app_permission_show', methods: ['GET'])]
     public function show(Permission $permission): Response
     {
-        return $this->render('permission/show.html.twig', [
-            'permission' => $permission,
-        ]);
+      return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/edit', name: 'app_permission_edit', methods: ['GET', 'POST'])]
@@ -63,6 +61,7 @@ class PermissionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $permissionRepository->add($permission, true);
 
+            $this->addFlash('success', "La Permission a bien été mise à jour");
             return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,10 +74,12 @@ class PermissionController extends AbstractController
     #[Route('/{id}', name: 'app_permission_delete', methods: ['POST'])]
     public function delete(Request $request, Permission $permission, PermissionRepository $permissionRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$permission->getId(), $request->request->get('_token'))) {
-            $permissionRepository->remove($permission, true);
-        }
 
-        return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);
+      if ($this->isCsrfTokenValid('delete'.$permission->getId(), $request->request->get('_token'))) {
+        $permissionRepository->remove($permission, true);
+        $this->addFlash('error', "La Permission a bien été supprimée");
+      }
+
+      return $this->redirectToRoute('app_permission_index', [], Response::HTTP_SEE_OTHER);
     }
 }

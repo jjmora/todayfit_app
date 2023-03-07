@@ -7,6 +7,7 @@ use App\Repository\PermissionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PermissionRepository::class)]
 #[ApiResource(
@@ -21,6 +22,15 @@ class Permission
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: 'Le Nom ne peux pas être vide',
+    )]
+    #[Assert\Length(
+      min: 3,
+      max: 50,
+      minMessage: 'Le Nom doit avoir au moins {{ limit }} caractères',
+      maxMessage: 'Le Nom doit avoir au maximum {{ limit }} caractères',
+    )]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Franchise::class, mappedBy: 'permissions')]
@@ -30,6 +40,9 @@ class Permission
     private Collection $partners;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(
+      message: "La valeur n'est pas une URL valide",
+    )]
     private ?string $image = null;
 
     public function __construct()

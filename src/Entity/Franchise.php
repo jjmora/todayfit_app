@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
 #[ORM\Index(name: 'franchise', columns: ['name', 'email', 'description'], flags: ['fulltext'])]
@@ -22,11 +23,24 @@ class Franchise
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: "Le nom ne peux pas être vide",
+    )]
+    #[Assert\Length(
+      min: 3,
+      max: 50,
+      minMessage: 'Le Nom doit avoir au moins {{ limit }} caractères',
+      maxMessage: 'Le Nom doit avoir au maximum {{ limit }} caractères',
+    )]
     private ?string $Name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(
+      message: "L'email ne peux pas être vide",
+    )]
+    #[Assert\Email()]
     private ?string $Email = null;
 
     #[ORM\Column]
@@ -40,6 +54,9 @@ class Franchise
 
     #[ORM\OneToOne(inversedBy: 'franchise', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(
+      message: "Veuillez sélectionner un utilisateur dans la liste",
+    )]
     private ?User $user = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -67,7 +84,7 @@ class Franchise
         return $this->Name;
     }
 
-    public function setName(string $Name): self
+    public function setName(?string $Name): self
     {
         $this->Name = $Name;
 
@@ -79,7 +96,7 @@ class Franchise
         return $this->Email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(?string $Email): self
     {
         $this->Email = $Email;
 
