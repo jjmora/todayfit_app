@@ -32,10 +32,6 @@ class RegistrationController extends AbstractController
           return $this->redirectToRoute('app_dashboard');
         }
       
-        // if ($this->getUser()) {
-        //   return $this->redirectToRoute('app_admin');
-        // }
-
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -67,8 +63,6 @@ class RegistrationController extends AbstractController
             
             $this->addFlash('success', "L'utilisateur à bien été enregistré");
             return $this->redirectToRoute('app_user_index');
-            //redirect to external url
-            //return $this->redirect('http://todayfit.fr');
         }
 
         return $this->render('registration/register.html.twig', [

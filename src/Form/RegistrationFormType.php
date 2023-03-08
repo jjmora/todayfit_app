@@ -19,6 +19,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', null, [
+              'required' => false,
               'constraints' => [
                 new Email([
                   'message' => "L'adresse e-mail n'est pas valide"
@@ -29,11 +30,11 @@ class RegistrationFormType extends AbstractType
               'required' => true,
               'multiple' => true,
               'expanded' => true,
-              'constraints' => [ 
-                new NotBlank([
-                  'message' => 'Selectionnez au moins un role',
-                ])
-              ],
+              // 'constraints' => [ 
+              //   new NotBlank([
+              //     'message' => 'Selectionnez au moins un role',
+              //   ])
+              // ],
               'choices' => [
                 'Admin' => 'ROLE_ADMIN',
                 'Franchise' => 'ROLE_FRANCHISE',
@@ -51,6 +52,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 8,
                         'minMessage' => 'Votre mote de passe doit avoir au moins {{ limit }} caracterès',
                         'max' => 20,
+                        'maxMessage' => 'Votre mote de passe doit avoir au maximum {{ limit }} caracterès',
                     ]),
                     new NotCompromisedPassword([
                       'message'=> "Ce mot de passe a été declaré comme volé dans le site https://haveibeenpwned.com/, il ne doit pas être utilisé. Veuillez utiliser un autre mot de passe",
