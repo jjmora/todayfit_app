@@ -3,19 +3,14 @@
 {% block title %}Franchises{% endblock %}
 
 {% block body %}
-    {# Header section #}
     <section class="d-flex flex-row justify-content-between align-items-center">
       <h1>Franchises</h1>
       <a href="{{ path('app_franchise_new') }}" class="btn btn-danger">Nouvelle Franchise</a>
     </section>
-    {# Header section #}
 
     <section class="container-fluid">
-
-      {# React Component #}
         <div {{ react_component('Franchises')}}></div>
-      {# React Component #}
-
     </section>
-
 {% endblock %}
+
+

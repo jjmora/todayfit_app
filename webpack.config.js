@@ -21,8 +21,6 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    // .addEntry('editPermission', './assets/js/editPermission.js')
-    // .addEntry('newPermission', './assets/js/newPermission.js')
     .addEntry('permissionForm', './assets/js/permissionForm.js')
     .addEntry('newPartnerForm', './assets/js/newPartnerForm.js')
     // .addEntry('userSearchForm', './assets/js/userSearchForm.js') //Dynamic Form with Vanilla JS

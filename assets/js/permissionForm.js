@@ -2,7 +2,7 @@ require('bootstrap')
 
 window.onload = (event) => {
   let input = document.getElementById("permission_image")
-  let image = document.getElementById("permission-image")
+  let image = document.getElementById("permission-pic")
   input.value ? image.src = input.value : ''
   input.addEventListener("keyup", function(){
     image.src = input.value
@@ -12,7 +12,7 @@ window.onload = (event) => {
 
 const checkIfImgExists = (image) => {
   const imageNotFound = () => {
-    let newImage = document.getElementById("permission-image")
+    let newImage = document.getElementById("permission-pic")
     // Image by default
     newImage.src = "https://www.svgrepo.com/show/340721/no-image.svg"
   };
@@ -21,3 +21,4 @@ const checkIfImgExists = (image) => {
   img.onerror = imageNotFound
   img.src = image.src
 }
+

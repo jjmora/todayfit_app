@@ -81,13 +81,10 @@ class FranchiseController extends AbstractController
     #[Route('/franchise_json', name: 'app_franchise_json')]
     public function index_json(FranchiseRepository $franchiseRepository, PermissionRepository $permissionRepository): JsonResponse
     {
-        
         $allFranchises = $franchiseRepository->findAll();
         $allPermissions = $permissionRepository->findAll();
-
         $franchisesArray = [];
         $j = 0;
-        //TO DO - PUT IN SERVICE
         foreach($allFranchises as $franchise){
           $franchisesArray[$j] = array(
             "id" => $franchise->getId(), 
