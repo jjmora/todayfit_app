@@ -35,7 +35,7 @@ const Franchises = () => {
           response.data.franchisesArray.slice(firstPostIndex, lastPostIndex)
         );
         setFilteredItemsQty(response.data.franchisesArray.length);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
         //console.log(error);
@@ -74,51 +74,40 @@ const Franchises = () => {
         let name = fr.name;
         name = name.toLowerCase();
         return (
-          fr.email.includes(lowerCaseInputValue) ||
-          fr.email_perso.includes(lowerCaseInputValue) ||
-          fr.name.includes(lowerCaseInputValue)
+          email.includes(lowerCaseInputValue) ||
+          email_perso.includes(lowerCaseInputValue) ||
+          name.includes(lowerCaseInputValue)
         );
       });
     } else {
       dataByInput = franchisesArray;
     }
-    // console.log("Data by input:", dataByInput);
-    // console.log("FranchiseArray:", franchisesArray);
 
     // by activeState
     if (activeState === "active") {
       dataByActiveState = dataByInput?.filter((fr, k) => {
         return fr.isActive === true;
       });
-      // console.log("X :", dataByActiveState);
-      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     } else if (activeState === "non-active") {
       dataByActiveState = dataByInput?.filter((fr, k) => {
         return fr.isActive === false;
       });
-      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     } else {
       dataByActiveState = dataByInput;
-      // console.log("X :", dataByActiveState?.length);
 
       setFilteredItemsQty(dataByActiveState?.length);
     }
 
-    // console.log("firstPostIndex: ", firstPostIndex);
-    // console.log("firstPostIndex: ", lastPostIndex);
     let currentPosts = dataByActiveState;
     if (dataByActiveState?.length > 6) {
       currentPosts = dataByActiveState?.slice(firstPostIndex, lastPostIndex);
     }
-    // console.log("CurrentPosts:", currentPosts);
 
-    //setFilteredFranchises(currData);
     setFilteredFranchises(currentPosts);
-    //setFilteredFranchises(dataByActiveState)
   }, [activeState, inputValue, currentPage]);
 
   return (

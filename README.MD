@@ -146,7 +146,7 @@ You have 2 Options:
 
   * **The Automatic Way**: The Database will be populated with one command on your cli thanks to Data Fixtures 
 
-  * **The Manual Way**:  You vill use the admin user created before and the forms on the website and/or sql commands
+  * **The Manual Way**:  You will use the admin user created before and the forms on the website and/or sql commands
 
 ### 📗 **AUTOMATIC - With Data Fixtures**
 
