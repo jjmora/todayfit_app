@@ -31,6 +31,7 @@
             {% else %}
               <div class="alert alert-danger">
                 <p>La Franchise <b>{{ franchise.Name }}</b> sera supprimée</p>
+                <p><b>Attention! l'utilisateur sera aussi supprimé</b></p>
               </div>
               {{ include('franchise/_delete_form.html.twig') }}
             {% endif %}

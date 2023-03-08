@@ -30,11 +30,6 @@ class RegistrationFormType extends AbstractType
               'required' => true,
               'multiple' => true,
               'expanded' => true,
-              // 'constraints' => [ 
-              //   new NotBlank([
-              //     'message' => 'Selectionnez au moins un role',
-              //   ])
-              // ],
               'choices' => [
                 'Admin' => 'ROLE_ADMIN',
                 'Franchise' => 'ROLE_FRANCHISE',
